@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-canvas: #F8F7F2;
+    --color-bg-card: rgba(255, 255, 255, 0.88);
+    --color-bg-acrylic: rgba(255, 255, 255, 0.75);
+    --color-navy-deep: #0A192F;
+    --color-navy-slate: #1E293B;
+    --color-iqoo-yellow: #F0B31C;
+    --color-iqoo-yellow-warm: #F5BE30;
+    --color-iqoo-yellow-amber: #D99B0F;
+    --color-cobalt-blue: #1D4ED8;
+    --color-cobalt-deep: #0A192F;
+    --color-pastel-peach: #FFFBEB;
+    --color-pastel-blue: #E2E8F0;
+    --color-text-muted: #64748B;
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-heading: 'Syne', system-ui, sans-serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background-color: #F8F7F2;
+    color: #0A192F;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Custom Typography */
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+.font-heading {
+  font-family: 'Syne', system-ui, sans-serif;
+}
+
+/* iQOO Brand Specific Utility Styles */
+.iqoo-yellow-btn {
+  background-color: #F0B31C;
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(240, 179, 28, 0.25);
+  transition: all 0.2s ease;
+}
+
+.iqoo-yellow-btn:hover {
+  background-color: #F5BE30;
+  box-shadow: 0 6px 20px rgba(240, 179, 28, 0.35);
+  transform: translateY(-1px);
+}
+
+.iqoo-yellow-pill {
+  background-color: #F0B31C;
+  color: #000000;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.iqoo-dark-pill {
+  background-color: #0A192F;
+  color: #F0B31C;
+  font-weight: 700;
+}
+
+/* Editorial dot grid texture */
+.editorial-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(10, 25, 47, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 25, 47, 0.04) 1px, transparent 1px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1D4ED8;
+}
