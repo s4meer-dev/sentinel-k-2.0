@@ -97,7 +97,7 @@ export const ArchitectureSection: React.FC = () => {
   const current = layers.find(l => l.id === activeLayer) || layers[3];
 
   return (
-    <section id="how-it-works" className="relative py-28 md:py-36 bg-white border-b border-black/[0.06] overflow-hidden">
+    <section id="how-it-works" className="scroll-mt-24 relative py-28 md:py-36 bg-white border-b border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
