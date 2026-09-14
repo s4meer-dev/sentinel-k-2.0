@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
   MapPin, 
-  BrainCircuit, 
   Building2, 
   Coffee, 
   Home, 
@@ -12,270 +11,225 @@ import {
 interface CampusNode {
   id: string;
   name: string;
-  zone: string;
-  icon: string;
-  pctStable5G: number;
-  statusText: string;
-  patternInsight: string;
-  recommendation: string;
-  color: string;
-  ringColor: string;
-  x: number; // percentage on map
-  y: number;
+  type: string;
+  icon: any;
+  confidenceScore: number;
+  checksCount: number;
+  typical5G: 'EXCELLENT' | 'DEGRADED' | 'UNSTABLE';
+  observedBand: string;
+  notes: string;
 }
 
 export const ConnectivityMemorySection: React.FC = () => {
-  const [activeCheckTier, setActiveCheckTier] = useState<number>(20); // 1, 5, 20
-  const [selectedPlaceId, setSelectedPlaceId] = useState<string>('library');
+  const [activeCheckMultiplier, setActiveCheckMultiplier] = useState<1 | 5 | 20>(5);
+  const [selectedNode, setSelectedNode] = useState<string>('library');
 
-  const places: CampusNode[] = [
+  const nodes: CampusNode[] = [
     {
       id: 'library',
-      name: 'LIBRARY',
-      zone: 'North Wing · 3rd Floor Quiet Zone',
-      icon: 'library',
-      pctStable5G: 82,
-      statusText: '5G HIGHLY STABLE',
-      patternInsight: '“Connection usually remains stable. Great for large downloads and cloud syncing.”',
-      recommendation: 'Nominal 5G SA locked on n78 band. No action required.',
-      color: 'text-emerald-400',
-      ringColor: 'border-emerald-500 bg-emerald-500/20',
-      x: 35,
-      y: 30,
+      name: 'Central Library (Floor 2)',
+      type: 'Study Area',
+      icon: Building2,
+      confidenceScore: 82,
+      checksCount: 14 * activeCheckMultiplier,
+      typical5G: 'EXCELLENT',
+      observedBand: 'n78 SA (3.5 GHz) - Strong Signal',
+      notes: 'Clean line of sight to outdoor rooftop repeater. Steady 21ms ping, excellent for research and downloads.',
     },
     {
       id: 'canteen',
-      name: 'CANTEEN',
-      zone: 'Central Plaza · Food Court',
-      icon: 'canteen',
-      pctStable5G: 61,
-      statusText: 'INTERMITTENT FLUX',
-      patternInsight: '“Frequent 5G ? 4G transitions during high density peak hours (12–2 PM).”',
-      recommendation: 'Pre-cache streaming content or prioritize LTE when moving outdoors.',
-      color: 'text-amber-400',
-      ringColor: 'border-amber-500 bg-amber-500/20',
-      x: 65,
-      y: 42,
+      name: 'North Canteen Corner',
+      type: 'Social / Dining',
+      icon: Coffee,
+      confidenceScore: 61,
+      checksCount: 9 * activeCheckMultiplier,
+      typical5G: 'UNSTABLE',
+      observedBand: 'n28 (700 MHz) with heavy cell flux',
+      notes: 'Dense crowd periods cause frequent handover fluttering between 5G low-band and 4G LTE Band 3.',
     },
     {
       id: 'hostel',
-      name: 'HOSTEL',
-      zone: 'Residential Block B · Indoor Corridor',
-      icon: 'hostel',
-      pctStable5G: 18,
-      statusText: 'FREQUENT 4G FALLBACK',
-      patternInsight: '“5G often becomes unstable here due to building wall attenuation.”',
-      recommendation: 'Smooth handover to campus Wi-Fi suggested automatically.',
-      color: 'text-red-400',
-      ringColor: 'border-red-500 bg-red-500/20',
-      x: 25,
-      y: 70,
+      name: 'Block-D Hostel Corridor',
+      type: 'Residential',
+      icon: Home,
+      confidenceScore: 18,
+      checksCount: 22 * activeCheckMultiplier,
+      typical5G: 'DEGRADED',
+      observedBand: '4G LTE Band 40 (Concrete Fade)',
+      notes: 'Thick reinforced concrete walls attenuate mid-band 5G. System auto-prepares for 4G carrier aggregation upon entry.',
     },
     {
       id: 'classroom',
-      name: 'CLASSROOM',
-      zone: 'Academic Complex · Basement Hall 102',
-      icon: 'classroom',
-      pctStable5G: 4,
-      statusText: 'SHIELDED INTERIOR',
-      patternInsight: '“Structural concrete blocks Sub-6GHz carrier signals almost completely.”',
-      recommendation: 'Keep phone on low-power LTE or institutional Wi-Fi.',
-      color: 'text-slate-400',
-      ringColor: 'border-slate-500 bg-slate-500/20',
-      x: 75,
-      y: 75,
+      name: 'Science Seminar Hall 04',
+      type: 'Lecture Hall',
+      icon: GraduationCap,
+      confidenceScore: 74,
+      checksCount: 18 * activeCheckMultiplier,
+      typical5G: 'EXCELLENT',
+      observedBand: 'n78 (3.5 GHz) Indoor Distributed Antenna',
+      notes: 'Indoor DAS antenna keeps latency under 19ms. Video streaming and collaborative whiteboards work seamlessly.',
     },
   ];
 
-  const currentPlace = places.find(p => p.id === selectedPlaceId) || places[0];
+  const currentNode = nodes.find(n => n.id === selectedNode) || nodes[0];
 
   return (
-    <section id="memory" className="relative py-28 md:py-36 bg-[#07090E] border-t border-white/[0.08] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-indigo-950/20 blur-[180px] pointer-events-none -z-10" />
-
+    <section id="memory" className="relative py-28 md:py-36 bg-white border-b border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
-            <BrainCircuit className="w-3.5 h-3.5 text-[#F0B31C]" />
-            <span className="font-extrabold text-white">CONNECTIVITY MEMORY</span>
-            <span className="text-slate-600">/</span>
-            <span>CONTEXTUAL SPATIAL INTELLIGENCE</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF9F5] border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6">
+            <MapPin className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-slate-900">SPATIAL INTELLIGENCE</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-500">LEARNED LOCAL PATTERNS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.06]">
-            YOUR PHONE <br />
-            <span className="text-[#F0B31C]">LEARNS YOUR PLACES.</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-slate-950 uppercase leading-[1.05]">
+            CONNECTIVITY <br />
+            <span className="text-[#F0B31C] bg-slate-900 px-3 py-0.5 rounded-xl inline-block mt-1">
+              MEMORY.
+            </span>
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-slate-300 font-heading font-medium">
-            "Not a generic coverage map. Your actual connectivity experience."
-          </p>
-
-          <p className="mt-2 text-xs font-mono-code text-slate-500">
-            Illustrative conceptual product visualization. Observes repeated visits without sharing location data to the cloud.
+          <p className="mt-6 text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+            "Your phone doesn’t just observe the current cell tower. Over time, it learns where 5G actually works on your campus or daily commute — building a private, on-device spatial memory."
           </p>
         </div>
 
-        {/* Confidence Accumulator Switcher */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
-          <span className="text-xs font-mono-code text-slate-400 font-bold uppercase tracking-wider">
-            OBSERVED VISIT CONFIDENCE:
-          </span>
-          <div className="flex items-center gap-2 p-1.5 rounded-xl bg-[#0D121E] border border-white/10 font-mono-code text-xs font-bold">
-            {[1, 5, 20].map((tier) => (
-              <button
-                key={tier}
-                onClick={() => setActiveCheckTier(tier)}
-                className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
-                  activeCheckTier === tier
-                    ? 'bg-[#F0B31C] text-[#07090E] shadow-sm font-black'
-                    : 'text-slate-400 hover:text-white'
+        {/* Observation Accumulator Filter Pills */}
+        <div className="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-[#FAF9F5] border border-black/[0.08] shadow-xs">
+          <div className="flex items-center gap-2 text-xs font-mono-code text-slate-700">
+            <Sparkles className="w-4 h-4 text-[#F0B31C]" />
+            <span>Simulate On-Device Learning Accumulation:</span>
+          </div>
+
+          <div className="flex items-center gap-2 font-mono-code text-xs">
+            <button
+              onClick={() => setActiveCheckMultiplier(1)}
+              className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeCheckMultiplier === 1
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-black/[0.06]'
+              }`}
+            >
+              1st Visit
+            </button>
+            <button
+              onClick={() => setActiveCheckMultiplier(5)}
+              className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeCheckMultiplier === 5
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-black/[0.06]'
+              }`}
+            >
+              5 Repeated Visits
+            </button>
+            <button
+              onClick={() => setActiveCheckMultiplier(20)}
+              className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                activeCheckMultiplier === 20
+                  ? 'bg-slate-900 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-black/[0.06]'
+              }`}
+            >
+              20 Visits (High Confidence)
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Campus Nodes Grid */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          {nodes.map((n) => {
+            const Icon = n.icon;
+            const isSelected = selectedNode === n.id;
+            return (
+              <div
+                key={n.id}
+                onClick={() => setSelectedNode(n.id)}
+                className={`p-6 rounded-3xl transition-all duration-300 cursor-pointer ${
+                  isSelected
+                    ? 'bg-white border-2 border-[#F0B31C] shadow-[0_8px_30px_rgba(240,179,28,0.15)] ring-2 ring-[#F0B31C]/20'
+                    : 'bg-[#FAF9F5] border border-black/[0.08] hover:border-black/20 shadow-xs'
                 }`}
               >
-                {tier === 1 && '1 CHECK'}
-                {tier === 5 && '5 CHECKS'}
-                {tier === 20 && '20 CHECKS'}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* The Campus Map & Intelligence Dashboard */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
-          
-          {/* Left: Spatial Campus Map Visualizer */}
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl glass-panel border border-white/10 relative min-h-[420px] flex flex-col justify-between overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between text-xs font-mono-code text-slate-400 z-10">
-              <span className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#F0B31C]" />
-                CAMPUS SPATIAL SURFACE // ZONE MAPPING
-              </span>
-              <span className="text-[#F0B31C] font-bold">
-                {activeCheckTier === 20 ? 'HIGH CONFIDENCE (94%)' : activeCheckTier === 5 ? 'MEDIUM CONFIDENCE (68%)' : 'INITIAL SAMPLING (32%)'}
-              </span>
-            </div>
-
-            {/* Fictional abstract gridlines and pathway nodes */}
-            <div className="absolute inset-0 network-grid opacity-40 pointer-events-none" />
-
-            {/* Connecting abstract pathways */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <line x1="35" y1="30" x2="65" y2="42" stroke="#3B82F6" strokeWidth="0.8" strokeDasharray="2 2" />
-              <line x1="65" y1="42" x2="75" y2="75" stroke="#F0B31C" strokeWidth="0.8" strokeDasharray="2 2" />
-              <line x1="35" y1="30" x2="25" y2="70" stroke="#3B82F6" strokeWidth="0.8" strokeDasharray="2 2" />
-              <line x1="25" y1="70" x2="75" y2="75" stroke="#94A3B8" strokeWidth="0.8" strokeDasharray="2 2" />
-            </svg>
-
-            {/* Interactive Campus Nodes on Map */}
-            <div className="relative w-full h-72 my-4">
-              {places.map((place) => (
-                <button
-                  key={place.id}
-                  onClick={() => setSelectedPlaceId(place.id)}
-                  style={{ left: `${place.x}%`, top: `${place.y}%` }}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 p-2 rounded-2xl transition-all duration-300 cursor-pointer group flex flex-col items-center z-20 ${
-                    selectedPlaceId === place.id ? 'scale-115' : 'hover:scale-105'
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center border shadow-xl backdrop-blur-md transition-all ${
-                    selectedPlaceId === place.id 
-                      ? `${place.ringColor} border-white shadow-[0_0_20px_rgba(240,179,28,0.4)]`
-                      : 'bg-[#101726]/90 border-white/20'
-                  }`}>
-                    {place.icon === 'library' && <Building2 className={`w-4 h-4 ${place.color}`} />}
-                    {place.icon === 'canteen' && <Coffee className={`w-4 h-4 ${place.color}`} />}
-                    {place.icon === 'hostel' && <Home className={`w-4 h-4 ${place.color}`} />}
-                    {place.icon === 'classroom' && <GraduationCap className={`w-4 h-4 ${place.color}`} />}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-2xl bg-white border border-black/[0.06] shadow-xs text-slate-800">
+                      <Icon className="w-5 h-5 text-[#F0B31C]" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-display font-black text-slate-950">
+                        {n.name}
+                      </h3>
+                      <span className="text-[11px] font-mono-code text-slate-500">
+                        {n.type}
+                      </span>
+                    </div>
                   </div>
 
-                  <span className={`text-[10px] font-mono-code font-bold mt-1.5 px-2 py-0.5 rounded-md backdrop-blur-md shadow-xs ${
-                    selectedPlaceId === place.id ? 'bg-[#F0B31C] text-[#07090E]' : 'bg-black/70 text-slate-300 border border-white/10'
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono-code font-extrabold uppercase ${
+                    n.typical5G === 'EXCELLENT'
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                      : n.typical5G === 'UNSTABLE'
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                      : 'bg-red-100 text-red-800 border border-red-300'
                   }`}>
-                    {place.name} ({place.pctStable5G}%)
+                    {n.typical5G}
                   </span>
-                </button>
-              ))}
-            </div>
+                </div>
 
-            {/* Bottom Map Legend */}
-            <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono-code text-slate-400 z-10 pt-4 border-t border-white/[0.08]">
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  &gt;80% 5G
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-amber-400" />
-                  50-80% Flux
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-red-400" />
-                  &lt;20% 4G Fallback
-                </span>
+                {/* Score and Bar */}
+                <div className="mt-4 pt-4 border-t border-black/[0.06]">
+                  <div className="flex items-center justify-between text-xs font-mono-code mb-2">
+                    <span className="text-slate-500">5G RELIABILITY CONFIDENCE</span>
+                    <span className="text-slate-950 font-bold">{n.confidenceScore}%</span>
+                  </div>
+                  <div className="h-2 w-full bg-black/[0.06] rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        n.confidenceScore > 70 ? 'bg-emerald-500' : n.confidenceScore > 40 ? 'bg-amber-500' : 'bg-red-500'
+                      }`}
+                      style={{ width: `${n.confidenceScore}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between text-[11px] font-mono-code text-slate-500">
+                  <span>{n.observedBand}</span>
+                  <span className="font-bold text-slate-700">{n.checksCount} samples</span>
+                </div>
               </div>
-              <span>TAP ANY PIN TO INSPECT</span>
-            </div>
-          </div>
+            );
+          })}
+        </div>
 
-          {/* Right: Learned Pattern Intelligence Card */}
-          <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-[#0B0F19] border border-white/10 flex flex-col justify-between shadow-2xl">
+        {/* Selected Node Deep Inspection Box */}
+        <div className="mt-8 max-w-5xl mx-auto p-6 sm:p-8 rounded-3xl bg-white border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-black/[0.06]">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <div>
-                  <span className="text-[10px] font-mono-code text-slate-400 uppercase tracking-wider block">
-                    LOCALIZED EXPERIENTIAL MEMORY
-                  </span>
-                  <h3 className="text-2xl font-display font-black text-white mt-1">
-                    {currentPlace.name}
-                  </h3>
-                </div>
-
-                <div className="text-right">
-                  <span className="text-2xl font-display font-black text-[#F0B31C]">
-                    {currentPlace.pctStable5G}%
-                  </span>
-                  <span className="text-[9px] font-mono-code text-slate-400 uppercase block">
-                    STABLE 5G
-                  </span>
-                </div>
+              <div className="text-xs font-mono-code text-[#B45309] font-bold uppercase tracking-wider">
+                LEARNED LOCALITY INTEL // {currentNode.name}
               </div>
-
-              <div className="mt-4 text-xs font-mono-code text-slate-400">
-                {currentPlace.zone}
-              </div>
-
-              {/* Pattern insight quote */}
-              <div className="mt-6 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                <div className="text-[10px] font-mono-code text-[#F0B31C] font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#F0B31C]" />
-                  RECOGNIZED CONNECTIVITY PATTERN
-                </div>
-                <p className="text-sm font-display font-bold text-white leading-relaxed">
-                  {currentPlace.patternInsight}
-                </p>
-              </div>
-
-              {/* Actionable recommendation */}
-              <div className="mt-4 p-4 rounded-2xl bg-black/50 border border-white/[0.08]">
-                <div className="text-[10px] font-mono-code text-slate-400 font-bold uppercase tracking-wider mb-1">
-                  RECOMMENDED ACTION
-                </div>
-                <p className="text-xs font-mono-code text-slate-300 leading-relaxed">
-                  {currentPlace.recommendation}
-                </p>
+              <div className="text-lg font-display font-black text-slate-950 mt-1">
+                {currentNode.observedBand}
               </div>
             </div>
 
-            {/* Historical observation tier impact */}
-            <div className="mt-6 pt-4 border-t border-white/[0.08] text-[11px] font-mono-code text-slate-400 flex items-center justify-between">
-              <span>ACCUMULATED RECORDINGS</span>
-              <span className="text-white font-bold">{activeCheckTier} Local Sessions</span>
+            <div className="flex items-center gap-2 font-mono-code text-xs">
+              <span className="px-3 py-1 rounded-xl bg-[#FAF9F5] border border-black/[0.06] text-slate-700 font-bold">
+                {currentNode.checksCount} Local Observations
+              </span>
+              <span className="px-3 py-1 rounded-xl bg-emerald-100 text-emerald-800 font-bold">
+                100% Private On-Device
+              </span>
             </div>
           </div>
 
+          <p className="mt-4 text-sm text-slate-600 font-normal leading-relaxed">
+            {currentNode.notes}
+          </p>
         </div>
 
       </div>

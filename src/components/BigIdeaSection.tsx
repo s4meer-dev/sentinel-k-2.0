@@ -17,110 +17,119 @@ interface PhilosophyStage {
 }
 
 export const BigIdeaSection: React.FC = () => {
-  const [selectedStage, setSelectedStage] = useState<string>('OBSERVE');
+  const [selectedStage, setSelectedStage] = useState('observe');
 
   const stages: PhilosophyStage[] = [
     {
-      id: 'OBSERVE',
-      step: 'STAGE 01',
+      id: 'observe',
+      step: '01',
       name: 'OBSERVE',
-      question: '“What’s happening right now?”',
-      summary: 'Passively tracking cellular transitions, carrier switches, and link layer jitter.',
-      detail: 'The phone observes signal flux, carrier aggregation states (n78/n28), and RSRP variations over a moving 30-second window without burdening modem power.',
-      telemetryEvidence: 'RSRP: -114 dBm · Band n78 dropped to LTE B3 · 3 handovers in 30s',
-      color: 'border-blue-500/40 text-blue-400 bg-blue-500/10',
+      question: '“What is happening right now?”',
+      summary: 'Continuous passive observation of cellular radio state, band carrier frequencies, ping latency, and raw signal quality.',
+      detail: 'Unlike traditional OS indicators that only poll every minute or after connection drops, CI passively ingests RSRP, RSRQ, and cell ID handovers with negligible battery overhead.',
+      telemetryEvidence: 'RSRP -104 dBm · Band n78 (3.5 GHz) · Sub-6 Carrier Attach',
+      color: 'border-blue-500/40 text-blue-600 bg-blue-50',
     },
     {
-      id: 'UNDERSTAND',
-      step: 'STAGE 02',
+      id: 'understand',
+      step: '02',
       name: 'UNDERSTAND',
-      question: '“Is it actually a problem for the user?”',
-      summary: 'Separating normal network handovers from active application stutters.',
-      detail: 'A momentary dip during passive idle is ignored; a 160ms latency surge while UDP gaming packets are actively streaming is flagged as real connection instability.',
-      telemetryEvidence: 'Active Foreground: Low-latency Game Client · Severity: HIGH INSTABILITY',
-      color: 'border-amber-500/40 text-amber-400 bg-amber-500/10',
+      question: '“Is this connection actually working well?”',
+      summary: 'Correlates raw radio metrics with what the user is experiencing — differentiating tower congestion from true signal fade.',
+      detail: 'Having 4 bars of 5G means nothing if UDP jitter causes Discord to glitch or PUBG Mobile to drop packets. We interpret whether degradation is transient or structural.',
+      telemetryEvidence: 'High Jitter detected: 142ms variance · 18.4% packet drop',
+      color: 'border-amber-500/40 text-amber-600 bg-amber-50',
     },
     {
-      id: 'ACT',
-      step: 'STAGE 03',
+      id: 'act',
+      step: '03',
       name: 'ACT',
-      question: '“What can we do within Android permissions?”',
-      summary: 'Recommending or executing supported recovery within platform guardrails.',
-      detail: 'Where supported, initiates cellular radio interface re-evaluation, adjusts antenna priority across the iQOO surround matrix, or prompts Wi-Fi assist.',
-      telemetryEvidence: 'Action: Re-evaluate carrier band priority · Guided recovery active',
-      color: 'border-[#F0B31C]/40 text-[#F0B31C] bg-[#F0B31C]/10',
+      question: '“What is the best available action?”',
+      summary: 'Provides targeted, intelligent recovery choices within real Android platform constraints and modem capabilities.',
+      detail: 'Depending on the diagnostic, recommend or execute supported actions: carrier aggregation reset, primary antenna surround steering, or clean fallback.',
+      telemetryEvidence: 'Actionable: Re-evaluate Carrier Aggregation · Primary n78 anchor',
+      color: 'border-[#F0B31C]/60 text-amber-700 bg-amber-50',
     },
     {
-      id: 'VERIFY',
-      step: 'STAGE 04',
+      id: 'verify',
+      step: '04',
       name: 'VERIFY',
-      question: '“Did it actually get better?”',
-      summary: 'Closing the feedback loop by measuring post-action stability.',
-      detail: 'Unlike traditional dashboards that throw suggestions and disappear, the system watches the next 15 seconds to verify if 5G re-anchored and packet loss dropped.',
-      telemetryEvidence: 'Post-Action Latency: 21 ms · 5G SA Locked · Stability +52%',
-      color: 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10',
+      question: '“Did that action actually help?”',
+      summary: 'Closes the loop by evaluating the connection post-recovery to measure real delta in latency and packet stability.',
+      detail: 'Most systems trigger a reset and walk away blind. CI actively measures 15 seconds of post-action telemetry to verify whether quality restored or if alternate routing is needed.',
+      telemetryEvidence: 'Verification: +52% Latency Stability Delta · 0 Packet Drops',
+      color: 'border-emerald-500/40 text-emerald-600 bg-emerald-50',
     },
     {
-      id: 'LEARN',
-      step: 'STAGE 05',
+      id: 'learn',
+      step: '05',
       name: 'LEARN',
-      question: '“Does this happen here again?”',
-      summary: 'Remembering localized connectivity patterns over repeated visits.',
-      detail: 'Retains an on-device spatial memory of where 5G consistently holds versus where physical barriers trigger drops, building predictive contextual awareness.',
-      telemetryEvidence: 'Campus Library (3rd Floor) · 24 Checks: 82% Stable · Low Interference',
-      color: 'border-indigo-500/40 text-indigo-400 bg-indigo-500/10',
+      question: '“What does this place usually look like?”',
+      summary: 'Builds localized spatial connectivity memory on-device so future visits benefit from past observations.',
+      detail: 'Learns your regular haunts — the library deadzone, the canteen corner with strong 5G SA, the hostel staircase handover — anticipating drops before you notice.',
+      telemetryEvidence: 'Spatial Memory: Campus Library Node · 82% 5G Reliability Confirmed',
+      color: 'border-purple-500/40 text-purple-600 bg-purple-50',
     },
   ];
 
   const current = stages.find(s => s.id === selectedStage) || stages[0];
 
   return (
-    <section id="vision" className="relative py-28 md:py-36 bg-[#07090E] border-t border-white/[0.08] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-blue-950/20 blur-[180px] pointer-events-none -z-10" />
-
+    <section className="relative py-28 md:py-36 bg-[#FAF9F5] border-b border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
-            <BrainCircuit className="w-3.5 h-3.5 text-[#F0B31C]" />
-            <span className="font-extrabold text-white">THE CORE PHILOSOPHY</span>
-            <span className="text-slate-600">/</span>
-            <span>CLOSED-LOOP INTELLIGENCE</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6">
+            <Radio className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-slate-900">THE 5-STAGE CLOSED LOOP</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-500">ENGINEERING DISCIPLINE</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.06]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-slate-950 uppercase leading-[1.05]">
             WHAT IF YOUR PHONE <br />
-            <span className="text-[#F0B31C]">UNDERSTOOD</span> ITS CONNECTION?
+            <span className="text-[#F0B31C] bg-slate-900 px-3 py-0.5 rounded-xl inline-block mt-1">
+              UNDERSTOOD
+            </span> ITS CONNECTION?
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-6 text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             Not just showing a static indicator, but actively closing the loop between observing a drop and verifying whether things improved.
           </p>
         </div>
 
-        {/* The 5 Giant Stages Visual Pipeline */}
-        <div className="mt-16 max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 sm:gap-3 p-2 rounded-2xl bg-[#0C101A] border border-white/10 backdrop-blur-xl">
+        {/* The 5 Giant Stages Visual Pipeline Tabs */}
+        <div className="mt-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 sm:gap-3 p-2 rounded-2xl bg-white border border-black/[0.08] shadow-sm">
             {stages.map((st, i) => (
               <button
                 key={st.id}
                 onClick={() => setSelectedStage(st.id)}
-                className={`p-3.5 sm:p-4 rounded-xl text-left transition-all duration-200 cursor-pointer relative ${selectedStage === st.id ? 'bg-white/10 shadow-lg border border-white/20' : 'hover:bg-white/[0.04]'}`}
+                className={`p-3.5 sm:p-4 rounded-xl text-left transition-all duration-200 cursor-pointer relative ${
+                  selectedStage === st.id
+                    ? 'bg-[#F0B31C] text-[#07090E] shadow-md font-bold'
+                    : 'hover:bg-slate-50 text-slate-700'
+                }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono-code font-bold text-slate-500">
+                  <span className={`text-[10px] font-mono-code font-bold ${
+                    selectedStage === st.id ? 'text-[#07090E]' : 'text-slate-400'
+                  }`}>
                     0{i + 1}
                   </span>
-                  <div className={`w-2 h-2 rounded-full ${selectedStage === st.id ? 'bg-[#F0B31C]' : 'bg-slate-700'}`} />
+                  <div className={`w-2 h-2 rounded-full ${
+                    selectedStage === st.id ? 'bg-[#07090E]' : 'bg-slate-300'
+                  }`} />
                 </div>
 
-                <div className="text-sm sm:text-base font-display font-black tracking-wide text-white">
+                <div className="text-sm sm:text-base font-display font-black tracking-wide">
                   {st.name}
                 </div>
 
-                <div className="text-[10px] font-mono-code text-slate-400 mt-1 line-clamp-1">
+                <div className={`text-[10px] font-mono-code mt-1 line-clamp-1 ${
+                  selectedStage === st.id ? 'text-slate-900 font-semibold' : 'text-slate-500'
+                }`}>
                   {st.question}
                 </div>
               </button>
@@ -135,62 +144,61 @@ export const BigIdeaSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="mt-6 p-6 sm:p-10 rounded-3xl glass-panel border border-white/10 shadow-2xl relative overflow-hidden"
+              className="mt-6 p-6 sm:p-10 rounded-3xl bg-white border border-black/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.04)] relative overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
                 {/* Left: Stage definition and human inquiry */}
                 <div className="lg:col-span-7">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-white/[0.06] border border-white/10 text-[#F0B31C]">
-                      {current.step}
-                    </span>
-                    <span className="text-xs font-mono-code text-slate-400">
-                      CLOSED-LOOP PILLAR
+                    <span className="px-3 py-1 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#FAF9F5] border border-black/[0.08] text-amber-700">
+                      {current.step} // CLOSED-LOOP PILLAR
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-4xl font-display font-black text-white tracking-tight">
+                  <h3 className="text-2xl sm:text-4xl font-display font-black text-slate-950 tracking-tight">
                     {current.name}
                   </h3>
 
-                  <div className="text-lg sm:text-xl font-heading font-extrabold text-[#F0B31C] mt-2">
+                  <div className="text-base sm:text-lg font-display font-bold text-[#B45309] mt-2">
                     {current.question}
                   </div>
 
-                  <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-                    {current.detail}
+                  <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                    {current.summary}
                   </p>
 
-                  <div className="mt-6 p-3.5 rounded-2xl bg-black/50 border border-white/[0.08] text-xs font-mono-code">
-                    <span className="text-slate-500 uppercase text-[9px] block tracking-wider mb-1">
-                      LOCAL OBSERVATION SIGNATURE
-                    </span>
-                    <span className="text-slate-200 font-semibold">
-                      {current.telemetryEvidence}
-                    </span>
-                  </div>
+                  <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    {current.detail}
+                  </p>
                 </div>
 
-                {/* Right: Graphic Card Visual */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-[#090D17] border border-white/10 flex flex-col justify-between min-h-[220px]">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono-code text-slate-400 uppercase tracking-wider">
-                      PROCESS OBJECTIVE
-                    </span>
-                    <Radio className="w-4 h-4 text-[#F0B31C]" />
-                  </div>
+                {/* Right: Technical Telemetry Box */}
+                <div className="lg:col-span-5">
+                  <div className="p-6 rounded-2xl bg-[#FAF9F5] border border-black/[0.08] shadow-xs">
+                    <div className="flex items-center justify-between text-xs font-mono-code text-slate-500 mb-4 pb-2 border-b border-black/[0.06]">
+                      <span className="flex items-center gap-1.5 font-bold text-slate-800">
+                        <BrainCircuit className="w-3.5 h-3.5 text-[#F0B31C]" />
+                        TELEMETRY REASONING
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
+                        ACTIVE LOOP
+                      </span>
+                    </div>
 
-                  <div className="my-6">
-                    <span className="text-xs font-mono-code text-slate-400 block">CORE GOAL</span>
-                    <span className="text-xl font-display font-extrabold text-white mt-1 block leading-snug">
-                      {current.summary}
-                    </span>
-                  </div>
+                    <div className="font-mono-code text-xs text-slate-800 space-y-3">
+                      <div>
+                        <div className="text-[10px] text-slate-500 uppercase">TELEMETRY EVIDENCE:</div>
+                        <div className="mt-1 p-2.5 rounded-lg bg-white border border-black/[0.06] text-slate-900 font-bold">
+                          {current.telemetryEvidence}
+                        </div>
+                      </div>
 
-                  <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-[10px] font-mono-code text-slate-400">
-                    <span>STATUS: ON-DEVICE ENGINE</span>
-                    <span className="text-emerald-400 font-bold">ACTIVE PIPELINE</span>
+                      <div className="pt-2 flex items-center justify-between text-[11px] text-slate-600">
+                        <span>PIPELINE DISCIPLINE:</span>
+                        <span className="text-amber-700 font-bold uppercase">NO BLIND ACTIONS</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

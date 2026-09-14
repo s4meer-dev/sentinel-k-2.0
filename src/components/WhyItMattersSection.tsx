@@ -1,97 +1,91 @@
 import React from 'react';
-import { Gamepad2, PhoneCall, Sparkles, Heart } from 'lucide-react';
+import { Gamepad2, Video, PhoneCall } from 'lucide-react';
 
 export const WhyItMattersSection: React.FC = () => {
-  const pillars = [
+  const cases = [
     {
-      title: 'GAMING',
-      statement: '“Milliseconds matter.”',
-      detail: 'A momentary 150ms cellular spike ruins a ranked competitive match. Jitter stability is vastly more critical than a 1 Gbps theoretical peak download speed.',
       icon: Gamepad2,
-      color: 'border-blue-500/30 text-blue-400',
+      tag: 'COMPETITIVE GAMING',
+      title: 'Every Millisecond Matters',
+      desc: 'In BGMI or Call of Duty Mobile, a silent 5G-to-4G handover creates a 180ms latency spike that causes instant in-game elimination. CI prevents unmonitored drop spikes.',
+      metric: '90 FPS STABLE',
     },
     {
-      title: 'CALLS',
-      statement: '“Stability matters.”',
-      detail: 'Interviews, family check-ins, and client meetings cannot afford frozen video or robotic audio drops caused by blind carrier handovers.',
+      icon: Video,
+      tag: 'WORK & LEARNING',
+      title: 'No Glitching Video Meetings',
+      desc: 'Zoom and Google Meet freeze when link throughput falters. CI identifies fading coverage before audio packets drop, keeping your interviews uninterrupted.',
+      metric: 'ZERO BUFFERING',
+    },
+    {
       icon: PhoneCall,
-      color: 'border-[#F0B31C]/30 text-[#F0B31C]',
-    },
-    {
-      title: 'EVERYDAY USE',
-      statement: '“Reliability matters.”',
-      detail: 'Navigation, mobile payments, and music streaming require consistent, dependable throughput wherever you walk across the city.',
-      icon: Sparkles,
-      color: 'border-emerald-500/30 text-emerald-400',
+      tag: 'EVERYDAY DEPENDABILITY',
+      title: 'Payments & Commutes That Just Work',
+      desc: 'Walking through a metro gate or paying at a crowded food court shouldn’t fail with endless spinning wheels. Honest signal verification keeps you moving.',
+      metric: 'INSTANT CONFIRMATION',
     },
   ];
 
   return (
-    <section className="relative py-28 md:py-36 bg-[#080B12] border-t border-white/[0.08] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-950/20 blur-[180px] pointer-events-none -z-10" />
-
+    <section className="relative py-28 md:py-36 bg-[#FAF9F5] border-b border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
-            <Heart className="w-3.5 h-3.5 text-[#F0B31C]" />
-            <span className="font-extrabold text-white">THE HUMAN EXPERIENCE</span>
-            <span className="text-slate-600">/</span>
-            <span>WHY IT MATTERS</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6">
+            <Gamepad2 className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-slate-900">HUMAN IMPACT</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-500">WHY STABILITY MATTERS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.06]">
-            REAL WORKLOADS. <br />
-            <span className="text-[#F0B31C]">REAL IMPACT.</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-slate-950 uppercase leading-[1.05]">
+            BECAUSE CONNECTIVITY <br />
+            <span className="text-[#F0B31C] bg-slate-900 px-3 py-0.5 rounded-xl inline-block mt-1">
+              IS AN EXPERIENCE.
+            </span>
           </h2>
+
+          <p className="mt-6 text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+            People don’t think about RSRP or milliwatts. They care whether their payment goes through, their video call stays sharp, and their match stays fluid.
+          </p>
         </div>
 
-        {/* 3 Giant Statements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {pillars.map((item) => {
-            const Icon = item.icon;
+        {/* 3 Use Cases */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {cases.map((c, idx) => {
+            const Icon = c.icon;
             return (
               <div
-                key={item.title}
-                className="p-8 rounded-3xl glass-panel border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all duration-300"
+                key={idx}
+                className="p-8 rounded-3xl bg-white border border-black/[0.08] shadow-xs hover:border-[#F0B31C]/60 hover:shadow-[0_10px_35px_rgba(240,179,28,0.1)] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-xs font-mono-code font-bold tracking-widest text-slate-500 uppercase">
-                      {item.title}
-                    </span>
-                    <div className={`p-2 rounded-xl border bg-white/[0.03] ${item.color}`}>
-                      <Icon className="w-4 h-4" />
+                    <div className="p-3 rounded-2xl bg-[#FAF9F5] border border-black/[0.06] shadow-xs text-slate-800">
+                      <Icon className="w-5 h-5 text-[#F0B31C]" />
                     </div>
+                    <span className="font-mono-code text-[10px] font-extrabold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                      {c.tag}
+                    </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-display font-black text-white tracking-tight leading-snug">
-                    {item.statement}
+                  <h3 className="text-xl font-display font-black text-slate-950">
+                    {c.title}
                   </h3>
 
-                  <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-                    {item.detail}
+                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    {c.desc}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-white/[0.08] text-[10px] font-mono-code text-slate-500 uppercase tracking-wider">
-                  Quality of Experience Focus
+                <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs font-mono-code">
+                  <span className="text-slate-500">EXPERIENCE TARGET:</span>
+                  <span className="text-emerald-700 font-bold">{c.metric}</span>
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Key Philosophical Statement Anchor */}
-        <div className="mt-16 max-w-4xl mx-auto text-center p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.04] to-black border border-white/10">
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-white leading-tight tracking-tight">
-            “The best connection isn’t always the fastest one.{' '}
-            <span className="text-[#F0B31C] block mt-2 sm:inline sm:mt-0">
-              It’s the one that works for what you’re doing.”
-            </span>
-          </p>
         </div>
 
       </div>

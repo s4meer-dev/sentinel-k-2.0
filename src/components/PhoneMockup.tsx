@@ -90,17 +90,17 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
           style={{ x: chipParallaxX, y: chipParallaxY }}
           className="hidden md:flex absolute -left-28 top-20 z-30 flex-col items-end pointer-events-none"
         >
-          <div className="glass-panel rounded-xl p-2.5 shadow-xl text-right border border-blue-500/30">
-            <span className="text-[8px] font-mono-code text-blue-400 uppercase font-bold tracking-wider block">
+          <div className="bg-white/95 border border-blue-500/30 rounded-xl p-2.5 shadow-lg text-right backdrop-blur-md">
+            <span className="text-[8px] font-mono-code text-blue-600 uppercase font-bold tracking-wider block">
               iQOO // SNAPDRAGON MODEM-RF
             </span>
-            <span className="text-xs font-mono-code font-bold text-white mt-0.5 block">
+            <span className="text-xs font-mono-code font-bold text-slate-900 mt-0.5 block">
               {getCalloutStatus()}
             </span>
           </div>
           <div className="flex items-center mt-1 mr-4">
             <div className="w-10 h-px bg-blue-500/40" />
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-600 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
           </div>
         </motion.div>
 
@@ -111,13 +111,13 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         >
           <div className="flex items-center mb-1 ml-4">
             <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] shadow-[0_0_8px_rgba(240,179,28,0.8)]" />
-            <div className="w-10 h-px bg-[#F0B31C]/40" />
+            <div className="w-10 h-px bg-[#F0B31C]/60" />
           </div>
-          <div className="glass-panel rounded-xl p-2.5 shadow-xl text-left border border-[#F0B31C]/30">
-            <span className="text-[8px] font-mono-code text-[#F0B31C] uppercase font-bold tracking-wider block">
+          <div className="bg-white/95 border border-[#F0B31C]/60 rounded-xl p-2.5 shadow-lg text-left backdrop-blur-md">
+            <span className="text-[8px] font-mono-code text-amber-700 uppercase font-bold tracking-wider block">
               iQOO // 360° SURROUND ANTENNA
             </span>
-            <span className="text-xs font-mono-code font-bold text-white mt-0.5 block">
+            <span className="text-xs font-mono-code font-bold text-slate-900 mt-0.5 block">
               SMART CELLULAR HARNESS
             </span>
           </div>
@@ -165,13 +165,13 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
 
       {showControls && (
         <div className="mt-6 flex flex-col items-center gap-2.5 z-20 w-full max-w-lg">
-          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#0D121D]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-white border border-black/[0.08] backdrop-blur-xl shadow-lg">
             <button
               onClick={() => onSelectState('CONNECTED')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
                 connectivityState === 'CONNECTED'
                   ? 'bg-blue-600 text-white shadow-md scale-102'
-                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Radio className="w-3 h-3 text-blue-300" />
@@ -183,7 +183,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
                 connectivityState === 'DEGRADING'
                   ? 'bg-amber-600 text-white shadow-md scale-102'
-                  : 'text-slate-400 hover:text-amber-300 hover:bg-white/[0.05]'
+                  : 'text-slate-600 hover:text-amber-800 hover:bg-slate-100'
               }`}
             >
               <AlertTriangle className="w-3 h-3 text-amber-300" />
@@ -195,7 +195,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
                 connectivityState === 'ACTION'
                   ? 'bg-[#F0B31C] text-[#07090E] shadow-[0_0_15px_rgba(240,179,28,0.4)] scale-102 font-black'
-                  : 'text-slate-400 hover:text-[#F0B31C] hover:bg-white/[0.05]'
+                  : 'text-slate-600 hover:text-amber-800 hover:bg-slate-100'
               }`}
             >
               <Zap className="w-3 h-3" />
@@ -207,7 +207,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
                 connectivityState === 'RECOVERED'
                   ? 'bg-emerald-600 text-white shadow-md scale-102'
-                  : 'text-slate-400 hover:text-emerald-300 hover:bg-white/[0.05]'
+                  : 'text-slate-600 hover:text-emerald-800 hover:bg-slate-100'
               }`}
             >
               <CheckCircle2 className="w-3 h-3 text-emerald-300" />
@@ -219,7 +219,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
                 connectivityState === 'MEMORY'
                   ? 'bg-indigo-600 text-white shadow-md scale-102'
-                  : 'text-slate-400 hover:text-indigo-300 hover:bg-white/[0.05]'
+                  : 'text-slate-600 hover:text-indigo-800 hover:bg-slate-100'
               }`}
             >
               <MapPin className="w-3 h-3 text-indigo-300" />
@@ -232,7 +232,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-code transition-all cursor-pointer border ${
               isPlaying
                 ? 'bg-[#F0B31C] border-[#F0B31C] text-[#07090E] font-black shadow-[0_0_15px_rgba(240,179,28,0.3)]'
-                : 'bg-white/[0.05] border-white/10 text-slate-300 hover:text-white hover:border-white/20'
+                : 'bg-white border-black/[0.08] text-slate-700 hover:text-slate-900 hover:bg-slate-50 shadow-xs'
             }`}
           >
             {isPlaying ? <Pause className="w-3 h-3 text-[#07090E]" /> : <Play className="w-3 h-3 fill-current text-[#F0B31C]" />}

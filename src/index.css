@@ -2,16 +2,18 @@
 
 @layer base {
   :root {
-    --color-bg-canvas: #07090E;
-    --color-bg-surface: #0E121A;
-    --color-bg-card: rgba(14, 18, 27, 0.82);
-    --color-bg-acrylic: rgba(18, 24, 38, 0.75);
+    --color-bg-canvas: #FAF9F5;
+    --color-bg-surface: #FFFFFF;
+    --color-bg-card: rgba(255, 255, 255, 0.9);
+    --color-bg-acrylic: rgba(250, 249, 245, 0.85);
     --color-iqoo-yellow: #F0B31C;
     --color-iqoo-yellow-warm: #F5BE30;
     --color-iqoo-yellow-amber: #D99B0F;
-    --color-cobalt-blue: #3B82F6;
+    --color-cobalt-blue: #2563EB;
     --color-cobalt-deep: #1D4ED8;
-    --color-text-muted: #94A3B8;
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748B;
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-heading: 'Syne', system-ui, sans-serif;
     --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -19,8 +21,8 @@
   }
 
   body {
-    background-color: #07090E;
-    color: #F1F5F9;
+    background-color: #FAF9F5;
+    color: #0F172A;
     font-family: var(--font-body);
     overflow-x: hidden;
     margin: 0;
@@ -74,34 +76,35 @@
 }
 
 .iqoo-dark-pill {
-  background-color: rgba(240, 179, 28, 0.12);
-  color: #F0B31C;
-  border: 1px solid rgba(240, 179, 28, 0.3);
+  background-color: rgba(240, 179, 28, 0.15);
+  color: #B45309;
+  border: 1px solid rgba(240, 179, 28, 0.4);
   font-weight: 700;
 }
 
-/* Glassmorphic Panel */
+/* Glassmorphic Panel (Light / Off-White Acrylic) */
 .glass-panel {
-  background: rgba(14, 18, 28, 0.76);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
 }
 
 .glass-panel-glow {
-  background: rgba(14, 18, 28, 0.82);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(240, 179, 28, 0.25);
-  box-shadow: 0 0 30px -10px rgba(240, 179, 28, 0.15);
+  border: 1px solid rgba(240, 179, 28, 0.45);
+  box-shadow: 0 8px 30px -5px rgba(240, 179, 28, 0.18);
 }
 
-/* Network dot grid texture */
+/* Network dot grid texture for light background */
 .network-grid {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 
 /* Custom Scrollbar */
@@ -111,11 +114,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #07090E;
+  background: #FAF9F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #CBD5E1;
   border-radius: 3px;
 }
 

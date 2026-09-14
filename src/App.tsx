@@ -35,7 +35,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090E] text-slate-100 selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#FAF9F5] text-slate-900 selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
       {/* Sticky Minimal Navbar */}
       <Navbar onExperienceClick={handleExperienceClick} />
 

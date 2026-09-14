@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   Sparkles, 
   Video, 
-  Radio, 
   ShieldAlert, 
   CheckCircle2, 
   Compass
@@ -16,167 +15,116 @@ export const FutureVisionSection: React.FC = () => {
       subhead: '“See what’s actually happening.”',
       detail: 'Detect 5G/4G handovers, quantify link instability, and observe real-world connection quality in plain English.',
       status: 'SHIPPED IN PROTOTYPE',
-      color: 'border-blue-500/30 text-blue-400 bg-blue-500/10',
-      badge: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      statusColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
     },
     {
-      era: 'NEXT // STAGE 02',
+      era: 'NEXT // STAGE 2',
       title: 'RESPOND',
-      subhead: '“Respond when connectivity starts degrading.”',
-      detail: 'Coordinate supported cellular band resets, shift receiver antenna priority, and guide handovers before packet queues collapse.',
-      status: 'IN ACTIVE DEVELOPMENT',
-      color: 'border-amber-500/30 text-amber-400 bg-amber-500/10',
-      badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+      subhead: '“Take supported recovery actions.”',
+      detail: 'Recommend carrier profile refreshes, optimize network aggregation, and verify measurable improvement post-action.',
+      status: 'ARCHITECTURE SPECIFIED',
+      statusColor: 'bg-blue-100 text-blue-800 border-blue-300',
     },
     {
-      era: 'FUTURE // HORIZON',
+      era: 'FUTURE // VISION',
       title: 'PREDICT',
-      subhead: '“Know a problem is coming before you feel it.”',
-      detail: 'Anticipate environmental signal decay before entering known interference zones, pre-buffering streams and locking secondary links.',
-      status: 'RESEARCH VISION',
-      color: 'border-[#F0B31C]/30 text-[#F0B31C] bg-[#F0B31C]/10',
-      badge: 'bg-[#F0B31C]/20 text-[#F0B31C] border-[#F0B31C]/30',
-    },
-  ];
-
-  const scenarioSteps = [
-    {
-      step: '01',
-      title: 'CALL INITIATED',
-      desc: 'User starts a critical video conference while walking across campus.',
-      icon: Video,
-    },
-    {
-      step: '02',
-      title: 'CONTEXT RECOGNIZED',
-      desc: 'Phone matches approaching corridor with historical memory node.',
-      icon: Radio,
-    },
-    {
-      step: '03',
-      title: 'PREDICTIVE WARNING',
-      desc: '“Connection may degrade near elevator shaft in 15 seconds.”',
-      icon: ShieldAlert,
-    },
-    {
-      step: '04',
-      title: 'AUTOMATIC PRE-ATTACH',
-      desc: 'Prepares seamless Wi-Fi bridge or pre-buffers audio packet queue.',
-      icon: Sparkles,
-    },
-    {
-      step: '05',
-      title: 'ZERO INTERRUPTION',
-      desc: 'Call continues smoothly with zero dropped voice frames or video blackouts.',
-      icon: CheckCircle2,
+      subhead: '“Anticipate connection drops.”',
+      detail: 'Anticipate degradation before an important video call or gaming match, preparing transitions proactively.',
+      status: 'LONG-TERM HORIZON',
+      statusColor: 'bg-amber-100 text-amber-800 border-amber-300',
     },
   ];
 
   return (
-    <section id="future" className="relative py-28 md:py-36 bg-[#07090E] border-t border-white/[0.08] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-purple-950/15 blur-[180px] pointer-events-none -z-10" />
-
+    <section id="future" className="relative py-28 md:py-36 bg-white border-b border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
-            <Compass className="w-3.5 h-3.5 text-[#F0B31C]" />
-            <span className="font-extrabold text-white">THE HORIZON</span>
-            <span className="text-slate-600">/</span>
-            <span>PREDICTIVE CONNECTIVITY</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF9F5] border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-slate-900">LONG-TERM TRAJECTORY</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-500">PREDICTIVE NETWORKING</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.06]">
-            TODAY: <span className="text-blue-400">UNDERSTAND</span> <br />
-            NEXT: <span className="text-amber-400">RESPOND</span> <br />
-            FUTURE: <span className="text-[#F0B31C]">PREDICT</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-slate-950 uppercase leading-[1.05]">
+            FROM REACTIVE TO <br />
+            <span className="text-[#F0B31C] bg-slate-900 px-3 py-0.5 rounded-xl inline-block mt-1">
+              PREDICTIVE CONNECTIVITY.
+            </span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
-            Our hackathon prototype proves the foundation of observing cellular handovers. The long-term vision is a phone that anticipates network friction before you ever feel it.
+          <p className="mt-6 text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+            The ultimate vision is not just helping when connections fail, but predicting drops before you ever notice them.
           </p>
         </div>
 
-        {/* 3-Stage Evolution Roadmap */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
-          {roadmap.map((card) => (
+        {/* 3 Roadmap Pillars */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {roadmap.map((r, i) => (
             <div
-              key={card.title}
-              className="p-8 rounded-3xl glass-panel border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all duration-300"
+              key={i}
+              className="p-8 rounded-3xl bg-[#FAF9F5] border border-black/[0.08] shadow-xs hover:border-[#F0B31C]/60 hover:shadow-[0_10px_35px_rgba(240,179,28,0.1)] transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono-code font-bold text-slate-500 uppercase">
-                    {card.era}
+                  <span className="text-xs font-mono-code font-bold text-slate-500">
+                    {r.era}
                   </span>
-                  <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-mono-code font-bold uppercase border ${card.badge}`}>
-                    {card.status}
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono-code font-extrabold uppercase border ${r.statusColor}`}>
+                    {r.status}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-display font-black text-white tracking-tight uppercase">
-                  {card.title}
+                <h3 className="text-2xl sm:text-3xl font-display font-black text-slate-950">
+                  {r.title}
                 </h3>
 
-                <div className="text-sm font-heading font-extrabold text-white mt-1">
-                  {card.subhead}
+                <div className="text-sm font-display font-bold text-slate-700 italic mt-2">
+                  {r.subhead}
                 </div>
 
-                <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-                  {card.detail}
+                <p className="mt-4 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  {r.detail}
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-white/[0.08] text-[10px] font-mono-code text-slate-500">
-                Aspirational product roadmap milestone
+              <div className="mt-8 pt-4 border-t border-black/[0.06] flex items-center justify-between text-[11px] font-mono-code text-slate-500">
+                <span>STAGE 0{i + 1} EVOLUTION</span>
+                <Compass className="w-3.5 h-3.5 text-slate-400" />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Future Walkthrough Scenario Pipeline */}
-        <div className="max-w-5xl mx-auto p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-[#0C111E] to-[#07090E] border border-white/10 shadow-2xl relative">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-xs font-mono-code uppercase tracking-widest text-[#F0B31C] font-bold block mb-2">
-              FUTURE SCENARIO WALKTHROUGH
-            </span>
-            <h4 className="text-xl sm:text-2xl font-display font-black text-white">
-              Zero-Interruption Voice &amp; Video Roaming
-            </h4>
-            <span className="text-xs font-mono-code text-slate-400 mt-1 block">
-              Framed as an aspirational research vision
-            </span>
+        {/* Concrete Future Scenario Example Box */}
+        <div className="mt-16 max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-[#FAF9F5] border border-black/[0.08] shadow-sm">
+          <div className="flex items-center gap-3 text-xs font-mono-code text-amber-700 font-bold uppercase tracking-wider mb-3">
+            <Video className="w-4 h-4 text-[#F0B31C]" />
+            <span>REAL-WORLD FUTURE SCENARIO: IMPORTANT VIDEO CALL</span>
           </div>
 
-          {/* 5-Step Scenario Horizontal Flow */}
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 relative">
-            {scenarioSteps.map((sc, i) => {
-              const Icon = sc.icon;
-              return (
-                <div key={sc.step} className="p-4 rounded-2xl bg-black/50 border border-white/[0.08] flex flex-col justify-between text-left">
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-mono-code font-bold text-slate-500">
-                        STEP {sc.step}
-                      </span>
-                      <Icon className="w-4 h-4 text-[#F0B31C]" />
-                    </div>
-                    <div className="text-xs font-display font-black text-white uppercase tracking-wide">
-                      {sc.title}
-                    </div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
-                      {sc.desc}
-                    </p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div className="p-4 rounded-2xl bg-white border border-red-200">
+              <div className="flex items-center gap-2 text-xs font-mono-code text-red-700 font-bold mb-2">
+                <ShieldAlert className="w-4 h-4 text-red-600" />
+                <span>TODAY'S REACTIVE PHONE</span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                User enters stairwell during an interview call. Phone freezes, audio garbles, call disconnects. User frantically toggles Airplane Mode.
+              </p>
+            </div>
 
-                  <div className="mt-3 pt-2 border-t border-white/[0.06] text-[9px] font-mono-code text-emerald-400">
-                    {i === 4 ? '? Call Uninterrupted' : 'Predictive Loop'}
-                  </div>
-                </div>
-              );
-            })}
+            <div className="p-4 rounded-2xl bg-white border border-emerald-200">
+              <div className="flex items-center gap-2 text-xs font-mono-code text-emerald-700 font-bold mb-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>WITH PREDICTIVE INTELLIGENCE</span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                System recognizes stairwell entry from spatial memory. Pre-buffers stream and smoothly completes carrier fallback before packet loss occurs.
+              </p>
+            </div>
           </div>
         </div>
 
