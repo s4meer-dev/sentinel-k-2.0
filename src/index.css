@@ -2,19 +2,16 @@
 
 @layer base {
   :root {
-    --color-bg-canvas: #F8F7F2;
-    --color-bg-card: rgba(255, 255, 255, 0.88);
-    --color-bg-acrylic: rgba(255, 255, 255, 0.75);
-    --color-navy-deep: #0A192F;
-    --color-navy-slate: #1E293B;
+    --color-bg-canvas: #07090E;
+    --color-bg-surface: #0E121A;
+    --color-bg-card: rgba(14, 18, 27, 0.82);
+    --color-bg-acrylic: rgba(18, 24, 38, 0.75);
     --color-iqoo-yellow: #F0B31C;
     --color-iqoo-yellow-warm: #F5BE30;
     --color-iqoo-yellow-amber: #D99B0F;
-    --color-cobalt-blue: #1D4ED8;
-    --color-cobalt-deep: #0A192F;
-    --color-pastel-peach: #FFFBEB;
-    --color-pastel-blue: #E2E8F0;
-    --color-text-muted: #64748B;
+    --color-cobalt-blue: #3B82F6;
+    --color-cobalt-deep: #1D4ED8;
+    --color-text-muted: #94A3B8;
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-heading: 'Syne', system-ui, sans-serif;
     --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -22,8 +19,8 @@
   }
 
   body {
-    background-color: #F8F7F2;
-    color: #0A192F;
+    background-color: #07090E;
+    color: #F1F5F9;
     font-family: var(--font-body);
     overflow-x: hidden;
     margin: 0;
@@ -57,53 +54,71 @@
 /* iQOO Brand Specific Utility Styles */
 .iqoo-yellow-btn {
   background-color: #F0B31C;
-  color: #000000;
+  color: #07090E;
   font-weight: 800;
-  box-shadow: 0 4px 14px rgba(240, 179, 28, 0.25);
+  box-shadow: 0 4px 18px rgba(240, 179, 28, 0.28);
   transition: all 0.2s ease;
 }
 
 .iqoo-yellow-btn:hover {
   background-color: #F5BE30;
-  box-shadow: 0 6px 20px rgba(240, 179, 28, 0.35);
+  box-shadow: 0 6px 24px rgba(240, 179, 28, 0.42);
   transform: translateY(-1px);
 }
 
 .iqoo-yellow-pill {
   background-color: #F0B31C;
-  color: #000000;
+  color: #07090E;
   font-weight: 800;
   letter-spacing: 0.05em;
 }
 
 .iqoo-dark-pill {
-  background-color: #0A192F;
+  background-color: rgba(240, 179, 28, 0.12);
   color: #F0B31C;
+  border: 1px solid rgba(240, 179, 28, 0.3);
   font-weight: 700;
 }
 
-/* Editorial dot grid texture */
-.editorial-grid {
-  background-size: 32px 32px;
+/* Glassmorphic Panel */
+.glass-panel {
+  background: rgba(14, 18, 28, 0.76);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(14, 18, 28, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(240, 179, 28, 0.25);
+  box-shadow: 0 0 30px -10px rgba(240, 179, 28, 0.15);
+}
+
+/* Network dot grid texture */
+.network-grid {
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(10, 25, 47, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(10, 25, 47, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F7F2;
+  background: #07090E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #1E293B;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1D4ED8;
+  background: #F0B31C;
 }

@@ -1,50 +1,45 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { PhoneScreen } from './PhoneScreen';
-import type { ThermalState } from '../types/telemetry';
-import { Flame, Sparkles, AlertTriangle, ShieldCheck, Play, Pause } from 'lucide-react';
+import type { ConnectivityState } from '../types/connectivity';
+import { Radio, AlertTriangle, Zap, CheckCircle2, MapPin, Play, Pause } from 'lucide-react';
 
 interface PhoneMockupProps {
-  thermalState: ThermalState;
-  onSelectState: (state: ThermalState) => void;
+  connectivityState: ConnectivityState;
+  onSelectState: (state: ConnectivityState) => void;
   className?: string;
   showControls?: boolean;
 }
 
 export const PhoneMockup: React.FC<PhoneMockupProps> = ({
-  thermalState,
+  connectivityState,
   onSelectState,
   className = '',
   showControls = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // Auto-tour sequence controller
-  const [isPlaying, setIsPlaying] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isPlaying) return;
-    const states: ThermalState[] = ['NORMAL', 'HEATING', 'THERMAL_EVENT', 'FORENSIC_ANALYSIS'];
-    let idx = states.indexOf(thermalState);
+    const states: ConnectivityState[] = ['CONNECTED', 'DEGRADING', 'ACTION', 'RECOVERED', 'MEMORY'];
+    let idx = states.indexOf(connectivityState);
     const interval = setInterval(() => {
       idx = (idx + 1) % states.length;
       onSelectState(states[idx]);
-    }, 4000);
+    }, 3800);
     return () => clearInterval(interval);
-  }, [isPlaying, thermalState, onSelectState]);
+  }, [isPlaying, connectivityState, onSelectState]);
 
-  // Mouse tilt tracking
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Spring physics for natural tactile feel
   const springConfig = { damping: 25, stiffness: 120, mass: 0.5 };
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), springConfig);
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-9, 9]), springConfig);
   const glareX = useSpring(useTransform(mouseX, [-0.5, 0.5], ['10%', '90%']), springConfig);
   const glareY = useSpring(useTransform(mouseY, [-0.5, 0.5], ['10%', '90%']), springConfig);
 
-  // Parallax float for callout chips
   const chipParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [10, -10]), springConfig);
   const chipParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig);
 
@@ -62,16 +57,18 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
     mouseY.set(0);
   };
 
-  // Dynamic temperature display for callout chip
-  const getCalloutTemp = () => {
-    switch (thermalState) {
-      case 'NORMAL':
-        return '41.8°C (iQOO OPTIMAL)';
-      case 'HEATING':
-        return '43.4°C (+2.1°C FLUX)';
-      case 'THERMAL_EVENT':
-      case 'FORENSIC_ANALYSIS':
-        return '44.3°C (TRIP LIMIT)';
+  const getCalloutStatus = () => {
+    switch (connectivityState) {
+      case 'CONNECTED':
+        return 'n78 · 3.5GHz (STABLE)';
+      case 'DEGRADING':
+        return 'CELL EDGE FLUX (-114 dBm)';
+      case 'ACTION':
+        return 'BAND RE-EVALUATION';
+      case 'RECOVERED':
+        return 'NR ATTACH LOCKED';
+      case 'MEMORY':
+        return 'LIBRARY HISTORIC: 82%';
     }
   };
 
@@ -85,45 +82,43 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         onMouseLeave={handleMouseLeave}
         className="relative perspective-[1400px] py-4 cursor-grab active:cursor-grabbing"
       >
-        {/* Soft Natural Hardware Ground Shadow */}
-        <div className="absolute -bottom-6 inset-x-8 h-10 bg-[#0A192F]/15 blur-2xl rounded-full pointer-events-none -z-10" />
+        <div className="absolute -bottom-8 inset-x-6 h-16 bg-blue-600/20 blur-3xl rounded-full pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-96 bg-[#F0B31C]/10 blur-[100px] rounded-full pointer-events-none -z-10" />
 
-        {/* Floating Callout Chip 1: iQOO SoC Cluster (Top-Left) */}
+        {/* Floating Callout Chip 1 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
           className="hidden md:flex absolute -left-28 top-20 z-30 flex-col items-end pointer-events-none"
         >
-          <div className="bg-white/95 backdrop-blur-md border border-[#1D4ED8]/20 rounded-xl p-2.5 shadow-lg text-right">
-            <span className="text-[8px] font-mono-code text-[#1D4ED8] uppercase font-bold tracking-wider block">
-              iQOO // SNAPDRAGON 8 GEN
+          <div className="glass-panel rounded-xl p-2.5 shadow-xl text-right border border-blue-500/30">
+            <span className="text-[8px] font-mono-code text-blue-400 uppercase font-bold tracking-wider block">
+              iQOO // SNAPDRAGON MODEM-RF
             </span>
-            <span className="text-xs font-mono-code font-bold text-[#0A192F] mt-0.5 block">
-              {getCalloutTemp()}
+            <span className="text-xs font-mono-code font-bold text-white mt-0.5 block">
+              {getCalloutStatus()}
             </span>
           </div>
-          {/* Hairline connector pointer with blue dot */}
           <div className="flex items-center mt-1 mr-4">
-            <div className="w-10 h-px bg-[#1D4ED8]/30" />
-            <div className="w-1.5 h-1.5 rounded-full bg-[#1D4ED8]" />
+            <div className="w-10 h-px bg-blue-500/40" />
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
           </div>
         </motion.div>
 
-        {/* Floating Callout Chip 2: iQOO 6K VC (Bottom-Right) */}
+        {/* Floating Callout Chip 2 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
           className="hidden md:flex absolute -right-28 bottom-32 z-30 flex-col items-start pointer-events-none"
         >
-          {/* Hairline connector pointer with blue dot */}
           <div className="flex items-center mb-1 ml-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] border border-black/40" />
-            <div className="w-10 h-px bg-[#0A192F]/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] shadow-[0_0_8px_rgba(240,179,28,0.8)]" />
+            <div className="w-10 h-px bg-[#F0B31C]/40" />
           </div>
-          <div className="bg-white/95 backdrop-blur-md border border-[#0A192F]/15 rounded-xl p-2.5 shadow-lg text-left">
-            <span className="text-[8px] font-mono-code text-[#0A192F]/70 uppercase font-bold tracking-wider block">
-              iQOO 6K ULTRA VAPOR CHAMBER
+          <div className="glass-panel rounded-xl p-2.5 shadow-xl text-left border border-[#F0B31C]/30">
+            <span className="text-[8px] font-mono-code text-[#F0B31C] uppercase font-bold tracking-wider block">
+              iQOO // 360° SURROUND ANTENNA
             </span>
-            <span className="text-xs font-mono-code font-bold text-[#0A192F] mt-0.5 block">
-              DISSIPATION: Δ 0.1°C/s
+            <span className="text-xs font-mono-code font-bold text-white mt-0.5 block">
+              SMART CELLULAR HARNESS
             </span>
           </div>
         </motion.div>
@@ -135,41 +130,32 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
             rotateY,
             transformStyle: 'preserve-3d',
           }}
-          className="relative w-[320px] sm:w-[350px] md:w-[370px] h-[670px] sm:h-[720px] rounded-[50px] p-[10px] bg-gradient-to-b from-[#2E3748] via-[#1A2232] to-[#0D1422] shadow-[0_25px_60px_-15px_rgba(10,25,47,0.22),0_0_0_1px_rgba(255,255,255,0.15),inset_0_1px_2px_rgba(255,255,255,0.3)] transition-shadow duration-500"
+          className="relative w-[320px] sm:w-[350px] md:w-[370px] h-[670px] sm:h-[720px] rounded-[50px] p-[10px] bg-gradient-to-b from-[#1F2633] via-[#101522] to-[#080B12] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.12),inset_0_1px_2px_rgba(255,255,255,0.25)] transition-shadow duration-500"
         >
-          {/* Outer Chamfer Edge */}
-          <div className="absolute inset-0 rounded-[50px] border border-white/[0.18] pointer-events-none" />
-          <div className="absolute inset-[1px] rounded-[49px] border border-black/60 pointer-events-none" />
+          <div className="absolute inset-0 rounded-[50px] border border-white/[0.12] pointer-events-none" />
+          <div className="absolute inset-[1px] rounded-[49px] border border-black/80 pointer-events-none" />
 
-          {/* Left Physical Buttons */}
-          <div className="absolute -left-[3px] top-[140px] w-[3px] h-[48px] bg-zinc-500 rounded-l-sm border-l border-white/30 shadow-xs" />
-          <div className="absolute -left-[3px] top-[198px] w-[3px] h-[48px] bg-zinc-500 rounded-l-sm border-l border-white/30 shadow-xs" />
+          <div className="absolute -left-[3px] top-[140px] w-[3px] h-[48px] bg-zinc-600 rounded-l-sm border-l border-white/20 shadow-xs" />
+          <div className="absolute -left-[3px] top-[198px] w-[3px] h-[48px] bg-zinc-600 rounded-l-sm border-l border-white/20 shadow-xs" />
 
-          {/* Right Physical Button (Signature iQOO Brand Yellow Power Key) */}
-          <div className="absolute -right-[3px] top-[165px] w-[3px] h-[65px] bg-[#F0B31C] rounded-r-sm border-r border-[#F5BE30] shadow-[0_0_8px_rgba(240,179,28,0.4)]" />
+          <div className="absolute -right-[3px] top-[165px] w-[3px] h-[65px] bg-[#F0B31C] rounded-r-sm border-r border-[#F5BE30] shadow-[0_0_12px_rgba(240,179,28,0.5)]" />
 
-          {/* Top Speaker Earpiece Grille */}
-          <div className="absolute top-[16px] left-1/2 -translate-x-1/2 w-16 h-1 bg-zinc-700 rounded-full border border-white/15 z-30 flex items-center justify-center">
-            <div className="w-12 h-[0.5px] bg-zinc-500" />
+          <div className="absolute top-[16px] left-1/2 -translate-x-1/2 w-16 h-1 bg-zinc-800 rounded-full border border-white/10 z-30 flex items-center justify-center">
+            <div className="w-12 h-[0.5px] bg-zinc-600" />
           </div>
 
-          {/* Inner Screen Housing */}
-          <div className="relative w-full h-full rounded-[42px] bg-[#FAF9F5] overflow-hidden border-[3px] border-[#0F172A] shadow-[inset_0_0_6px_rgba(0,0,0,0.4)]">
-            
-            {/* Front Camera Punch-hole */}
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#0F172A] border border-zinc-700 z-30 flex items-center justify-center pointer-events-none shadow-xs">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#0A192F] flex items-center justify-center">
-                <div className="w-0.5 h-0.5 rounded-full bg-[#1D4ED8]" />
+          <div className="relative w-full h-full rounded-[42px] bg-[#080B12] overflow-hidden border-[3px] border-[#0A0D15] shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#07090E] border border-zinc-700 z-30 flex items-center justify-center pointer-events-none shadow-xs">
+              <div className="w-1.5 h-1.5 rounded-full bg-black flex items-center justify-center">
+                <div className="w-0.5 h-0.5 rounded-full bg-blue-500" />
               </div>
             </div>
 
-            {/* Dynamic Interactive Phone Screen Component */}
-            <PhoneScreen thermalState={thermalState} onSelectState={onSelectState} />
+            <PhoneScreen connectivityState={connectivityState} onSelectState={onSelectState} />
 
-            {/* Glossy Screen Glare Texture */}
             <motion.div
               style={{
-                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 45%, transparent 75%)`,
+                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.01) 45%, transparent 75%)`,
               }}
               className="absolute inset-0 pointer-events-none mix-blend-overlay z-20"
             />
@@ -177,70 +163,80 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         </motion.div>
       </div>
 
-      {/* Hero Phone Interactive State Station Bar */}
       {showControls && (
-        <div className="mt-6 flex flex-col items-center gap-2.5 z-20">
-          <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-white/95 border border-[#0A192F]/10 backdrop-blur-xl shadow-lg">
+        <div className="mt-6 flex flex-col items-center gap-2.5 z-20 w-full max-w-lg">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#0D121D]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
             <button
-              onClick={() => onSelectState('NORMAL')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
-                thermalState === 'NORMAL'
-                  ? 'bg-[#1D4ED8] text-white shadow-md scale-102'
-                  : 'text-[#0A192F]/70 hover:text-[#1D4ED8] hover:bg-blue-50/50'
+              onClick={() => onSelectState('CONNECTED')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
+                connectivityState === 'CONNECTED'
+                  ? 'bg-blue-600 text-white shadow-md scale-102'
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
               }`}
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>01 NORMAL</span>
+              <Radio className="w-3 h-3 text-blue-300" />
+              <span>01 CONNECTED</span>
             </button>
 
             <button
-              onClick={() => onSelectState('HEATING')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
-                thermalState === 'HEATING'
-                  ? 'bg-[#D97706] text-white shadow-md scale-102 font-bold'
-                  : 'text-[#0A192F]/70 hover:text-[#D97706] hover:bg-amber-50/50'
+              onClick={() => onSelectState('DEGRADING')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
+                connectivityState === 'DEGRADING'
+                  ? 'bg-amber-600 text-white shadow-md scale-102'
+                  : 'text-slate-400 hover:text-amber-300 hover:bg-white/[0.05]'
               }`}
             >
-              <Flame className="w-3.5 h-3.5" />
-              <span>02 HEATING</span>
+              <AlertTriangle className="w-3 h-3 text-amber-300" />
+              <span>02 DEGRADING</span>
             </button>
 
             <button
-              onClick={() => onSelectState('THERMAL_EVENT')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
-                thermalState === 'THERMAL_EVENT'
-                  ? 'bg-[#F0B31C] text-black shadow-[0_2px_12px_rgba(240,179,28,0.35)] scale-102 font-black border border-black/15'
-                  : 'text-[#0A192F]/70 hover:text-black hover:bg-yellow-100/50'
+              onClick={() => onSelectState('ACTION')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
+                connectivityState === 'ACTION'
+                  ? 'bg-[#F0B31C] text-[#07090E] shadow-[0_0_15px_rgba(240,179,28,0.4)] scale-102 font-black'
+                  : 'text-slate-400 hover:text-[#F0B31C] hover:bg-white/[0.05]'
               }`}
             >
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>03 EVENT</span>
+              <Zap className="w-3 h-3" />
+              <span>03 ACTION</span>
             </button>
 
             <button
-              onClick={() => onSelectState('FORENSIC_ANALYSIS')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
-                thermalState === 'FORENSIC_ANALYSIS'
-                  ? 'bg-[#0A192F] text-[#F0B31C] shadow-md scale-102 font-black border border-black/20'
-                  : 'text-[#0A192F]/70 hover:text-[#1D4ED8] hover:bg-blue-50/50'
+              onClick={() => onSelectState('RECOVERED')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
+                connectivityState === 'RECOVERED'
+                  ? 'bg-emerald-600 text-white shadow-md scale-102'
+                  : 'text-slate-400 hover:text-emerald-300 hover:bg-white/[0.05]'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#F0B31C]" />
-              <span>04 FORENSICS</span>
+              <CheckCircle2 className="w-3 h-3 text-emerald-300" />
+              <span>04 RECOVERED</span>
+            </button>
+
+            <button
+              onClick={() => onSelectState('MEMORY')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all duration-200 cursor-pointer ${
+                connectivityState === 'MEMORY'
+                  ? 'bg-indigo-600 text-white shadow-md scale-102'
+                  : 'text-slate-400 hover:text-indigo-300 hover:bg-white/[0.05]'
+              }`}
+            >
+              <MapPin className="w-3 h-3 text-indigo-300" />
+              <span>05 MEMORY</span>
             </button>
           </div>
 
-          {/* Auto Simulation Cycle Pill with iQOO Yellow button */}
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono-code transition-all cursor-pointer border ${
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-code transition-all cursor-pointer border ${
               isPlaying
-                ? 'bg-[#F0B31C] border-black/20 text-black font-black shadow-xs'
-                : 'bg-white/90 border-[#0A192F]/10 text-[#0A192F]/80 hover:text-[#1D4ED8] hover:border-[#1D4ED8]/20 shadow-xs'
+                ? 'bg-[#F0B31C] border-[#F0B31C] text-[#07090E] font-black shadow-[0_0_15px_rgba(240,179,28,0.3)]'
+                : 'bg-white/[0.05] border-white/10 text-slate-300 hover:text-white hover:border-white/20'
             }`}
           >
-            {isPlaying ? <Pause className="w-3 h-3 text-black" /> : <Play className="w-3 h-3 fill-current text-[#0A192F]" />}
-            <span>{isPlaying ? 'iQOO AUTO-TOUR ACTIVE (4s INTERVAL)' : 'PLAY AUTOMATIC CINEMATIC TOUR'}</span>
+            {isPlaying ? <Pause className="w-3 h-3 text-[#07090E]" /> : <Play className="w-3 h-3 fill-current text-[#F0B31C]" />}
+            <span>{isPlaying ? 'iQOO DEMO TOUR ACTIVE (3.8s CYCLE)' : 'PLAY AUTOMATIC PRODUCT TOUR'}</span>
           </button>
         </div>
       )}

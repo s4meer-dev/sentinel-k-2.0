@@ -2,69 +2,96 @@ import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProblemSection } from './components/ProblemSection';
-import { DetectionCards } from './components/DetectionCards';
-import { ThermalTimelineSection } from './components/ThermalTimelineSection';
-import { ForensicsSection } from './components/ForensicsSection';
+import { BigIdeaSection } from './components/BigIdeaSection';
+import { ExperienceCarousel } from './components/ExperienceCarousel';
+import { BeforeAfterSection } from './components/BeforeAfterSection';
+import { ConnectivityMemorySection } from './components/ConnectivityMemorySection';
+import { ConnectivityJourneySection } from './components/ConnectivityJourneySection';
 import { ArchitectureSection } from './components/ArchitectureSection';
-import { DeviceFirstSection } from './components/DeviceFirstSection';
+import { NoHypeAISection } from './components/NoHypeAISection';
+import { FutureVisionSection } from './components/FutureVisionSection';
+import { WhyItMattersSection } from './components/WhyItMattersSection';
+import { ProductPrinciplesSection } from './components/ProductPrinciplesSection';
 import { TeamSection } from './components/TeamSection';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
-import type { ThermalState } from './types/telemetry';
+import type { ConnectivityState } from './types/connectivity';
 
 export function App() {
-  const [thermalState, setThermalState] = useState<ThermalState>('NORMAL');
+  const [connectivityState, setConnectivityState] = useState<ConnectivityState>('CONNECTED');
 
-  const handleExploreClick = () => {
-    const el = document.getElementById('problem');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleExperienceClick = () => {
+    const el = document.getElementById('experience');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  const handleTimelineClick = () => {
-    const el = document.getElementById('timeline');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleVisionClick = () => {
+    const el = document.getElementById('vision');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F2] text-[#0A192F] selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#07090E] text-slate-100 selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
       {/* Sticky Minimal Navbar */}
-      <Navbar onExploreClick={handleExploreClick} />
+      <Navbar onExperienceClick={handleExperienceClick} />
 
-      {/* Editorial Hero Section with Live Realistic Phone Simulation */}
+      {/* Cinematic Hero Section with Preserved 3D iQOO Phone Simulation */}
       <main>
         <Hero
-          thermalState={thermalState}
-          setThermalState={setThermalState}
-          onExploreClick={handleExploreClick}
-          onTimelineClick={handleTimelineClick}
+          connectivityState={connectivityState}
+          setConnectivityState={setConnectivityState}
+          onExperienceClick={handleExperienceClick}
+          onVisionClick={handleVisionClick}
         />
 
-        {/* Section: The Moment Performance Changes (90 FPS vs 41°C) */}
+        {/* Section 2: The Problem (5G icon vs Real Experience Deterioration) */}
         <ProblemSection />
 
-        {/* Section: Detect / Correlate / Explain (Distinct Editorial Compositions) */}
-        <DetectionCards />
+        {/* Section 3: The Big Idea (Observe ? Understand ? Act ? Verify ? Learn) */}
+        <BigIdeaSection />
 
-        {/* Section: The Thermal Event Timeline ('See what your phone sees') */}
-        <ThermalTimelineSection />
+        {/* Section 4: The Experience Carousel (Detect, Understand, Act, Verify) */}
+        <ExperienceCarousel />
 
-        {/* Section: Forensic Context ('Raw signals aren't the answer. Context is.') */}
-        <ForensicsSection />
+        {/* Section 5: Before / After (Measure the Improvement) */}
+        <BeforeAfterSection />
 
-        {/* Section: Technical Architecture */}
+        {/* Section 6: Connectivity Memory (Your Phone Learns Your Places) */}
+        <ConnectivityMemorySection />
+
+        {/* Section 7: Connectivity Journey (Contextual Mobility Across Campus) */}
+        <ConnectivityJourneySection />
+
+        {/* Section 8: How It Works (End-to-End System Pipeline) */}
         <ArchitectureSection />
 
-        {/* Section: Phone-First Design */}
-        <DeviceFirstSection />
+        {/* Section 9: Intelligence Without the Hype (Not Everything Needs AI) */}
+        <NoHypeAISection />
 
-        {/* Section: Built By (J Sashank, D Mounika, S Sameer) */}
+        {/* Section 10: The Future (Today: Understand, Next: Respond, Future: Predict) */}
+        <FutureVisionSection />
+
+        {/* Section 11: Why It Matters (Gaming, Calls, Everyday Use) */}
+        <WhyItMattersSection />
+
+        {/* Section 12: Product Principles (Honest, Actionable, Personal) */}
+        <ProductPrinciplesSection />
+
+        {/* Team Section (J Sashank, D Mounika, S Sameer) */}
         <TeamSection />
 
-        {/* Section: Final Editorial Ending */}
-        <FinalCTA onExploreClick={handleExploreClick} />
+        {/* Final CTA */}
+        <FinalCTA 
+          onExperienceClick={handleExperienceClick} 
+          onVisionClick={handleVisionClick} 
+        />
       </main>
 
-      {/* Minimal Editorial Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

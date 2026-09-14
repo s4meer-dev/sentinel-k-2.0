@@ -1,243 +1,240 @@
 import React, { useState } from 'react';
-import { Sliders, HelpCircle, EyeOff, ShieldAlert } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Gamepad2, 
+  VideoOff, 
+  ArrowDownCircle, 
+  Radio, 
+  AlertTriangle,
+  ArrowRight,
+  TrendingDown
+} from 'lucide-react';
+
+interface Stage {
+  id: number;
+  label: string;
+  icon: string;
+  symptom: string;
+  networkIcon: string;
+  latency: string;
+  throughput: string;
+  packetLoss: string;
+  color: string;
+  description: string;
+}
 
 export const ProblemSection: React.FC = () => {
-  // Interactive scrubber along the timeline 0 to 100%
-  const [scrubPosition, setScrubPosition] = useState(65);
+  const [activeStep, setActiveStep] = useState<number>(0);
 
-  // Compute values dynamically at scrubber position
-  const getScrubbedMetrics = (pos: number) => {
-    let temp = 41.2;
-    let fps = 90;
-    let governor = 'iQOO MONSTER STABLE';
+  const stages: Stage[] = [
+    {
+      id: 0,
+      label: 'GAMING SESSIONS',
+      icon: 'game',
+      symptom: 'BUT YOUR GAME LAGS.',
+      networkIcon: '5G',
+      latency: '18 ms ➔ 164 ms',
+      throughput: '240 Mbps',
+      packetLoss: '14.2%',
+      color: 'border-amber-500/50 bg-amber-500/[0.04]',
+      description: 'The indicator at the top of your screen still says 5G. But micro-jitter at the cell edge starts discarding real-time UDP packets, causing rubberbanding and stuttering.',
+    },
+    {
+      id: 1,
+      label: 'VIDEO CALLS',
+      icon: 'call',
+      symptom: 'YOUR CALL FREEZES.',
+      networkIcon: '4G LTE',
+      latency: '186 ms',
+      throughput: '12 Mbps',
+      packetLoss: '22.8%',
+      color: 'border-red-500/50 bg-red-500/[0.04]',
+      description: 'Without any warning, your phone performs an uncoordinated handover from 5G to 4G. Voice frames drop and your client pauses playback to re-buffer.',
+    },
+    {
+      id: 2,
+      label: 'LARGE DOWNLOADS',
+      icon: 'download',
+      symptom: 'YOUR DOWNLOAD DROPS.',
+      networkIcon: '5G ➔ 4G',
+      latency: '240 ms',
+      throughput: '3 Mbps',
+      packetLoss: '31.5%',
+      color: 'border-orange-500/50 bg-orange-500/[0.04]',
+      description: 'Rapid ping-ponging between 5G NR and LTE carrier frequencies forces TCP socket congestion collapse. The transfer speed falls off a cliff.',
+    },
+  ];
 
-    if (pos < 35) {
-      temp = 41.2 + (pos / 35) * 0.8;
-      fps = 90;
-      governor = 'OPTIMAL 90Hz RENDER';
-    } else if (pos < 70) {
-      const p = (pos - 35) / 35;
-      temp = 42.0 + p * 2.1;
-      fps = Math.round(90 - p * 30);
-      governor = 'iQOO FLUX MITIGATION';
-    } else {
-      temp = 44.1 + ((pos - 70) / 30) * 0.3;
-      fps = 60;
-      governor = 'SILICON CLAMPED (60 FPS)';
-    }
-
-    return { temp: temp.toFixed(1), fps, governor };
-  };
-
-  const metrics = getScrubbedMetrics(scrubPosition);
+  const current = stages[activeStep];
 
   return (
-    <section id="problem" className="relative py-28 bg-[#F8F7F2] border-t border-[#0A192F]/[0.08] overflow-hidden">
-      {/* Abstract background acrylic washes */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#FFEADB]/30 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#DCE7F9]/70 rounded-full blur-[130px] pointer-events-none" />
+    <section id="problem" className="relative py-28 md:py-36 bg-[#080B12] border-t border-white/[0.08] overflow-hidden">
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[500px] bg-red-950/15 blur-[160px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-amber-950/15 blur-[160px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Large Editorial Typography with iQOO Brand Accents */}
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0A192F]/10 text-xs font-mono-code text-[#0A192F] mb-6 shadow-xs">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F0B31C] border border-black/30" />
-            <span className="font-bold uppercase tracking-wider">iQOO HARDWARE TELEMETRY ANALYSIS</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
+            <Radio className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-white">THE RELATABLE PROBLEM</span>
+            <span className="text-slate-600">/</span>
+            <span>WHAT ACTUALLY HAPPENS</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-black tracking-tight text-[#0A192F] leading-[1.03]">
-            Heat isn’t the problem.{' '}
-            <span className="block mt-1">
-              <span className="bg-[#F0B31C] text-black px-3 py-0.5 rounded-lg shadow-xs border border-black/10 inline-block font-black">
-                Not knowing why is.
-              </span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.08]">
+            YOUR PHONE SAYS:{' '}
+            <span className="px-3 py-1 bg-white/[0.08] border border-white/15 rounded-xl font-mono-code text-blue-400 inline-block ml-1">
+              "5G"
             </span>
           </h2>
-
-          <p className="mt-6 text-lg sm:text-xl text-slate-700 font-normal leading-relaxed max-w-2xl">
-            iQOO Monster Mode actively manages silicon safety. When background tasks spike thermal flux, 
-            gamers experience the symptom — sudden frame rate stutters — but never the underlying cause.
-          </p>
         </div>
 
-        {/* The Moment Performance Changes: Big Visual Split */}
-        <div className="mt-16 bg-white/95 rounded-3xl border border-[#0A192F]/10 p-6 sm:p-10 shadow-[0_20px_50px_-15px_rgba(10,25,47,0.08)] backdrop-blur-xl relative overflow-hidden">
-          
-          {/* Dual Big Readouts: Left FPS in Cobalt Blue, Right Temp in iQOO Yellow */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-[#0A192F]/[0.08] pb-8">
-            
-            {/* Left: Frame Rate in Deep Royal Blue */}
-            <div className="p-6 rounded-2xl bg-blue-50/50 border border-[#1D4ED8]/20 flex flex-col justify-between shadow-2xs">
-              <div className="flex items-center justify-between text-xs font-mono-code text-[#1D4ED8] font-bold uppercase tracking-wider">
-                <span>SURFACEFLINGER FRAME PACING</span>
-                <span className="bg-white px-2 py-0.5 rounded border border-[#1D4ED8]/20 text-[#1D4ED8]">TARGET: 90 FPS</span>
-              </div>
-              <div className="mt-4 flex items-baseline gap-3">
-                <span className="text-6xl sm:text-7xl font-display font-black tracking-tight text-[#1D4ED8]">
-                  {metrics.fps}
-                </span>
-                <span className="text-2xl font-display font-bold text-[#1D4ED8]/50">
-                  FPS
-                </span>
-              </div>
-              <div className="mt-3 flex items-center gap-2 text-xs font-mono-code text-[#1D4ED8]/80 font-bold">
-                <span className="w-2 h-2 rounded-full bg-[#1D4ED8]" />
-                <span>Frame time: {(1000 / metrics.fps).toFixed(1)}ms</span>
-              </div>
-            </div>
+        <div className="mt-14 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-1.5 rounded-2xl bg-[#0E1422] border border-white/10 backdrop-blur-xl">
+            {stages.map((stage, idx) => (
+              <button
+                key={stage.id}
+                onClick={() => setActiveStep(idx)}
+                className={`flex items-center justify-between p-4 rounded-xl transition-all duration-200 cursor-pointer text-left ${
+                  activeStep === idx
+                    ? 'bg-[#151D2E] border border-white/20 shadow-lg text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/[0.03]'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-lg ${
+                    activeStep === idx ? 'bg-[#F0B31C] text-[#07090E]' : 'bg-white/[0.05] text-slate-400'
+                  }`}>
+                    {stage.icon === 'game' && <Gamepad2 className="w-4 h-4" />}
+                    {stage.icon === 'call' && <VideoOff className="w-4 h-4" />}
+                    {stage.icon === 'download' && <ArrowDownCircle className="w-4 h-4" />}
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono-code font-bold uppercase tracking-wider block text-slate-400">
+                      {stage.label}
+                    </span>
+                    <span className="text-sm font-display font-black tracking-tight text-white">
+                      {stage.symptom}
+                    </span>
+                  </div>
+                </div>
 
-            {/* Right: Temperature with iQOO Brand Yellow Badge */}
-            <div className="p-6 rounded-2xl bg-[#FAF9F5] border border-[#0A192F]/15 flex flex-col justify-between shadow-2xs">
-              <div className="flex items-center justify-between text-xs font-mono-code text-[#0A192F] font-bold uppercase tracking-wider">
-                <span>iQOO 6K VC SILICON HEADROOM</span>
-                <span className="bg-[#F0B31C] text-black px-2 py-0.5 rounded border border-black/20 font-black">TRIP: 43.8°C</span>
-              </div>
-              <div className="mt-4 flex items-baseline gap-3">
-                <span className="text-6xl sm:text-7xl font-display font-black tracking-tight text-[#0A192F]">
-                  {metrics.temp}
-                </span>
-                <span className="text-2xl font-display font-black text-[#0A192F]/50">
-                  °C
-                </span>
-              </div>
-              <div className="mt-3 flex items-center gap-2 text-xs font-mono-code text-[#0A192F] font-bold">
-                <span className="w-2 h-2 rounded-full bg-[#F0B31C] border border-black/40" />
-                <span>Governor State: {metrics.governor}</span>
-              </div>
-            </div>
-
+                <div className="font-mono-code text-xs font-bold text-slate-500">
+                  0{idx + 1}
+                </div>
+              </button>
+            ))}
           </div>
 
-          {/* Connected Synchronized Telemetry Graph */}
-          <div className="relative mt-8 h-72 sm:h-80 w-full bg-[#FAF9F5] rounded-2xl border border-[#0A192F]/[0.08] p-4 flex flex-col justify-between overflow-hidden">
-            
-            {/* Subtle Gridlines */}
-            <div className="absolute inset-0 p-6 flex flex-col justify-between pointer-events-none opacity-40">
-              <div className="w-full border-b border-dashed border-[#0A192F]/15 flex justify-between text-[10px] font-mono-code text-[#1D4ED8] font-bold">
-                <span>90 FPS (NOMINAL)</span>
-                <span className="text-[#0A192F]">44.5°C (iQOO SEVERE)</span>
-              </div>
-              <div className="w-full border-b border-dashed border-[#0A192F]/15 flex justify-between text-[10px] font-mono-code text-slate-500">
-                <span>75 FPS</span>
-                <span>43.0°C</span>
-              </div>
-              <div className="w-full border-b border-dashed border-[#0A192F]/15 flex justify-between text-[10px] font-mono-code text-slate-500">
-                <span className="text-[#1D4ED8]">60 FPS (THROTTLED CLAMP)</span>
-                <span className="text-[#0A192F]">41.5°C (BASELINE)</span>
-              </div>
-            </div>
-
-            {/* SVG Curves: Temp in Yellow/Gold, FPS in Deep Blue */}
-            <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 300">
-              <defs>
-                <linearGradient id="editorialYellowFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#F0B31C" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#F0B31C" stopOpacity="0.0" />
-                </linearGradient>
-                <linearGradient id="editorialFpsFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0.15" />
-                  <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.0" />
-                </linearGradient>
-              </defs>
-
-              {/* Shaded Area Under Temp Curve */}
-              <path
-                d="M 40,240 Q 250,230 420,130 T 760,40 L 760,280 L 40,280 Z"
-                fill="url(#editorialYellowFill)"
-              />
-
-              {/* Temperature Curve (High-contrast gold/black backing with yellow top stroke) */}
-              <path
-                d="M 40,240 Q 250,230 420,130 T 760,40"
-                fill="none"
-                stroke="#0A192F"
-                strokeWidth="4"
-                strokeLinecap="round"
-              />
-              <path
-                d="M 40,240 Q 250,230 420,130 T 760,40"
-                fill="none"
-                stroke="#F0B31C"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-
-              {/* FPS Curve (Deep Royal Blue #1D4ED8) */}
-              <path
-                d="M 40,50 L 380,50 Q 440,55 500,160 T 600,230 L 760,230"
-                fill="none"
-                stroke="#1D4ED8"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
-
-              {/* Throttle Trip Marker */}
-              <line x1="430" y1="20" x2="430" y2="280" stroke="#000000" strokeWidth="2" strokeDasharray="5 5" />
-            </svg>
-
-            {/* Annotated Marker in iQOO Yellow */}
-            <div className="absolute top-4 left-[54%] -translate-x-1/2 bg-[#F0B31C] border border-black/20 text-black px-3 py-1.5 rounded-lg text-xs font-mono-code font-black shadow-md flex items-center gap-1.5 pointer-events-none">
-              <ShieldAlert className="w-3.5 h-3.5 text-black" />
-              <span>iQOO MONSTER MITIGATION TRIPPOINT: 43.8°C</span>
-            </div>
-
-            {/* Interactive Scrubber Handle */}
-            <div 
-              className="absolute top-0 bottom-0 w-0.5 bg-[#0A192F] shadow-sm pointer-events-none z-10 transition-all duration-75"
-              style={{ left: `${scrubPosition}%` }}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className={`mt-6 p-6 sm:p-8 rounded-3xl glass-panel border ${current.color} shadow-2xl relative overflow-hidden`}
             >
-              <div className="w-3.5 h-3.5 rounded-full bg-[#F0B31C] border-2 border-black -translate-x-[5px] top-1/2 absolute shadow-md" />
-            </div>
-          </div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-[10px] font-mono-code text-red-300 font-bold uppercase mb-4">
+                    <AlertTriangle className="w-3.5 h-3.5" />
+                    EXPERIENCE DETERIORATION OBSERVED
+                  </div>
 
-          {/* Timeline Scrubber Slider */}
-          <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FAF9F5] p-4 rounded-2xl border border-[#0A192F]/[0.06]">
-            <div className="flex items-center gap-2 text-xs font-mono-code font-bold text-[#0A192F]">
-              <Sliders className="w-4 h-4 text-[#1D4ED8]" />
-              <span>iQOO TIMELINE TELEMETRY SCRUBBER:</span>
-            </div>
-            <div className="flex-1 max-w-md flex items-center gap-3">
-              <span className="text-[10px] font-mono-code text-slate-500 font-bold">t = 0s</span>
-              <input
-                type="range"
-                min="5"
-                max="95"
-                value={scrubPosition}
-                onChange={(e) => setScrubPosition(Number(e.target.value))}
-                className="w-full accent-[#1D4ED8] cursor-pointer h-2 bg-zinc-200 rounded-lg appearance-none"
-              />
-              <span className="text-[10px] font-mono-code text-slate-500 font-bold">t = 60s</span>
-            </div>
-          </div>
+                  <h3 className="text-2xl sm:text-3xl font-display font-black text-white">
+                    {current.symptom}
+                  </h3>
 
-          {/* Editorial Comparison: What user sees vs ThermAlyze */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-white border border-[#0A192F]/[0.06] shadow-xs">
-              <div className="flex items-center gap-2 text-[#0A192F]/70 font-mono-code text-xs font-bold uppercase">
-                <EyeOff className="w-4 h-4 text-[#0A192F]/50" />
-                <span>WHAT THE USER CURRENTLY EXPERIENCES</span>
+                  <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
+                    {current.description}
+                  </p>
+
+                  <div className="mt-6 p-4 rounded-2xl bg-black/60 border border-white/[0.08]">
+                    <div className="text-[10px] font-mono-code text-slate-400 uppercase tracking-wider mb-2">
+                      CELLULAR HANDOVER SEQUENCE (OBSERVED ON PHONE)
+                    </div>
+                    <div className="flex items-center gap-3 font-mono-code text-xs">
+                      <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">
+                        5G ACTIVE
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-amber-400 animate-pulse" />
+                      <span className="px-3 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                        4G LTE FALLBACK
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-red-400 animate-pulse" />
+                      <span className="px-3 py-1 rounded-lg bg-red-500/20 text-red-300 border border-red-500/30 font-bold">
+                        BUFFER TIMEOUT
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+                  <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08]">
+                    <span className="text-[9px] font-mono-code text-slate-400 uppercase tracking-wider block">
+                      LATENCY SPIKE
+                    </span>
+                    <span className="text-xl font-display font-black text-amber-400 mt-1 block">
+                      {current.latency}
+                    </span>
+                    <span className="text-[10px] font-mono-code text-slate-500 mt-1 block">
+                      Buffering delay
+                    </span>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08]">
+                    <span className="text-[9px] font-mono-code text-slate-400 uppercase tracking-wider block">
+                      PACKET LOSS
+                    </span>
+                    <span className="text-xl font-display font-black text-red-400 mt-1 block">
+                      {current.packetLoss}
+                    </span>
+                    <span className="text-[10px] font-mono-code text-slate-500 mt-1 block">
+                      Dropped UDP stream
+                    </span>
+                  </div>
+
+                  <div className="col-span-2 p-4 rounded-2xl bg-black/40 border border-white/[0.08] flex items-center justify-between">
+                    <div>
+                      <span className="text-[9px] font-mono-code text-slate-400 uppercase tracking-wider block">
+                        EFFECTIVE THROUGHPUT
+                      </span>
+                      <span className="text-lg font-display font-black text-white mt-0.5 block">
+                        {current.throughput}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs font-mono-code text-amber-400 font-bold">
+                      <TrendingDown className="w-4 h-4" />
+                      <span>-85% FLUX</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed font-normal">
-                A sudden stutter in demanding games. Frame rate plummets from 90 to 60 FPS while the chassis heats up. 
-                Android displays zero explanation of what triggered the throttling.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-blue-50/40 border border-[#1D4ED8]/20 shadow-xs">
-              <div className="flex items-center gap-2 text-[#1D4ED8] font-mono-code text-xs font-black uppercase">
-                <HelpCircle className="w-4 h-4 text-[#1D4ED8]" />
-                <span>WHAT THERMALYZE REVEALS ON iQOO</span>
-              </div>
-              <p className="mt-3 text-sm text-[#0A192F]/85 leading-relaxed font-normal">
-                Precise correlation: 18 seconds prior to throttling, an unoptimized background sync task saturated high-efficiency cores, 
-                tipping the device over its 43.8°C thermal trip-point.
-              </p>
-            </div>
-          </div>
-
+            </motion.div>
+          </AnimatePresence>
         </div>
 
+        <div className="mt-20 max-w-4xl mx-auto text-center p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/[0.04] to-black border border-white/10 relative overflow-hidden">
+          <span className="text-xs font-mono-code uppercase tracking-widest text-[#F0B31C] font-extrabold block mb-3">
+            THE UNNOTICED TRUTH
+          </span>
+          
+          <h3 className="text-2xl sm:text-4xl font-display font-black text-white tracking-tight leading-snug uppercase">
+            THE NETWORK CHANGED. <br />
+            YOU DIDN'T KNOW WHY. <br />
+            <span className="text-slate-400">AND YOU COULDN'T DO MUCH ABOUT IT.</span>
+          </h3>
+
+          <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span className="text-base sm:text-lg font-heading font-extrabold text-white">
+              "Connectivity is more than a network icon."
+            </span>
+            <span className="text-xs font-mono-code text-slate-400">
+              Observing reality vs static indicator icons
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

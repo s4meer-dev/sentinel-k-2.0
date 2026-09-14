@@ -1,180 +1,218 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Smartphone, 
-  Cpu, 
-  Layers, 
-  GitCommit, 
-  Sparkles, 
-  CheckCircle, 
-  ShieldAlert, 
-  Database
+  Radio, 
+  Cpu,
+  CheckCircle2, 
+  ShieldCheck,
 } from 'lucide-react';
 
-export const ArchitectureSection: React.FC = () => {
-  const [activeNode, setActiveNode] = useState<number>(2);
+interface ArchNode {
+  id: string;
+  step: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  technicalSpecs: string[];
+}
 
-  const nodes = [
+export const ArchitectureSection: React.FC = () => {
+  const [selectedNode, setSelectedNode] = useState<string>('OBSERVATION');
+
+  const nodes: ArchNode[] = [
     {
-      id: 0,
-      title: 'iQOO HARDWARE TELEMETRY',
-      subtitle: 'Snapdragon 8 Gen + Q2 Sensor Plane',
-      icon: Smartphone,
-      description: 'Physical thermistors across the iQOO 6K Ice-Loop VC, dual-cell battery, and chassis skin emitting continuous status updates at hardware interrupts.',
-      signals: ['THERMAL_ZONE_0', '6K_VC_GRADIENT', 'BATTERY_THERMAL'],
-      badge: 'SILICON LAYER',
+      id: 'PHONE',
+      step: '01',
+      title: 'PHONE PLATFORM',
+      subtitle: 'Hardware Transceiver Matrix',
+      description: 'The physical device environment, including Snapdragon Modem-RF and iQOO 360° surround antenna array.',
+      technicalSpecs: ['Sub-6GHz NR & LTE Transceivers', 'Android TelephonyManager APIs', 'Passive Sensor Access'],
     },
     {
-      id: 1,
-      title: 'Monster Engine & PowerManager',
-      subtitle: 'OS Telemetry Interfaces',
-      icon: Layers,
-      description: 'Android PowerManager thermal callbacks combined with iQOO Monster Engine scheduler and BatteryHistorian wake-lock signals.',
-      signals: ['OnThermalStatusChanged()', 'ActiveWakeLocks', 'Fg/Bg State'],
-      badge: 'FRAMEWORK API',
+      id: 'SIGNALS',
+      step: '02',
+      title: 'CELLULAR SIGNALS',
+      subtitle: 'Link-Layer Radio Metrics',
+      description: 'Standard link metrics exposed to Android applications, such as RSRP, RSRQ, carrier frequencies, and cell IDs.',
+      technicalSpecs: ['RSRP (Reference Signal Received Power)', 'Carrier Frequency (n78, n28, B3)', 'Link-layer Frame Jitter'],
     },
     {
-      id: 2,
-      title: 'ThermAlyze Detection Engine',
-      subtitle: 'Multivariate Signal Ingest',
-      icon: Cpu,
-      description: 'High-speed circular buffer ingesting frame pacing, CPU cluster frequency governors, and thermal gradients at 100Hz.',
-      signals: ['100Hz Sliding Window', 'Thermal Slope ΔT/Δt', 'Choreographer FPS'],
-      badge: 'CORE ENGINE',
+      id: 'EVENTS',
+      step: '03',
+      title: 'NETWORK EVENTS',
+      subtitle: 'State Transition Stream',
+      description: 'Discrete occurrences over time, such as 5G to 4G fallbacks, carrier re-attachments, and connection timeouts.',
+      technicalSpecs: ['Handover Time-stamping', 'Ping-Pong Detection Logic', 'Jitter Threshold Alerts'],
     },
     {
-      id: 3,
-      title: 'Event Correlation Matrix',
-      subtitle: 'Temporal Alignment',
-      icon: GitCommit,
-      description: 'Correlates the exact sub-second timestamp of thermal state escalation with concurrent background process workloads.',
-      signals: ['Temporal Overlap Index', 'Cluster Core Affinity', 'Process Jitter'],
-      badge: 'STATISTICAL MATH',
+      id: 'OBSERVATION',
+      step: '04',
+      title: 'OBSERVATION ENGINE',
+      subtitle: 'Phone-Native Telemetry Loop',
+      description: 'Correlates network transitions with active application requirements to determine if instability is impacting user experience.',
+      technicalSpecs: ['Rolling 30-Second Window', 'Application Foreground State Check', 'Low-Overhead Background Service'],
     },
     {
-      id: 4,
-      title: 'On-Device AI Model',
-      subtitle: 'Local Neural Classifier',
-      icon: Sparkles,
-      description: 'Quantized on-device model matches sensor trace against thousands of known hardware throttling signatures.',
-      signals: ['Zero Cloud Latency', 'Privacy Safe', '87%+ Confidence'],
-      badge: 'QUANTIZED NPU',
+      id: 'DECISION',
+      step: '05',
+      title: 'DECISION LAYER',
+      subtitle: 'Deterministic Context Evaluation',
+      description: 'Evaluates the observed event sequence against rule-based models to select the most appropriate response.',
+      technicalSpecs: ['Severity Level Classification', 'Rule-Based Deterministic Filtering', 'Context-Aware Priority Matching'],
     },
     {
-      id: 5,
-      title: 'Human-Readable Diagnosis',
-      subtitle: 'Actionable Executive Verdict',
-      icon: CheckCircle,
-      description: 'Synthesizes technical telemetry into clear, credible explanations explaining likely contributors and mitigation guidance.',
-      signals: ['Plain English Summary', 'Probable Cause Isolated', 'Zero Jargon'],
-      badge: 'USER VERDICT',
+      id: 'ACTIONS',
+      step: '06',
+      title: 'AVAILABLE ACTIONS',
+      subtitle: 'Supported Interventions',
+      description: 'Coordinates recovery through supported Android APIs, antenna switching, or clear guided user steps.',
+      technicalSpecs: ['Radio Band Re-negotiation', 'Antenna Priority Adjustment', 'Guided Action Prompts'],
+    },
+    {
+      id: 'VERIFY',
+      step: '07',
+      title: 'VERIFICATION',
+      subtitle: 'Post-Action Confirmation',
+      description: 'Measures link metrics for 15 seconds after intervention to verify whether stability was genuinely restored.',
+      technicalSpecs: ['Delta Latency Comparison', 'Packet Loss Re-measurement', 'Stability Improvement Index'],
+    },
+    {
+      id: 'MEMORY',
+      step: '08',
+      title: 'CONNECTIVITY MEMORY',
+      subtitle: 'On-Device Spatial Experience',
+      description: 'Stores historical outcomes locally to build a contextual profile of where 5G performs reliably over time.',
+      technicalSpecs: ['Private On-Device Datastore', 'Zero Cloud Transmission', 'Predictive Pre-Caching Assist'],
     },
   ];
 
+  const current = nodes.find(n => n.id === selectedNode) || nodes[3];
+
   return (
-    <section id="technology" className="relative py-28 bg-[#F8F7F2] border-t border-[#0A192F]/[0.08] overflow-hidden">
-      {/* Background ambient acrylic washes */}
-      <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-[#E2E8F0]/50 blur-[140px] pointer-events-none -z-10" />
+    <section id="how-it-works" className="relative py-28 md:py-36 bg-[#07090E] border-t border-white/[0.08] overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-blue-950/15 blur-[200px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0A192F]/10 text-xs font-mono-code text-[#0A192F] mb-6 shadow-xs">
-            <Database className="w-3.5 h-3.5 text-[#1D4ED8]" />
-            <span>SYSTEM TOPOLOGY</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono-code text-slate-300 mb-6">
+            <Cpu className="w-3.5 h-3.5 text-[#F0B31C]" />
+            <span className="font-extrabold text-white">SYSTEM ARCHITECTURE</span>
+            <span className="text-slate-600">/</span>
+            <span>TECHNICAL INTEGRITY</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-display font-extrabold text-[#0A192F] tracking-tight leading-[1.08]">
-            Technical Architecture.
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-white uppercase leading-[1.06]">
+            HOW IT WORKS: <br />
+            <span className="text-[#F0B31C]">END-TO-END PIPELINE</span>
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-[#0A192F]/70">
-            How ThermAlyze turns millions of raw sensor pulses into clear, human-intelligible insights — 
-            entirely on-device with zero cloud dependency.
+          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+            "We work with the network information available to the device and turn changes over time into useful decisions."
           </p>
         </div>
 
-        {/* Vertical Flow Diagram */}
-        <div className="max-w-4xl mx-auto space-y-3 relative">
+        {/* The 8 Pipeline Nodes Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
           
-          {/* Subtle connecting vertical line */}
-          <div className="absolute left-[38px] sm:left-[46px] top-8 bottom-8 w-0.5 bg-[#0A192F]/15 -z-0" />
-
-          {nodes.map((node, idx) => {
-            const Icon = node.icon;
-            const isSelected = activeNode === idx;
-
-            return (
-              <div
-                key={node.title}
-                onClick={() => setActiveNode(idx)}
-                className={`relative z-10 rounded-2xl p-5 sm:p-6 transition-all duration-200 cursor-pointer border ${
-                  isSelected
-                    ? 'bg-white border-[#1D4ED8]/60 shadow-[0_15px_35px_-10px_rgba(29,78,216,0.15)] scale-[1.01]'
-                    : 'bg-white/80 border-[#0A192F]/[0.08] hover:border-[#0A192F]/20 hover:bg-white'
+          {/* Left: Interactive 8-Stage Architecture Flow */}
+          <div className="lg:col-span-7 space-y-2.5">
+            {nodes.map((node) => (
+              <button
+                key={node.id}
+                onClick={() => setSelectedNode(node.id)}
+                className={`w-full p-3.5 sm:p-4 rounded-2xl transition-all duration-200 cursor-pointer text-left flex items-center justify-between border ${
+                  selectedNode === node.id
+                    ? 'bg-[#12192A] border-[#F0B31C]/60 shadow-[0_0_20px_rgba(240,179,28,0.15)] scale-101'
+                    : 'bg-[#0A0E17]/80 border-white/[0.08] hover:border-white/20 text-slate-400'
                 }`}
               >
-                <div className="flex items-start gap-4 sm:gap-6">
-                  {/* Step Icon */}
-                  <div
-                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shrink-0 border transition-all ${
-                      isSelected
-                        ? 'bg-[#0A192F] text-[#F0B31C] border-[#0A192F] shadow-md'
-                        : 'bg-[#FAF9F5] text-[#0A192F] border-[#0A192F]/10'
-                    }`}
-                  >
-                    <Icon className="w-6 h-6" />
-                  </div>
-
-                  {/* Body Content */}
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div>
-                        <span className="text-[10px] font-mono-code uppercase text-[#1D4ED8] tracking-widest block font-bold">
-                          {node.subtitle}
-                        </span>
-                        <h3 className="text-lg sm:text-xl font-display font-bold text-[#0A192F] mt-0.5">
-                          {node.title}
-                        </h3>
-                      </div>
-
-                      <span className="text-[10px] font-mono-code px-2.5 py-1 rounded-full bg-[#FAF9F5] text-[#0A192F] border border-[#0A192F]/10 font-medium">
-                        {node.badge}
-                      </span>
-                    </div>
-
-                    <p className="mt-2 text-xs sm:text-sm text-[#0A192F]/75 leading-relaxed font-normal">
-                      {node.description}
-                    </p>
-
-                    {/* Sensor Tags */}
-                    <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-[#0A192F]/[0.06]">
-                      {node.signals.map((sig) => (
-                        <span
-                          key={sig}
-                          className="text-[10px] font-mono-code px-2.5 py-0.5 rounded bg-[#FAF9F5] text-[#0A192F]/70 border border-[#0A192F]/[0.06]"
-                        >
-                          {sig}
-                        </span>
-                      ))}
-                    </div>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono-code text-xs font-bold text-slate-500 w-6">
+                    {node.step}
+                  </span>
+                  <div>
+                    <span className={`text-sm font-display font-black tracking-wide block ${
+                      selectedNode === node.id ? 'text-white' : 'text-slate-300'
+                    }`}>
+                      {node.title}
+                    </span>
+                    <span className="text-[11px] font-mono-code text-slate-400 block">
+                      {node.subtitle}
+                    </span>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+
+                <div className={`w-2 h-2 rounded-full ${
+                  selectedNode === node.id ? 'bg-[#F0B31C] shadow-[0_0_8px_rgba(240,179,28,0.8)]' : 'bg-white/10'
+                }`} />
+              </button>
+            ))}
+          </div>
+
+          {/* Right: Technical Inspector Deep Dive Card */}
+          <div className="lg:col-span-5 sticky top-28">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="p-6 sm:p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl"
+              >
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <span className="text-xs font-mono-code text-[#F0B31C] font-bold uppercase tracking-wider">
+                    LAYER {current.step} // INSPECTION
+                  </span>
+                  <Radio className="w-4 h-4 text-[#F0B31C]" />
+                </div>
+
+                <h3 className="text-xl font-display font-black text-white mt-4">
+                  {current.title}
+                </h3>
+                <div className="text-xs font-mono-code text-blue-400 mt-0.5">
+                  {current.subtitle}
+                </div>
+
+                <p className="mt-4 text-sm text-slate-300 leading-relaxed">
+                  {current.description}
+                </p>
+
+                {/* Technical Specifications */}
+                <div className="mt-6 pt-4 border-t border-white/[0.08]">
+                  <span className="text-[10px] font-mono-code text-slate-400 uppercase tracking-wider block mb-2 font-bold">
+                    LAYER CAPABILITIES
+                  </span>
+                  <div className="space-y-2">
+                    {current.technicalSpecs.map((spec, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs font-mono-code text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span>{spec}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-[10px] font-mono-code text-slate-400">
+                  Operates passively within standard Android platform boundaries without requiring root or custom ROMs.
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
 
-        {/* Engineering Credibility Note */}
-        <div className="mt-14 max-w-4xl mx-auto p-6 rounded-2xl bg-white border border-[#0A192F]/10 text-xs font-mono-code text-[#0A192F]/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
-          <div className="flex items-center gap-3">
-            <ShieldAlert className="w-5 h-5 text-[#1D4ED8] shrink-0" />
-            <span>
-              <strong>ENGINEERING NOTE:</strong> Android sandboxing prevents apps from killing background processes directly. 
-              ThermAlyze operates strictly as an observational forensics engine.
-            </span>
+        {/* Technical Credibility Note */}
+        <div className="mt-14 max-w-4xl mx-auto p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-xs font-mono-code text-slate-300 leading-relaxed flex items-start gap-4">
+          <ShieldCheck className="w-5 h-5 text-[#F0B31C] shrink-0 mt-0.5" />
+          <div>
+            <strong className="text-white">TECHNICAL INTEGRITY NOTE:</strong> Where Android or the carrier restricts direct intervention, 
+            the system can guide the user through the supported action instead of pretending it has control it doesn't. We do not claim 
+            arbitrary modem override or hidden baseband modifications.
           </div>
-          <span className="text-[#0A192F]/50 whitespace-nowrap">SELinux Enforcing Compliant</span>
         </div>
 
       </div>
