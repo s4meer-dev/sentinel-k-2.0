@@ -40,12 +40,12 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6 w-fit"
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-xs font-mono-code text-slate-800 mb-6 w-fit"
             >
-              <span className="w-2 h-2 rounded-full bg-[#F0B31C] animate-pulse" />
-              <span className="font-extrabold text-slate-900">iQOO × CONNECTIVITY INTELLIGENCE</span>
+              <span className="w-2 h-2 rounded-full bg-[#F0B31C] animate-pulse shadow-[0_0_8px_rgba(240,179,28,0.8)]" />
+              <span className="font-sans font-extrabold tracking-wide text-slate-900">iQOO × CONNECTIVITY INTELLIGENCE</span>
               <span className="text-slate-300">/</span>
-              <span className="text-slate-500">NETWORK EXPERIENCE ENGINE</span>
+              <span className="text-amber-800 font-bold text-[11px]">PREDICTIVE NETWORK ENGINE</span>
             </motion.div>
 
             {/* Main Headline */}
@@ -53,12 +53,12 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-6xl xl:text-7xl font-display font-black tracking-tight text-slate-950 uppercase leading-[0.98]"
+              className="text-4xl sm:text-6xl xl:text-7xl font-sans font-black tracking-tight text-slate-950 uppercase leading-[1.02]"
             >
               YOUR PHONE <br />
               CONNECTS. <br />
-              <span className="inline-block mt-2 px-3 py-1 bg-[#F0B31C] text-[#07090E] rounded-2xl shadow-[0_4px_20px_rgba(240,179,28,0.3)]">
-                [WE MAKE IT SMARTER.]
+              <span className="inline-block mt-2.5 px-4 py-1 rounded-2xl bg-[#F0B31C] text-[#07090E] shadow-[0_6px_28px_rgba(240,179,28,0.4)]">
+                WE MAKE IT SMARTER.
               </span>
             </motion.h1>
 
@@ -67,9 +67,9 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 text-base sm:text-xl text-slate-600 max-w-xl font-normal leading-relaxed"
+              className="mt-6 text-base sm:text-lg xl:text-xl text-slate-600 max-w-xl font-normal leading-relaxed"
             >
-              Connectivity shouldn't stop at showing you 5G or Wi-Fi. It should understand when your connection is struggling — and help you respond.
+              Today&apos;s phones only tell you if you&apos;re connected to 5G. We give your phone the intelligence to understand connection instability in real time — and autonomously heal it.
             </motion.p>
 
             {/* Live Telemetry Harness Quick Card */}
@@ -77,65 +77,84 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-8 p-4 sm:p-5 rounded-2xl bg-white border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.04)] max-w-lg"
+              className="mt-7 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] max-w-lg"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] text-xs font-mono-code">
-                <span className="text-slate-500 flex items-center gap-1.5 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-xs font-mono-code">
+                <span className="text-slate-700 flex items-center gap-2 font-bold">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600" />
+                  </span>
                   CELLULAR TELEMETRY HARNESS
                 </span>
-                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
-                  NOMINAL 5G ATTACHMENT
+                <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  5G SA NOMINAL
                 </span>
               </div>
 
               <div className="grid grid-cols-4 gap-2 pt-3 font-mono-code text-center">
-                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-black/[0.04]">
-                  <div className="text-[9px] text-slate-500 uppercase">CURRENT</div>
-                  <div className="text-sm font-extrabold text-slate-900 mt-0.5">5G SA</div>
+                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-slate-200/60">
+                  <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">CARRIER</div>
+                  <div className="text-xs sm:text-sm font-black text-slate-900 mt-0.5">n78 3.5G</div>
                 </div>
-                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-black/[0.04]">
-                  <div className="text-[9px] text-slate-500 uppercase">STABILITY</div>
-                  <div className="text-sm font-extrabold text-emerald-600 mt-0.5">92%</div>
+                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-slate-200/60">
+                  <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">STABILITY</div>
+                  <div className="text-xs sm:text-sm font-black text-emerald-700 mt-0.5">98.2%</div>
                 </div>
-                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-black/[0.04]">
-                  <div className="text-[9px] text-slate-500 uppercase">LATENCY</div>
-                  <div className="text-sm font-extrabold text-blue-600 mt-0.5">18 ms</div>
+                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-slate-200/60">
+                  <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">LATENCY</div>
+                  <div className="text-xs sm:text-sm font-black text-blue-700 mt-0.5">18 ms</div>
                 </div>
-                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-black/[0.04]">
-                  <div className="text-[9px] text-slate-500 uppercase">EVENTS</div>
-                  <div className="text-sm font-extrabold text-slate-900 mt-0.5">00</div>
+                <div className="p-2 rounded-xl bg-[#FAF9F5] border border-slate-200/60">
+                  <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">HEALING</div>
+                  <div className="text-xs sm:text-sm font-black text-amber-800 mt-0.5">&lt;1.4s</div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[10px] font-mono-code text-slate-500 mt-3 pt-2 border-t border-black/[0.06]">
-                <span>OBSERVE → UNDERSTAND → ACT → VERIFY</span>
-                <span className="text-[#B45309] font-bold">ACTIVE HARNESS</span>
+              <div className="flex items-center justify-between text-[10px] font-mono-code text-slate-500 mt-3 pt-2.5 border-t border-slate-100">
+                <span className="font-semibold text-slate-600">OBSERVE → DETECT → ACT → VERIFY → LEARN</span>
+                <span className="text-amber-800 font-black tracking-wider uppercase">ACTIVE ENGINE</span>
               </div>
             </motion.div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons & Trust Badges */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-7 flex flex-col gap-4"
             >
-              <button
-                onClick={onExperienceClick}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] font-mono-code font-extrabold text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_4px_20px_rgba(240,179,28,0.35)] hover:shadow-[0_6px_25px_rgba(240,179,28,0.5)] active:scale-98 cursor-pointer"
-              >
-                <span>TRY THE EXPERIENCE</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="flex flex-wrap items-center gap-3.5">
+                <button
+                  onClick={onExperienceClick}
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] font-mono-code font-black text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_4px_20px_rgba(240,179,28,0.35)] hover:shadow-[0_6px_25px_rgba(240,179,28,0.5)] active:scale-98 cursor-pointer"
+                >
+                  <span>EXPERIENCE LIVE DEMO</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
 
-              <button
-                onClick={onVisionClick}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-black/15 font-mono-code text-xs font-bold uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
-              >
-                <Compass className="w-4 h-4 text-[#F0B31C]" />
-                <span>SEE THE VISION</span>
-              </button>
+                <button
+                  onClick={onVisionClick}
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-mono-code text-xs font-bold uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
+                >
+                  <Compass className="w-4 h-4 text-amber-700" />
+                  <span>SEE ARCHITECTURE</span>
+                </button>
+              </div>
+
+              {/* Technical Trust Markers */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] font-mono-code text-slate-500">
+                <span className="flex items-center gap-1">
+                  <span className="text-emerald-700 font-bold">✓</span> Snapdragon Modem-RF
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-emerald-700 font-bold">✓</span> 360° Surround Antenna
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-emerald-700 font-bold">✓</span> 100% On-Device Privacy
+                </span>
+              </div>
             </motion.div>
 
           </div>
