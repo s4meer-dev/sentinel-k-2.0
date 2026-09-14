@@ -88,7 +88,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Floating Callout Chip 1 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden md:flex absolute -left-28 top-20 z-30 flex-col items-end pointer-events-none"
+          className="hidden xl:flex absolute -left-24 top-20 z-30 flex-col items-end pointer-events-none"
         >
           <div className="bg-white/95 border border-blue-500/30 rounded-xl p-2.5 shadow-lg text-right backdrop-blur-md">
             <span className="text-[8px] font-mono-code text-blue-600 uppercase font-bold tracking-wider block">
@@ -107,7 +107,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Floating Callout Chip 2 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden md:flex absolute -right-28 bottom-32 z-30 flex-col items-start pointer-events-none"
+          className="hidden xl:flex absolute -right-24 bottom-32 z-30 flex-col items-start pointer-events-none"
         >
           <div className="flex items-center mb-1 ml-4">
             <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] shadow-[0_0_8px_rgba(240,179,28,0.8)]" />

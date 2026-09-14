@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Radio } from 'lucide-react';
 
 interface NavbarProps {
@@ -9,21 +9,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('vision');
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 35);
+      setScrolled(window.scrollY > 30);
 
-      // Active section detection
+      // Robust getBoundingClientRect section detector
       const sections = ['vision', 'problem', 'experience', 'how-it-works', 'memory', 'future'];
-      const scrollPosition = window.scrollY + 140;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
+      for (const id of sections) {
+        const el = document.getElementById(id);
         if (el) {
-          const top = el.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(sections[i]);
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 260 && rect.bottom >= 100) {
+            setActiveSection(id);
             break;
           }
         }
@@ -35,6 +34,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMobileMenuOpen(false);
+      }
+    };
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileMenuOpen]);
+
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -45,23 +57,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
 
   const navItems = [
     { id: 'vision', label: 'Vision' },
-    { id: 'problem', label: 'The Problem' },
+    { id: 'problem', label: 'Problem' },
     { id: 'experience', label: 'Experience' },
-    { id: 'how-it-works', label: 'How It Works' },
+    { id: 'how-it-works', label: 'Architecture' },
     { id: 'memory', label: 'Memory' },
     { id: 'future', label: 'Future' },
   ];
 
   return (
-    <>
-      <header
-        className={`fixed z-50 transition-all duration-300 ease-out ${
+    <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300">
+      <div 
+        ref={menuRef}
+        className={`pointer-events-auto mx-auto transition-all duration-300 ease-out ${
           scrolled
-            ? 'top-3 sm:top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl rounded-full bg-white/92 backdrop-blur-xl border border-black/[0.08] shadow-[0_12px_35px_-5px_rgba(0,0,0,0.1),0_2px_6px_rgba(0,0,0,0.04)] py-2 sm:py-2 px-3.5 sm:px-5'
-            : 'top-0 left-0 right-0 w-full bg-[#FAF9F5]/80 backdrop-blur-sm border-b border-black/[0.04] py-4 sm:py-5 px-4 sm:px-6 lg:px-8'
+            ? 'mt-2.5 sm:mt-3.5 w-fit max-w-[94vw] rounded-full bg-white/95 backdrop-blur-xl border border-black/[0.09] shadow-[0_12px_32px_-4px_rgba(0,0,0,0.12),0_2px_6px_rgba(0,0,0,0.04)] px-3 sm:px-4 py-1.5'
+            : 'w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-5 bg-transparent'
         }`}
       >
-        <div className={`flex items-center justify-between ${scrolled ? 'w-full' : 'max-w-7xl mx-auto'}`}>
+        <div className="flex items-center justify-between gap-3 sm:gap-6">
           
           {/* Brand Logo */}
           <div 
@@ -69,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
             className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group shrink-0"
           >
             <div className={`rounded-xl bg-[#F0B31C] text-[#07090E] flex items-center justify-center font-black transition-all duration-300 shadow-[0_2px_10px_rgba(240,179,28,0.35)] group-hover:scale-105 ${
-              scrolled ? 'w-7 h-7 text-[10px]' : 'w-8 h-8 text-xs'
+              scrolled ? 'w-6 h-6 sm:w-7 sm:h-7 text-[10px]' : 'w-8 h-8 text-xs'
             }`}>
               CI
             </div>
@@ -78,7 +91,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
               <span className={`font-heading font-extrabold tracking-wider text-slate-900 leading-tight transition-all duration-200 ${
                 scrolled ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'
               }`}>
-                iQOO <span className="text-slate-400 font-normal">×</span> CONNECTIVITY <span className="hidden sm:inline">INTELLIGENCE</span>
+                iQOO <span className="text-slate-400 font-normal">×</span>{' '}
+                {scrolled ? (
+                  <>
+                    <span className="sm:hidden text-amber-700">CI</span>
+                    <span className="hidden sm:inline">CONNECTIVITY</span>
+                  </>
+                ) : (
+                  <>
+                    CONNECTIVITY <span className="hidden sm:inline">INTELLIGENCE</span>
+                  </>
+                )}
               </span>
               
               {!scrolled && (
@@ -90,8 +113,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className={`hidden lg:flex items-center font-mono-code text-xs font-bold transition-all duration-300 ${
-            scrolled ? 'gap-2 lg:gap-3 bg-[#FAF9F5]/70 px-2 py-1 rounded-full border border-black/[0.04]' : 'gap-6 xl:gap-7 text-slate-600'
+          <nav className={`hidden md:flex items-center font-mono-code transition-all duration-300 ${
+            scrolled 
+              ? 'gap-0.5 px-2 py-0.5 rounded-full bg-[#FAF9F5] border border-black/[0.04]' 
+              : 'gap-5 xl:gap-7 text-xs font-bold text-slate-600'
           }`}>
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -99,11 +124,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`transition-all duration-200 cursor-pointer ${
+                  className={`transition-all duration-200 cursor-pointer whitespace-nowrap ${
                     scrolled
-                      ? `px-3 py-1 rounded-full text-[11px] ${
+                      ? `px-2.5 py-1 rounded-full text-[11px] font-bold ${
                           isActive 
-                            ? 'bg-slate-900 text-white shadow-xs font-extrabold' 
+                            ? 'bg-slate-950 text-white shadow-xs' 
                             : 'text-slate-600 hover:text-slate-950 hover:bg-black/[0.04]'
                         }`
                       : `relative py-1 hover:text-slate-950 ${
@@ -121,12 +146,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
           </nav>
 
           {/* Action Button & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={onExperienceClick}
-              className={`inline-flex items-center gap-1.5 font-mono-code font-extrabold tracking-wider uppercase transition-all duration-200 active:scale-98 cursor-pointer ${
+              className={`inline-flex items-center gap-1 font-mono-code font-extrabold tracking-wider uppercase transition-all duration-200 active:scale-98 cursor-pointer ${
                 scrolled
-                  ? 'px-3 sm:px-4 py-1.5 rounded-full bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] text-[10px] sm:text-[11px] shadow-[0_2px_12px_rgba(240,179,28,0.3)] hover:shadow-[0_4px_18px_rgba(240,179,28,0.45)]'
+                  ? 'px-3 py-1.5 rounded-full bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] text-[10px] sm:text-[11px] shadow-[0_2px_10px_rgba(240,179,28,0.3)] hover:shadow-[0_4px_16px_rgba(240,179,28,0.45)]'
                   : 'px-4 sm:px-5 py-2.5 rounded-xl bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] text-xs shadow-[0_2px_15px_rgba(240,179,28,0.35)] hover:shadow-[0_4px_20px_rgba(240,179,28,0.5)]'
               }`}
             >
@@ -137,8 +162,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden rounded-full text-slate-700 hover:text-black hover:bg-black/[0.05] transition-colors ${
-                scrolled ? 'p-1.5' : 'p-2'
+              className={`md:hidden rounded-full text-slate-700 hover:text-black hover:bg-black/[0.05] transition-colors cursor-pointer ${
+                scrolled ? 'p-1' : 'p-2'
               }`}
               aria-label="Toggle Menu"
             >
@@ -149,23 +174,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className={`lg:hidden mt-3 rounded-2xl bg-[#FAF9F5]/98 border border-black/[0.08] p-4 space-y-2 font-mono-code text-xs backdrop-blur-2xl shadow-xl ${
-            scrolled ? 'absolute top-full left-0 right-0 w-full' : ''
-          }`}>
+          <div className="md:hidden mt-2.5 rounded-2xl bg-white/98 border border-black/[0.08] p-3 space-y-1 font-mono-code text-xs backdrop-blur-2xl shadow-2xl w-full max-w-xs mx-auto">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center justify-between w-full p-2.5 rounded-xl text-left font-bold transition-all ${
+                  className={`flex items-center justify-between w-full px-3 py-2 rounded-xl text-left font-bold transition-all cursor-pointer ${
                     isActive 
                       ? 'bg-[#F0B31C] text-[#07090E]' 
                       : 'text-slate-700 hover:text-black hover:bg-black/[0.04]'
                   }`}
                 >
                   <span>{item.label}</span>
-                  {isActive && <Radio className="w-3 h-3 text-[#07090E]" />}
+                  {isActive && <Radio className="w-3.5 h-3.5 text-[#07090E]" />}
                 </button>
               );
             })}
@@ -183,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onExperienceClick }) => {
             </div>
           </div>
         )}
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
