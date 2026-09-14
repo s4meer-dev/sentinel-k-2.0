@@ -88,7 +88,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Floating Callout Chip 1 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden xl:flex absolute -left-24 top-20 z-30 flex-col items-end pointer-events-none"
+          className="hidden 2xl:flex absolute -left-36 top-24 z-30 flex-col items-end pointer-events-none"
         >
           <div className="bg-white/95 border border-blue-500/30 rounded-xl p-2.5 shadow-lg text-right backdrop-blur-md">
             <span className="text-[8px] font-mono-code text-blue-600 uppercase font-bold tracking-wider block">
@@ -99,7 +99,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
             </span>
           </div>
           <div className="flex items-center mt-1 mr-4">
-            <div className="w-10 h-px bg-blue-500/40" />
+            <div className="w-12 h-px bg-blue-500/40" />
             <div className="w-1.5 h-1.5 rounded-full bg-blue-600 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
           </div>
         </motion.div>
@@ -107,11 +107,11 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Floating Callout Chip 2 */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden xl:flex absolute -right-24 bottom-32 z-30 flex-col items-start pointer-events-none"
+          className="hidden 2xl:flex absolute -right-36 bottom-36 z-30 flex-col items-start pointer-events-none"
         >
           <div className="flex items-center mb-1 ml-4">
             <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] shadow-[0_0_8px_rgba(240,179,28,0.8)]" />
-            <div className="w-10 h-px bg-[#F0B31C]/60" />
+            <div className="w-12 h-px bg-[#F0B31C]/60" />
           </div>
           <div className="bg-white/95 border border-[#F0B31C]/60 rounded-xl p-2.5 shadow-lg text-left backdrop-blur-md">
             <span className="text-[8px] font-mono-code text-amber-700 uppercase font-bold tracking-wider block">
@@ -123,31 +123,34 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
           </div>
         </motion.div>
 
-        {/* Realistic Smartphone Chassis */}
+        {/* Realistic Smartphone Chassis with Ultra-Slim Flagship Bezels */}
         <motion.div
           style={{
             rotateX,
             rotateY,
             transformStyle: 'preserve-3d',
           }}
-          className="relative w-[320px] sm:w-[350px] md:w-[370px] h-[670px] sm:h-[720px] rounded-[50px] p-[10px] bg-gradient-to-b from-[#1F2633] via-[#101522] to-[#080B12] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.12),inset_0_1px_2px_rgba(255,255,255,0.25)] transition-shadow duration-500"
+          className="relative w-[320px] sm:w-[350px] md:w-[370px] h-[670px] sm:h-[720px] rounded-[48px] p-[5px] bg-gradient-to-b from-[#2A3342] via-[#1A2230] to-[#0F141E] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.4),0_0_0_1px_rgba(0,0,0,0.12),inset_0_1px_2px_rgba(255,255,255,0.3)] transition-shadow duration-500"
         >
-          <div className="absolute inset-0 rounded-[50px] border border-white/[0.12] pointer-events-none" />
-          <div className="absolute inset-[1px] rounded-[49px] border border-black/80 pointer-events-none" />
+          <div className="absolute inset-0 rounded-[48px] border border-white/[0.15] pointer-events-none" />
+          <div className="absolute inset-[1px] rounded-[47px] border border-black/60 pointer-events-none" />
 
-          <div className="absolute -left-[3px] top-[140px] w-[3px] h-[48px] bg-zinc-600 rounded-l-sm border-l border-white/20 shadow-xs" />
-          <div className="absolute -left-[3px] top-[198px] w-[3px] h-[48px] bg-zinc-600 rounded-l-sm border-l border-white/20 shadow-xs" />
-
+          {/* Side Buttons */}
+          <div className="absolute -left-[3px] top-[140px] w-[3px] h-[48px] bg-zinc-500 rounded-l-sm border-l border-white/30 shadow-xs" />
+          <div className="absolute -left-[3px] top-[198px] w-[3px] h-[48px] bg-zinc-500 rounded-l-sm border-l border-white/30 shadow-xs" />
           <div className="absolute -right-[3px] top-[165px] w-[3px] h-[65px] bg-[#F0B31C] rounded-r-sm border-r border-[#F5BE30] shadow-[0_0_12px_rgba(240,179,28,0.5)]" />
 
-          <div className="absolute top-[16px] left-1/2 -translate-x-1/2 w-16 h-1 bg-zinc-800 rounded-full border border-white/10 z-30 flex items-center justify-center">
-            <div className="w-12 h-[0.5px] bg-zinc-600" />
+          {/* Minimal Earpiece */}
+          <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-14 h-0.5 bg-zinc-500 rounded-full z-30 flex items-center justify-center pointer-events-none">
+            <div className="w-10 h-[0.5px] bg-zinc-400" />
           </div>
 
-          <div className="relative w-full h-full rounded-[42px] bg-[#080B12] overflow-hidden border-[3px] border-[#0A0D15] shadow-[inset_0_0_10px_rgba(0,0,0,0.8)]">
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#07090E] border border-zinc-700 z-30 flex items-center justify-center pointer-events-none shadow-xs">
-              <div className="w-1.5 h-1.5 rounded-full bg-black flex items-center justify-center">
-                <div className="w-0.5 h-0.5 rounded-full bg-blue-500" />
+          {/* Edge-to-Edge Inner Display Screen with Slim Bezel */}
+          <div className="relative w-full h-full rounded-[44px] bg-[#FAF9F5] overflow-hidden border border-slate-300/70 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)]">
+            {/* Front Camera Punch-hole */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#05070B] border border-slate-400/40 z-30 flex items-center justify-center pointer-events-none shadow-xs">
+              <div className="w-1 h-1 rounded-full bg-slate-900 flex items-center justify-center">
+                <div className="w-0.5 h-0.5 rounded-full bg-blue-500/80" />
               </div>
             </div>
 
@@ -155,7 +158,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
 
             <motion.div
               style={{
-                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.01) 45%, transparent 75%)`,
+                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.03) 45%, transparent 75%)`,
               }}
               className="absolute inset-0 pointer-events-none mix-blend-overlay z-20"
             />
