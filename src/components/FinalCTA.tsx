@@ -1,70 +1,67 @@
 import React from 'react';
-import { ArrowRight, Compass, Radio } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Play } from 'lucide-react';
 
 interface FinalCTAProps {
-  onExperienceClick: () => void;
-  onVisionClick?: () => void;
+  onExploreClick: () => void;
+  onKineticClick: () => void;
 }
 
-export const FinalCTA: React.FC<FinalCTAProps> = ({ onExperienceClick }) => {
+export const FinalCTA: React.FC<FinalCTAProps> = ({ onExploreClick, onKineticClick }) => {
   return (
-    <section className="relative py-28 md:py-36 bg-white border-b border-black/[0.06] overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-[#07090E] border-b border-white/[0.08] overflow-hidden text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Editorial Launchcard Container */}
-        <div className="max-w-5xl mx-auto rounded-3xl bg-[#FAF9F5] border border-black/[0.08] p-8 sm:p-14 lg:p-16 shadow-[0_12px_45px_rgba(0,0,0,0.04)] relative overflow-hidden text-center">
+        {/* Launchcard Container */}
+        <div className="max-w-5xl mx-auto rounded-3xl bg-[#0B0F19] border border-cyan-500/30 p-8 sm:p-14 lg:p-16 shadow-[0_12px_45px_rgba(0,0,0,0.6)] relative overflow-hidden text-center">
           
-          {/* Subtle Ambient Radial Lighting */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-400/[0.08] blur-[140px] pointer-events-none -z-10" />
+          {/* Ambient Lighting */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.08] blur-[160px] pointer-events-none -z-10" />
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-xs text-xs font-mono-code text-slate-700 mb-6">
-            <Radio className="w-3.5 h-3.5 text-[#F0B31C]" />
-            <span className="font-extrabold text-slate-900">NEXT-GEN CELLULAR EXPERIENCE</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121826] border border-cyan-500/30 shadow-xs text-xs font-mono-code text-cyan-300 mb-6">
+            <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="font-bold">CYBER-PHYSICAL FIELD DEFENSE</span>
           </div>
 
           {/* Bold Heading */}
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black tracking-tight text-slate-950 uppercase leading-[1.05] max-w-3xl mx-auto">
-            YOUR CONNECTION <br />
-            <span className="text-[#F0B31C] bg-slate-900 px-3 py-0.5 rounded-xl inline-block mt-1">
-              SHOULD WORK FOR YOU.
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white uppercase leading-[1.05] max-w-3xl mx-auto">
+            TRUST THE REASONING. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-[#F0B31C] to-emerald-400">
+              VERIFY THE CONSEQUENCE.
             </span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
-            Experience phone-native connectivity intelligence. Observe drops, understand flux, take supported recovery actions, and build localized memory.
+          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+            Stop blind operational execution. Equip critical infrastructure field workers with on-device NPU evidence verification, deterministic cyber gates, and hydrodynamic physical twins.
           </p>
 
           {/* Action Buttons */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
-              onClick={onExperienceClick}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#F0B31C] hover:bg-[#F5BE30] text-[#07090E] font-mono-code font-extrabold text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_4px_25px_rgba(240,179,28,0.35)] hover:shadow-[0_6px_35px_rgba(240,179,28,0.55)] active:scale-98 cursor-pointer"
+              onClick={onExploreClick}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-[#07090E] font-mono-code font-extrabold text-xs tracking-wider uppercase transition-all duration-200 shadow-[0_0_25px_rgba(0,240,255,0.4)] hover:shadow-[0_0_35px_rgba(0,240,255,0.6)] active:scale-98 cursor-pointer"
             >
-              <span>LAUNCH LIVE DEMO</span>
+              <span>EXPLORE SENTINEL PIPELINE</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
-              onClick={() => {
-                const el = document.getElementById('how-it-works');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-black/15 font-mono-code text-xs font-bold uppercase tracking-wider transition-colors shadow-xs cursor-pointer"
+              onClick={onKineticClick}
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-[#121826] hover:bg-[#1A2234] text-white border border-white/20 font-mono-code text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
             >
-              <Compass className="w-4 h-4 text-[#F0B31C]" />
-              <span>EXPLORE ARCHITECTURE</span>
+              <Play className="w-4 h-4 text-[#F0B31C]" />
+              <span>REJECTION &amp; REPLAN DEMO</span>
             </button>
           </div>
 
-          {/* Mini Phone Telemetry Status bar */}
-          <div className="mt-12 max-w-md mx-auto p-3.5 rounded-2xl bg-white border border-black/[0.08] shadow-xs flex items-center justify-between text-xs font-mono-code">
+          {/* Bottom Telemetry Status bar */}
+          <div className="mt-12 max-w-md mx-auto p-3.5 rounded-xl bg-[#07090E] border border-white/[0.08] flex items-center justify-between text-xs font-mono-code">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-slate-800 font-bold">iQOO Modem-RF: Active</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-white font-bold">OriginOS Field Copilot: Active</span>
             </div>
-            <span className="text-amber-700 font-extrabold uppercase">
-              5G SA // 18ms Locked
+            <span className="text-[#F0B31C] font-bold uppercase">
+              PLANT TWIN SYNCHRONIZED
             </span>
           </div>
 

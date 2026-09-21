@@ -2,29 +2,29 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative py-12 bg-[#FAF9F5] border-t border-black/[0.08] text-slate-600 font-mono-code text-xs">
+    <footer className="relative py-12 bg-[#07090E] border-t border-white/[0.08] text-slate-400 font-mono-code text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-lg bg-[#F0B31C] text-[#07090E] flex items-center justify-center font-black text-xs shadow-xs">
-            CI
+          <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 flex items-center justify-center font-black text-xs shadow-sm">
+            SK
           </div>
           <div>
-            <span className="font-heading font-extrabold text-sm text-slate-900 tracking-wider">
-              iQOO <span className="text-slate-400 font-normal">×</span> CONNECTIVITY INTELLIGENCE
+            <span className="font-sans font-black text-sm text-white tracking-wider flex items-center gap-1.5">
+              SENTINEL-K <span className="text-slate-600 font-normal">|</span> FIELD SECURITY COPILOT
             </span>
             <span className="block text-[10px] text-slate-500">
-              Predictive Network Experience Engine
+              Cyber-Physical Protection for Critical Infrastructure
             </span>
           </div>
         </div>
 
         {/* Disclaimer */}
-        <div className="text-center sm:text-right text-[11px] text-slate-500">
-          Built for the iQOO Hackathon by <strong>J Sashank</strong>, <strong>D Mounika</strong>, and <strong>S Sameer</strong>.
-          <div className="text-[10px] text-slate-400 mt-0.5">
-            100% Private On-Device Cellular Analytics · No Cloud Tracking
+        <div className="text-center sm:text-right text-[11px] text-slate-400">
+          iQOO Hackathon 2026 Submission by <strong>J Sashank</strong>, <strong>D Mounika</strong>, and <strong>S Sameer</strong>.
+          <div className="text-[10px] text-slate-500 mt-0.5">
+            Physical Plant Simulations Driven by WNTR / EPANET Hydrodynamic Engine · Zero Continuous Surveillance
           </div>
         </div>
 
