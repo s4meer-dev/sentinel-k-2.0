@@ -27,18 +27,18 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
     const interval = setInterval(() => {
       idx = (idx + 1) % phases.length;
       onSelectPhase(phases[idx]);
-    }, 3800);
+    }, 4000);
     return () => clearInterval(interval);
   }, [isPlaying, phase, onSelectPhase]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 120, mass: 0.5 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
-  const glareX = useSpring(useTransform(mouseX, [-0.5, 0.5], ['15%', '85%']), springConfig);
-  const glareY = useSpring(useTransform(mouseY, [-0.5, 0.5], ['15%', '85%']), springConfig);
+  const springConfig = { damping: 26, stiffness: 130, mass: 0.5 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), springConfig);
+  const glareX = useSpring(useTransform(mouseX, [-0.5, 0.5], ['10%', '90%']), springConfig);
+  const glareY = useSpring(useTransform(mouseY, [-0.5, 0.5], ['10%', '90%']), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -57,7 +57,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
   return (
     <div className={`flex flex-col items-center select-none relative ${className}`}>
       
-      {/* 3D Phone Chassis */}
+      {/* 3D Phone Chassis Stage */}
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
@@ -65,58 +65,58 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         className="relative perspective-[1400px] py-1 cursor-grab active:cursor-grabbing"
       >
         {/* Soft Ambient Ground Shadow */}
-        <div className="absolute -bottom-5 inset-x-6 h-12 bg-slate-400/25 blur-xl rounded-full pointer-events-none -z-10" />
+        <div className="absolute -bottom-6 inset-x-8 h-14 bg-slate-400/20 blur-2xl rounded-full pointer-events-none -z-10" />
 
-        {/* Smartphone Chassis with Authentic iQOO 13 Ultra-Slim Bezel */}
+        {/* Smartphone Chassis — Replicating iQOO 13 Flagship Aluminum Rail & 1.36mm Bezel */}
         <motion.div
           style={{
             rotateX,
             rotateY,
             transformStyle: 'preserve-3d',
           }}
-          className="relative w-[295px] sm:w-[320px] md:w-[335px] h-[580px] sm:h-[610px] rounded-[44px] p-[3px] bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] transition-shadow duration-300"
+          className="relative w-[295px] sm:w-[325px] md:w-[335px] h-[585px] sm:h-[615px] rounded-[46px] p-[3px] bg-gradient-to-b from-[#EAEAE6] via-[#D8D8D2] to-[#B8B8B2] shadow-[0_22px_60px_-12px_rgba(0,0,0,0.14),0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.95)] transition-shadow duration-300"
         >
-          {/* Beveled Chamfer Borders */}
-          <div className="absolute inset-0 rounded-[44px] border border-white/70 pointer-events-none" />
-          <div className="absolute inset-[1px] rounded-[43px] border border-black/15 pointer-events-none" />
+          {/* Polished Diamond-Cut Bevels */}
+          <div className="absolute inset-0 rounded-[46px] border border-white/80 pointer-events-none" />
+          <div className="absolute inset-[1px] rounded-[45px] border border-black/15 pointer-events-none" />
 
-          {/* Antenna Breaks on Aluminum Rail */}
-          <div className="absolute top-[75px] -left-[3px] w-[3px] h-[2.5px] bg-slate-500/70 pointer-events-none" />
-          <div className="absolute bottom-[75px] -left-[3px] w-[3px] h-[2.5px] bg-slate-500/70 pointer-events-none" />
-          <div className="absolute top-[75px] -right-[3px] w-[3px] h-[2.5px] bg-slate-500/70 pointer-events-none" />
-          <div className="absolute bottom-[75px] -right-[3px] w-[3px] h-[2.5px] bg-slate-500/70 pointer-events-none" />
+          {/* Dark Injection-Molded Antenna Breaks */}
+          <div className="absolute top-[80px] -left-[3px] w-[3px] h-[3px] bg-slate-600/80 pointer-events-none" />
+          <div className="absolute bottom-[80px] -left-[3px] w-[3px] h-[3px] bg-slate-600/80 pointer-events-none" />
+          <div className="absolute top-[80px] -right-[3px] w-[3px] h-[3px] bg-slate-600/80 pointer-events-none" />
+          <div className="absolute bottom-[80px] -right-[3px] w-[3px] h-[3px] bg-slate-600/80 pointer-events-none" />
 
-          {/* Side Volume Buttons */}
-          <div className="absolute -left-[3px] top-[125px] w-[3px] h-[40px] bg-slate-400 rounded-l-sm border-l border-white/50 shadow-2xs" />
-          <div className="absolute -left-[3px] top-[175px] w-[3px] h-[40px] bg-slate-400 rounded-l-sm border-l border-white/50 shadow-2xs" />
+          {/* Left Volume Rockers */}
+          <div className="absolute -left-[3px] top-[130px] w-[3px] h-[42px] bg-slate-400 rounded-l-sm border-l border-white/60 shadow-2xs" />
+          <div className="absolute -left-[3px] top-[182px] w-[3px] h-[42px] bg-slate-400 rounded-l-sm border-l border-white/60 shadow-2xs" />
 
-          {/* Signature iQOO Textured Kinetic Orange Power Button */}
-          <div className="absolute -right-[3px] top-[148px] w-[3px] h-[52px] bg-gradient-to-r from-[#D97706] to-[#F59E0B] rounded-r-sm border-r border-[#B45309] shadow-xs flex flex-col justify-between py-1.5">
-            <div className="w-full h-0.5 bg-black/25" />
-            <div className="w-full h-0.5 bg-black/25" />
-            <div className="w-full h-0.5 bg-black/25" />
+          {/* Right Signature iQOO Textured Kinetic Orange Power Button */}
+          <div className="absolute -right-[3px] top-[154px] w-[3px] h-[56px] bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#FBBF24] rounded-r-sm border-r border-[#92400E] shadow-xs flex flex-col justify-between py-1.5 pointer-events-none">
+            <div className="w-full h-0.5 bg-black/30" />
+            <div className="w-full h-0.5 bg-black/30" />
+            <div className="w-full h-0.5 bg-black/30" />
           </div>
 
-          {/* BMW M Motorsport Tricolor Accent Tag (iQOO Legend Heritage) */}
-          <div className="absolute -bottom-1.5 right-6 flex items-center h-1.5 overflow-hidden rounded-xs shadow-2xs border border-white/80 z-30 pointer-events-none">
+          {/* BMW M Motorsport Tricolor Stripe Badge (iQOO Legend Heritage) */}
+          <div className="absolute -bottom-2 right-8 flex items-center h-2 overflow-hidden rounded-xs shadow-xs border border-white/90 z-30 pointer-events-none">
             <div className="w-2.5 h-full bg-[#0066B1]" />
             <div className="w-2.5 h-full bg-[#002C6C]" />
             <div className="w-2.5 h-full bg-[#E2231A]" />
           </div>
 
-          {/* Minimal Earpiece Mesh */}
-          <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-12 h-0.5 bg-slate-500 rounded-full z-30 flex items-center justify-center pointer-events-none">
-            <div className="w-6 h-[0.5px] bg-slate-300" />
+          {/* Micro Stereo Earpiece Slit */}
+          <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-14 h-0.5 bg-slate-500 rounded-full z-30 flex items-center justify-center pointer-events-none">
+            <div className="w-8 h-[0.5px] bg-slate-300" />
           </div>
 
-          {/* Inner Display Screen with 1.36mm Symmetrical Bezel */}
-          <div className="relative w-full h-full rounded-[41px] bg-[#FAFAF8] overflow-hidden border border-black/[0.10] shadow-[inset_0_0_8px_rgba(0,0,0,0.05)]">
+          {/* Inner Display Screen with Symmetrical 1.36mm Bezel */}
+          <div className="relative w-full h-full rounded-[43px] bg-[#FAFAF8] overflow-hidden border border-black/[0.12] shadow-[inset_0_0_10px_rgba(0,0,0,0.06)]">
             <PhoneScreen phase={phase} onSelectPhase={onSelectPhase} />
 
-            {/* Realistic Screen Glare */}
+            {/* Dynamic Glass Parallax Glare */}
             <motion.div
               style={{
-                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.03) 45%, transparent 75%)`,
+                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 48%, transparent 75%)`,
               }}
               className="absolute inset-0 pointer-events-none mix-blend-overlay z-20"
             />

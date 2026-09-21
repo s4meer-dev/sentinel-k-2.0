@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { SentinelExperienceCarousel } from './components/SentinelExperienceCarousel';
 import { ProblemSection } from './components/ProblemSection';
 import { SentinelPipelineSection } from './components/SentinelPipelineSection';
+import { CardSwapShowcase } from './components/CardSwapShowcase';
 import { DigitalTwinSection } from './components/DigitalTwinSection';
 import { AgentArchitectureSection } from './components/AgentArchitectureSection';
 import { DemoStorySection } from './components/DemoStorySection';
@@ -46,7 +47,10 @@ export function App() {
         {/* 4. The 8-Stage Autonomous Sentinel Pipeline */}
         <SentinelPipelineSection />
 
-        {/* 5. Physical Twin Simulation: EPANET / WNTR Hydrodynamics */}
+        {/* 5. Tangible 3D Verification Stack (React Bits CardSwap) */}
+        <CardSwapShowcase />
+
+        {/* 6. Physical Twin Simulation: EPANET / WNTR Hydrodynamics */}
         <DigitalTwinSection />
 
         {/* 6. Multi-Agent Coordination: 5 Specialized Roles */}
