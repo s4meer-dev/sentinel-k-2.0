@@ -2,22 +2,19 @@
 
 @layer base {
   :root {
-    --color-bg-canvas: #07090E;
-    --color-bg-surface: #0D111A;
-    --color-bg-surface-elevated: #131926;
-    --color-bg-card: rgba(13, 17, 26, 0.85);
-    --color-bg-acrylic: rgba(7, 9, 14, 0.9);
+    --color-bg-canvas: #FBFBFA;
+    --color-bg-surface: #FFFFFF;
+    --color-bg-surface-elevated: #F5F5F2;
+    --color-bg-surface-subtle: #EFEFEA;
     --color-iqoo-yellow: #F0B31C;
-    --color-iqoo-yellow-warm: #F5BE30;
-    --color-electric-cyan: #00F0FF;
-    --color-cyan-glow: rgba(0, 240, 255, 0.25);
-    --color-industrial-blue: #0284C7;
-    --color-danger-crimson: #EF4444;
-    --color-warning-amber: #F59E0B;
-    --color-success-emerald: #10B981;
-    --color-text-primary: #F8FAFC;
-    --color-text-secondary: #94A3B8;
-    --color-text-muted: #64748B;
+    --color-iqoo-yellow-warm: #E2A312;
+    --color-industrial-ink: #090D15;
+    --color-danger-crimson: #DC2626;
+    --color-warning-amber: #D97706;
+    --color-success-emerald: #16A34A;
+    --color-text-primary: #090D15;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94A3B8;
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-heading: 'Syne', system-ui, sans-serif;
     --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -25,8 +22,8 @@
   }
 
   body {
-    background-color: #07090E;
-    color: #F8FAFC;
+    background-color: #FBFBFA;
+    color: #090D15;
     font-family: var(--font-body);
     overflow-x: hidden;
     margin: 0;
@@ -57,91 +54,53 @@
   font-family: 'Syne', system-ui, sans-serif;
 }
 
-/* Industrial & iQOO Utility Styles */
-.iqoo-yellow-btn {
-  background-color: #F0B31C;
-  color: #07090E;
-  font-weight: 800;
-  box-shadow: 0 4px 18px rgba(240, 179, 28, 0.28);
-  transition: all 0.2s ease;
+/* Off-White Architectural Hairline Panels */
+.hairline-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 6px 24px -4px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.iqoo-yellow-btn:hover {
-  background-color: #F5BE30;
-  box-shadow: 0 6px 24px rgba(240, 179, 28, 0.45);
-  transform: translateY(-1px);
+.hairline-card:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), 0 12px 32px -4px rgba(0, 0, 0, 0.06);
 }
 
-.cyan-neon-glow {
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+.hairline-surface {
+  background: #F5F5F2;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.amber-warning-glow {
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
-}
-
-.crimson-alert-glow {
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.35);
-}
-
-.emerald-safe-glow {
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
-}
-
-/* Dark Industrial Technical Panels */
-.technical-panel {
-  background: rgba(13, 17, 26, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.6);
-}
-
-.technical-panel-cyan {
-  background: rgba(13, 17, 26, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  box-shadow: 0 8px 32px -4px rgba(0, 240, 255, 0.12);
-}
-
-.technical-panel-amber {
-  background: rgba(13, 17, 26, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  box-shadow: 0 8px 32px -4px rgba(245, 158, 11, 0.12);
-}
-
-/* Technical Control Room Grid */
+/* Subtle Architectural Grid */
 .industrial-grid {
-  background-size: 32px 32px;
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
 }
 
-.industrial-subgrid {
-  background-size: 8px 8px;
+.network-grid {
+  background-size: 24px 24px;
   background-image: 
-    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+    radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 0);
 }
 
-/* Custom Scrollbar for Dark Control Room */
+/* Custom Scrollbar for Clean Editorial Light */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #07090E;
+  background: #FBFBFA;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
-  border-radius: 2px;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00F0FF;
+  background: #94A3B8;
 }

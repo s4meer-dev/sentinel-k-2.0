@@ -32,8 +32,8 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090E] text-slate-100 selection:bg-cyan-500 selection:text-black overflow-x-hidden font-sans">
-      {/* Dark Technical Navbar */}
+    <div className="min-h-screen bg-[#FBFBFA] text-[#090D15] selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
+      {/* Streamlined Minimal Navbar */}
       <Navbar onVerifyClick={() => scrollTo('hero')} />
 
       {/* Cinematic Hero Section: Phone Node + Evidence Stream + Digital Twin */}

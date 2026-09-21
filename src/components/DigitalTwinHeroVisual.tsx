@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle2, ShieldAlert, Gauge, Activity, Radio } from 'lucide-react';
+import { CheckCircle2, ShieldAlert, Gauge, Radio } from 'lucide-react';
 import type { ValidationPhase } from '../types/sentinel';
 
 interface DigitalTwinHeroVisualProps {
@@ -19,205 +18,152 @@ export const DigitalTwinHeroVisual: React.FC<DigitalTwinHeroVisualProps> = ({ ph
   const tankLevel = isViolation ? 96 : isReplanned ? 78 : 65;
 
   return (
-    <div className="w-full rounded-2xl bg-[#0D111A]/95 border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] p-4 sm:p-5 flex flex-col justify-between font-mono-code relative overflow-hidden">
+    <div className="w-full rounded-2xl bg-white border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-4 sm:p-5 flex flex-col justify-between font-mono-code relative overflow-hidden">
       
-      {/* Background Subtle Gradient & Grid */}
-      <div className="absolute inset-0 industrial-subgrid opacity-20 pointer-events-none" />
-      <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[90px] pointer-events-none transition-colors duration-700 ${
-        isViolation ? 'bg-rose-500/20' : isReplanned ? 'bg-emerald-500/15' : 'bg-cyan-500/15'
-      }`} />
-
-      {/* Header */}
-      <div className="relative z-10 flex items-center justify-between pb-3 border-b border-white/10">
+      {/* Header telemetry info */}
+      <div className="flex items-center justify-between pb-3 border-b border-black/[0.05]">
         <div className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${
-            isViolation ? 'bg-rose-500 animate-ping' : isReplanned ? 'bg-emerald-400' : 'bg-cyan-400 animate-pulse'
-          }`} />
-          <span className="text-xs font-bold text-white tracking-wider">INDUSTRIAL DIGITAL TWIN</span>
-          <span className="text-[10px] text-slate-500">WNTR / EPANET</span>
-        </div>
-        <span className="text-[9px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">
-          PROTOTYPE SIMULATION
-        </span>
-      </div>
-
-      {/* Schematic Process Grid */}
-      <div className="relative z-10 my-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        
-        {/* Component 1: Booster Pump 4 */}
-        <div className={`p-3 rounded-xl border transition-all ${
-          isViolation 
-            ? 'bg-rose-950/30 border-rose-500/40 shadow-[0_0_15px_rgba(239,68,68,0.15)]' 
-            : isReplanned 
-            ? 'bg-emerald-950/20 border-emerald-500/40' 
-            : 'bg-black/40 border-white/10'
-        }`}>
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
-            <span className="flex items-center gap-1.5 font-bold">
-              <Activity className="w-3 h-3 text-cyan-400" />
-              BOOSTER PUMP 4
-            </span>
-            <span className={`px-1.5 py-0.2 rounded text-[8px] font-bold ${
-              isViolation 
-                ? 'bg-rose-500/20 text-rose-300' 
-                : isReplanned 
-                ? 'bg-emerald-500/20 text-emerald-300' 
-                : 'bg-white/10 text-slate-300'
-            }`}>
-              {isViolation ? 'FORCED 100%' : isReplanned ? 'MODULATED 65%' : 'STANDBY'}
-            </span>
+          <div className="p-1.5 rounded-lg bg-[#F5F5F2] border border-black/[0.05]">
+            <Radio className="w-3.5 h-3.5 text-[#090D15]" />
           </div>
-
-          <div className="mt-2 flex items-baseline justify-between">
-            <div>
-              <span className="text-xl font-display font-black text-white">{flowGPM}</span>
-              <span className="text-[10px] text-slate-400 ml-1">GPM</span>
-            </div>
-            <div className="text-right text-[10px]">
-              <span className="text-slate-400">RPM: </span>
-              <span className="font-bold text-white">{pumpRPM}</span>
-            </div>
-          </div>
-
-          {/* Animated Flow Track */}
-          <div className="mt-2 h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-            <motion.div
-              animate={{ x: isViolation ? ['-100%', '100%'] : ['-100%', '100%'] }}
-              transition={{ duration: isViolation ? 0.6 : 1.5, repeat: Infinity, ease: 'linear' }}
-              className={`h-full w-1/3 rounded-full ${
-                isViolation ? 'bg-rose-500' : isReplanned ? 'bg-emerald-400' : 'bg-cyan-400'
-              }`}
-            />
+          <div>
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">
+              PHYSICAL TWIN SIMULATOR
+            </span>
+            <span className="text-xs font-sans font-black text-[#090D15]">
+              STATION 04 // PUMP &amp; MANIFOLD
+            </span>
           </div>
         </div>
 
-        {/* Component 2: Hydraulic Line Pressure */}
-        <div className={`p-3 rounded-xl border transition-all ${
-          isViolation 
-            ? 'bg-rose-950/40 border-rose-500/60 shadow-[0_0_20px_rgba(239,68,68,0.25)]' 
-            : isReplanned 
-            ? 'bg-emerald-950/20 border-emerald-500/40' 
-            : 'bg-black/40 border-white/10'
-        }`}>
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
-            <span className="flex items-center gap-1.5 font-bold">
-              <Gauge className="w-3 h-3 text-cyan-400" />
-              PRESSURE MANIFOLD
-            </span>
-            <span className="text-[8px] text-slate-500">MAX: 9.2 BAR</span>
-          </div>
-
-          <div className="mt-2 flex items-baseline justify-between">
-            <div>
-              <span className={`text-2xl font-display font-black tracking-tight ${
-                isViolation ? 'text-rose-400 animate-pulse' : isReplanned ? 'text-emerald-400' : 'text-white'
-              }`}>
-                {pressureBar.toFixed(1)}
-              </span>
-              <span className="text-[10px] text-slate-400 ml-1">BAR</span>
-            </div>
-            <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase ${
-              isViolation 
-                ? 'bg-rose-500/30 text-rose-300 border border-rose-500/50' 
-                : isReplanned 
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' 
-                : 'bg-white/10 text-slate-300'
-            }`}>
-              {isViolation ? 'OVERPRESSURE!' : isReplanned ? 'SAFE STABILIZED' : 'NOMINAL'}
-            </span>
-          </div>
-
-          {/* Threshold Visual Bar */}
-          <div className="mt-2 relative h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-            <div 
-              style={{ width: `${Math.min(100, (pressureBar / 12) * 100)}%` }}
-              className={`h-full transition-all duration-500 rounded-full ${
-                isViolation ? 'bg-rose-500' : isReplanned ? 'bg-emerald-400' : 'bg-cyan-400'
-              }`}
-            />
-            {/* Safe 9.2 bar limit marker */}
-            <div 
-              style={{ left: `${(9.2 / 12) * 100}%` }}
-              className="absolute top-0 bottom-0 w-0.5 bg-rose-400 shadow-[0_0_4px_#ef4444]" 
-            />
-          </div>
-        </div>
-
-        {/* Component 3: Storage Reservoir Level */}
-        <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
-            <span>RESERVOIR TANK 2</span>
-            <span className="text-white font-bold">{tankLevel}%</span>
-          </div>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="flex-1 bg-white/10 h-2 rounded-full overflow-hidden">
-              <div 
-                style={{ width: `${tankLevel}%` }}
-                className={`h-full transition-all duration-500 rounded-full ${
-                  isViolation ? 'bg-amber-500' : 'bg-cyan-400'
-                }`}
-              />
-            </div>
-            <span className="text-[9px] text-slate-400">{isViolation ? 'OVERFILL FLUX' : 'BALANCED'}</span>
-          </div>
-        </div>
-
-        {/* Component 4: Relief Valve 02 */}
-        <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
-            <span>BYPASS VALVE 02</span>
-            <span className={`text-[9px] font-bold ${isReplanned ? 'text-emerald-400' : 'text-slate-400'}`}>
-              {valveState}
-            </span>
-          </div>
-          <div className="mt-2 flex items-center justify-between text-[10px]">
-            <span className="text-slate-500 text-[9px]">SPOOFED ORDER:</span>
-            <span className="text-rose-400 text-[9px] font-bold">KEEP CLOSED</span>
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Verification Status Callout */}
-      <div className={`relative z-10 p-3 rounded-xl border transition-all ${
-        isViolation
-          ? 'bg-rose-950/60 border-rose-500/60'
-          : isReplanned
-          ? 'bg-emerald-950/40 border-emerald-500/50'
-          : 'bg-black/50 border-white/10'
-      }`}>
-        <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            {isViolation ? (
-              <ShieldAlert className="w-4 h-4 text-rose-400 animate-pulse" />
-            ) : isReplanned ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            ) : (
-              <Radio className="w-4 h-4 text-cyan-400" />
-            )}
-            <span className="font-bold text-white">
-              {isViolation ? 'PHYSICAL SAFETY ENVELOPE BREACHED' : isReplanned ? 'KINETIC CONSTRAINTS SATISFIED' : 'TWIN MODEL SYNCHRONIZED'}
-            </span>
-          </div>
-
-          <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase ${
+        <div className="text-right">
+          <span className={`text-[10px] font-mono-code font-bold uppercase px-2 py-0.5 rounded-full border ${
             isViolation 
-              ? 'bg-rose-500 text-black' 
+              ? 'bg-red-50 text-red-700 border-red-200' 
               : isReplanned 
-              ? 'bg-emerald-400 text-black' 
-              : 'bg-cyan-500/20 text-cyan-300'
+              ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
+              : 'bg-slate-100 text-slate-700 border-slate-200'
           }`}>
-            {isViolation ? 'BLOCKED ✕' : isReplanned ? 'VERIFIED ✓' : 'READY'}
+            {isViolation ? 'SAFETY FAULT' : isReplanned ? 'REPLANNED' : 'MONITORING'}
           </span>
         </div>
+      </div>
 
-        <p className="mt-1.5 text-[10px] text-slate-300 leading-relaxed">
-          {isViolation
-            ? 'Action rejected: Although cyber authorization passed, physical fluid simulation predicts a 11.4 bar pressure spike rupturing the manifold at T+84s.'
-            : isReplanned
-            ? 'Safe execution plan verified: Modulating Pump 4 to 65% with Bypass Valve 02 open stabilizes pressure at 7.4 bar. Ready for operator approval.'
-            : 'Observing field node inputs. When high-impact instructions are proposed, Sentinel-K simulates hydraulic and physical consequences.'}
-        </p>
+      {/* SVG Industrial Water Schematic */}
+      <div className="relative py-4 my-2">
+        <svg viewBox="0 0 400 160" className="w-full h-auto">
+          {/* Main Pipeline Pipe */}
+          <line x1="20" y1="80" x2="380" y2="80" stroke="#E2E8F0" strokeWidth="16" strokeLinecap="round" />
+          
+          {/* High pressure stress highlight */}
+          <line 
+            x1="140" 
+            y1="80" 
+            x2="280" 
+            y2="80" 
+            stroke={isViolation ? '#EF4444' : isReplanned ? '#10B981' : '#CBD5E1'} 
+            strokeWidth="10" 
+            strokeDasharray={isViolation ? '6,3' : 'none'}
+            className={isViolation ? 'animate-pulse' : ''}
+          />
+
+          {/* Bypass relief branch */}
+          <path 
+            d="M 220 80 L 220 40 L 320 40" 
+            fill="none" 
+            stroke={isReplanned ? '#10B981' : '#E2E8F0'} 
+            strokeWidth="8" 
+            strokeLinecap="round"
+          />
+
+          {/* Pump Unit Circle */}
+          <circle cx="90" cy="80" r="28" fill="#F8FAFC" stroke="#090D15" strokeWidth="2.5" />
+          <text x="90" y="76" textAnchor="middle" fill="#090D15" fontSize="10" fontWeight="bold">PUMP 04</text>
+          <text x="90" y="90" textAnchor="middle" fill="#64748B" fontSize="8">{pumpRPM} RPM</text>
+
+          {/* Manifold Pressure Gauge */}
+          <circle cx="210" cy="80" r="18" fill="#FFFFFF" stroke={isViolation ? '#EF4444' : '#090D15'} strokeWidth="2" />
+          <text x="210" y="78" textAnchor="middle" fill={isViolation ? '#DC2626' : '#090D15'} fontSize="8" fontWeight="bold">
+            {pressureBar}
+          </text>
+          <text x="210" y="88" textAnchor="middle" fill="#64748B" fontSize="6">BAR</text>
+
+          {/* Relief Valve 02 */}
+          <rect x="250" y="30" width="22" height="20" rx="3" fill="#FFFFFF" stroke={isReplanned ? '#10B981' : '#64748B'} strokeWidth="1.5" />
+          <text x="261" y="43" textAnchor="middle" fill={isReplanned ? '#15803D' : '#64748B'} fontSize="7" fontWeight="bold">V02</text>
+
+          {/* Reservoir Tank 2 */}
+          <rect x="330" y="55" width="45" height="50" rx="4" fill="#F8FAFC" stroke="#090D15" strokeWidth="2" />
+          {/* Fluid fill level */}
+          <rect 
+            x="332" 
+            y={55 + (50 - (tankLevel * 0.46))} 
+            width="41" 
+            height={tankLevel * 0.46} 
+            fill={isViolation ? 'rgba(239, 68, 68, 0.25)' : 'rgba(59, 130, 246, 0.25)'} 
+            rx="2"
+          />
+          <text x="352" y="84" textAnchor="middle" fill="#090D15" fontSize="8" fontWeight="bold">TANK 2</text>
+          <text x="352" y="94" textAnchor="middle" fill="#64748B" fontSize="7">{tankLevel}%</text>
+        </svg>
+
+        {/* Floating Pressure Callout */}
+        <div className="absolute top-2 right-2 flex items-center gap-1.5 p-1.5 rounded-lg bg-white/95 border border-black/[0.08] shadow-xs text-[10px]">
+          <Gauge className={`w-3.5 h-3.5 ${isViolation ? 'text-red-600 animate-pulse' : 'text-slate-700'}`} />
+          <span className="text-slate-500">LINE PRESSURE:</span>
+          <strong className={isViolation ? 'text-red-700' : isReplanned ? 'text-emerald-700' : 'text-slate-900'}>
+            {pressureBar} BAR
+          </strong>
+        </div>
+      </div>
+
+      {/* Numerical Telemetry Metrics */}
+      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-black/[0.05] text-center text-[10px]">
+        <div className="p-2 rounded-xl bg-[#FAFAF8] border border-black/[0.04]">
+          <span className="text-slate-500 block uppercase text-[8px]">THROUGHPUT</span>
+          <span className="font-bold text-[#090D15]">{flowGPM} GPM</span>
+        </div>
+        <div className="p-2 rounded-xl bg-[#FAFAF8] border border-black/[0.04]">
+          <span className="text-slate-500 block uppercase text-[8px]">LIMIT HEAD</span>
+          <span className="font-bold text-slate-700">9.2 BAR MAX</span>
+        </div>
+        <div className="p-2 rounded-xl bg-[#FAFAF8] border border-black/[0.04]">
+          <span className="text-slate-500 block uppercase text-[8px]">VALVE 02</span>
+          <span className={`font-bold ${isReplanned ? 'text-emerald-700' : 'text-slate-700'}`}>{valveState}</span>
+        </div>
+        <div className="p-2 rounded-xl bg-[#FAFAF8] border border-black/[0.04]">
+          <span className="text-slate-500 block uppercase text-[8px]">STATUS</span>
+          <span className={`font-bold ${isViolation ? 'text-red-700' : isReplanned ? 'text-emerald-700' : 'text-slate-700'}`}>
+            {isViolation ? 'OVERPRESSURE' : isReplanned ? 'SAFE' : 'STABLE'}
+          </span>
+        </div>
+      </div>
+
+      {/* Invariant Alert Status */}
+      <div className={`mt-3 p-2.5 rounded-xl border text-[10px] leading-relaxed flex items-center justify-between ${
+        isViolation
+          ? 'bg-red-50 border-red-200 text-red-900'
+          : isReplanned
+          ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+          : 'bg-[#FAFAF8] border-black/[0.05] text-slate-700'
+      }`}>
+        <div className="flex items-center gap-1.5">
+          {isViolation ? (
+            <ShieldAlert className="w-4 h-4 text-red-600 shrink-0" />
+          ) : (
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          )}
+          <span>
+            {isViolation
+              ? 'Hydrodynamic surge exceeds safe threshold (11.4 bar > 9.2 bar)'
+              : isReplanned
+              ? 'Critic replan sustains hydrodynamic safety gradient (7.4 bar)'
+              : 'Plant telemetry synchronized with forward EPANET kinematic model'}
+          </span>
+        </div>
+        <span className="font-bold text-[9px] uppercase tracking-wider shrink-0 ml-2">
+          {isViolation ? 'BLOCKED' : 'VERIFIED'}
+        </span>
       </div>
 
     </div>

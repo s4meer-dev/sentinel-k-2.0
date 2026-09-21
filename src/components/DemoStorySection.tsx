@@ -101,120 +101,118 @@ export const DemoStorySection: React.FC = () => {
   const current = storySteps.find((s) => s.step === activeStep) || storySteps[6];
 
   return (
-    <section id="demo-story" className="scroll-mt-24 relative py-24 md:py-32 bg-[#07090E] border-b border-white/[0.08] overflow-hidden text-white">
-      <div className="absolute inset-0 industrial-grid opacity-50 pointer-events-none -z-10" />
+    <section id="demo-story" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121826] border border-cyan-500/30 text-xs font-mono-code text-cyan-300 mb-6 shadow-sm">
-            <Clock className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+            <Clock className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">INCIDENT WALKTHROUGH</span>
-            <span className="text-white/20">/</span>
-            <span className="text-[#F0B31C] font-semibold">THE FRIDAY AFTERNOON SURGE ATTACK</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-600">THE FRIDAY AFTERNOON SURGE ATTACK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white uppercase leading-[1.08]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
             CHRONICLE OF A THWARTED <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-400 to-emerald-400">
-              PHYSICAL DISASTER.
-            </span>
+            <span className="text-slate-900">PHYSICAL DISASTER.</span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             Follow the 10-step sequence showing how an adversarial authority-spoofing attack was intercepted, simulated, rejected, and safely remediated in under 4 minutes.
           </p>
         </div>
 
         {/* Step Nav Bar */}
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-1 sm:gap-2 p-2 rounded-2xl bg-[#0B0F19] border border-white/[0.08] overflow-x-auto mb-8">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-1 p-1.5 rounded-2xl bg-white border border-black/[0.06] overflow-x-auto mb-6 shadow-2xs">
           {storySteps.map((st) => (
             <button
               key={st.step}
               onClick={() => setActiveStep(st.step)}
-              className={`px-3 py-2 rounded-xl font-mono-code text-[11px] font-bold shrink-0 transition-all duration-200 cursor-pointer border ${
+              className={`px-2.5 py-1.5 rounded-xl font-mono-code text-[11px] font-bold shrink-0 transition-all duration-200 cursor-pointer border ${
                 activeStep === st.step
-                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-400 shadow-[0_0_12px_rgba(0,240,255,0.3)]'
-                  : 'bg-transparent text-slate-400 border-transparent hover:text-white'
+                  ? 'bg-[#090D15] text-white border-[#090D15] shadow-xs'
+                  : 'bg-transparent text-slate-600 border-transparent hover:text-black hover:bg-black/[0.02]'
               }`}
             >
-              {st.time.substring(0, 5)} · #{st.step}
+              #{st.step}
             </button>
           ))}
         </div>
 
         {/* Active Step Showcase */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.step}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className="p-6 sm:p-10 rounded-2xl bg-[#121826]/90 border border-white/[0.1] shadow-2xl"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="p-6 sm:p-8 rounded-2xl bg-white border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/[0.08]">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-5 border-b border-black/[0.05]">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#FAFAF8] border border-black/[0.05] text-slate-800">
                     STEP {current.step} OF 10 // {current.time}
                   </span>
-                  <span className="text-xs font-mono-code text-slate-400">
-                    ACTOR: <strong className="text-white">{current.actor}</strong>
+                  <span className="text-xs font-mono-code text-slate-500">
+                    ACTOR: <strong className="text-slate-900">{current.actor}</strong>
                   </span>
                 </div>
 
                 <span
-                  className={`text-xs font-mono-code font-bold uppercase px-3 py-1 rounded-full ${
+                  className={`text-xs font-mono-code font-bold uppercase px-2.5 py-0.5 rounded-full ${
                     current.threatStatus === 'CRITICAL'
-                      ? 'bg-red-500/20 text-red-300 border border-red-500/30 animate-pulse'
+                      ? 'bg-red-50 text-red-800 border border-red-200'
                       : current.threatStatus === 'WARNING'
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                      ? 'bg-amber-50 text-amber-800 border border-amber-200'
                       : current.threatStatus === 'SAFE'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                      : 'bg-slate-100 text-slate-800 border border-slate-200'
                   }`}
                 >
                   {current.threatStatus}
                 </span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-sans font-black text-white">
+              <h3 className="text-xl sm:text-2xl font-sans font-black text-[#090D15]">
                 {current.title}
               </h3>
 
-              <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+              <p className="mt-2.5 text-sm text-slate-600 leading-relaxed font-normal">
                 {current.summary}
               </p>
 
-              <div className="mt-6 p-4 rounded-xl bg-[#07090E] border border-white/[0.08] font-mono-code text-xs">
+              <div className="mt-5 p-3.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] font-mono-code text-xs">
                 <div className="text-[10px] text-slate-500 uppercase font-bold">OPERATIONAL TRACE:</div>
-                <div className="text-cyan-300 font-bold mt-1 text-xs sm:text-sm">
+                <div className="text-[#090D15] font-bold mt-1 text-xs">
                   {current.action}
                 </div>
               </div>
 
               {/* Navigation Arrows */}
-              <div className="mt-8 pt-4 border-t border-white/[0.08] flex items-center justify-between">
+              <div className="mt-6 pt-3.5 border-t border-black/[0.05] flex items-center justify-between">
                 <button
                   disabled={current.step === 1}
                   onClick={() => setActiveStep((prev) => Math.max(1, prev - 1))}
-                  className="text-xs font-mono-code text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                  className="text-xs font-mono-code text-slate-500 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 >
-                  &larr; PREVIOUS STEP
+                  &larr; PREVIOUS
                 </button>
 
-                <span className="text-xs font-mono-code text-slate-500">
+                <span className="text-xs font-mono-code text-slate-400">
                   {current.step} / 10
                 </span>
 
                 <button
                   disabled={current.step === 10}
                   onClick={() => setActiveStep((prev) => Math.min(10, prev + 1))}
-                  className="text-xs font-mono-code text-cyan-400 hover:text-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-bold"
+                  className="text-xs font-mono-code text-[#090D15] hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-bold"
                 >
-                  NEXT STEP &rarr;
+                  NEXT &rarr;
                 </button>
               </div>
             </motion.div>

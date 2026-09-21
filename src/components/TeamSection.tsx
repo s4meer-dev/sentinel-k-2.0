@@ -24,64 +24,64 @@ export const TeamSection: React.FC = () => {
   ];
 
   return (
-    <section id="team" className="scroll-mt-24 relative py-24 md:py-32 bg-[#0B0F19] border-b border-white/[0.08] overflow-hidden text-white">
-      <div className="absolute inset-0 industrial-grid opacity-50 pointer-events-none -z-10" />
+    <section id="team" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FBFBFA] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121826] border border-cyan-500/30 text-xs font-mono-code text-cyan-300 mb-6 shadow-sm">
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
             <Users className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">THE BUILDERS</span>
-            <span className="text-white/20">/</span>
-            <span className="text-[#F0B31C] font-semibold">iQOO HACKATHON 2026 TEAM</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-600">iQOO HACKATHON 2026 TEAM</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white uppercase leading-[1.08]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
             MEET THE BUILDERS.
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             Engineered with deep focus on mobile hardware acceleration, cyber-physical safety, and operational human sovereignty.
           </p>
         </div>
 
         {/* 3 Team Cards */}
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
           {team.map((m, idx) => {
             const Icon = m.icon;
             return (
               <div
                 key={idx}
-                className="p-6 sm:p-8 rounded-2xl bg-[#121826]/90 border border-white/[0.08] hover:border-cyan-500/40 shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="p-6 sm:p-7 rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.06]">
-                    <div className="p-3 rounded-xl bg-[#0B0F19] border border-white/[0.08]">
-                      <Icon className="w-5 h-5 text-cyan-400" />
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-black/[0.05]">
+                    <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] text-[#090D15]">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <span className="font-mono-code text-xs font-bold text-slate-500">
+                    <span className="font-mono-code text-xs font-bold text-slate-400">
                       0{idx + 1}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-sans font-black text-white">
+                  <h3 className="text-lg font-sans font-black text-[#090D15]">
                     {m.name}
                   </h3>
 
-                  <div className="text-xs font-mono-code text-[#F0B31C] font-bold mt-1 uppercase">
+                  <div className="text-xs font-mono-code text-amber-800 font-bold mt-1 uppercase">
                     {m.role}
                   </div>
 
-                  <p className="mt-4 text-xs text-slate-300 leading-relaxed font-normal">
+                  <p className="mt-3 text-xs text-slate-600 leading-relaxed font-normal">
                     {m.focus}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-white/[0.06] text-[10px] font-mono-code text-slate-500 uppercase flex items-center justify-between">
+                <div className="mt-5 pt-3 border-t border-black/[0.05] text-[10px] font-mono-code text-slate-500 uppercase flex items-center justify-between">
                   <span>SENTINEL-K CORE</span>
-                  <span className="text-emerald-400 font-bold">ACTIVE</span>
+                  <span className="text-emerald-800 font-bold">ACTIVE</span>
                 </div>
               </div>
             );

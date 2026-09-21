@@ -127,32 +127,32 @@ export const SentinelPipelineSection: React.FC = () => {
   };
 
   return (
-    <section id="pipeline" className="scroll-mt-24 relative py-24 md:py-32 bg-[#0B0F19] border-b border-white/[0.08] overflow-hidden text-white">
-      {/* Precision Grid */}
-      <div className="absolute inset-0 industrial-grid opacity-50 pointer-events-none -z-10" />
+    <section id="pipeline" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+      {/* Subtle Dot Grid */}
+      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121826] border border-cyan-500/30 text-xs font-mono-code text-cyan-300 mb-6 shadow-sm">
-            <Sliders className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+            <Sliders className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">END-TO-END VERIFICATION HARNESS</span>
-            <span className="text-white/20">/</span>
-            <span className="text-[#F0B31C] font-semibold">8 DETERMINISTIC STAGES</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-600">8 DETERMINISTIC STAGES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white uppercase leading-[1.08]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
             THE 8-STAGE SENTINEL PIPELINE
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             From the moment an unverified instruction lands on an iQOO smartphone to the moment a physically verified safe action is dispatched to the PLC.
           </p>
         </div>
 
         {/* 8-Step Interactive Timeline Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-2 rounded-2xl bg-[#07090E] border border-white/[0.08]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-1.5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs">
           {steps.map((s) => {
             const Icon = getStepIcon(s.id);
             const isSelected = activeStep === s.id;
@@ -167,34 +167,44 @@ export const SentinelPipelineSection: React.FC = () => {
                 className={`p-3 rounded-xl text-left transition-all duration-200 cursor-pointer border ${
                   isSelected
                     ? isFail
-                      ? 'bg-red-950/40 border-red-500 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.3)]'
+                      ? 'bg-red-50 border-red-300 text-red-900 shadow-xs'
                       : isReplan
-                      ? 'bg-amber-950/40 border-amber-500 text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
-                      : 'bg-cyan-950/40 border-cyan-500 text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'bg-[#121826]/60 border-transparent hover:border-white/10 text-slate-400'
+                      ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-xs'
+                      : 'bg-[#090D15] text-white border-[#090D15] shadow-xs'
+                    : 'bg-[#FAFAF8] border-transparent hover:border-black/10 text-slate-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="font-mono-code text-[10px] font-bold text-slate-500">
+                  <span className={`font-mono-code text-[10px] font-bold ${
+                    isSelected && !isFail && !isReplan ? 'text-slate-400' : 'text-slate-500'
+                  }`}>
                     STAGE 0{s.id}
                   </span>
                   <Icon className={`w-3.5 h-3.5 ${
-                    isFail ? 'text-red-400' : isFlag ? 'text-amber-400' : 'text-cyan-400'
+                    isFail 
+                      ? 'text-red-600' 
+                      : isFlag 
+                      ? 'text-amber-600' 
+                      : isSelected && !isFail && !isReplan 
+                      ? 'text-[#F0B31C]' 
+                      : 'text-slate-700'
                   }`} />
                 </div>
-                <div className="text-[11px] font-sans font-bold line-clamp-1 text-white">
+                <div className={`text-[11px] font-sans font-bold line-clamp-1 ${
+                  isSelected && !isFail && !isReplan ? 'text-white' : 'text-[#090D15]'
+                }`}>
                   {s.stage}
                 </div>
                 <div className="mt-1">
                   <span
-                    className={`text-[8px] font-mono-code uppercase px-1 py-0.2 rounded ${
+                    className={`text-[8px] font-mono-code uppercase px-1.5 py-0.2 rounded font-bold ${
                       isFail
-                        ? 'bg-red-500/20 text-red-300'
+                        ? 'bg-red-100 text-red-800'
                         : isFlag
-                        ? 'bg-amber-500/20 text-amber-300'
+                        ? 'bg-amber-100 text-amber-800'
                         : isReplan
-                        ? 'bg-amber-500/20 text-amber-300'
-                        : 'bg-emerald-500/20 text-emerald-300'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'bg-emerald-100 text-emerald-800'
                     }`}
                   >
                     {s.status}
@@ -209,81 +219,81 @@ export const SentinelPipelineSection: React.FC = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="mt-6 p-6 sm:p-10 rounded-2xl bg-[#121826]/95 border border-white/[0.1] shadow-2xl relative overflow-hidden"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="mt-5 p-6 sm:p-8 rounded-2xl bg-white border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               
               {/* Left Column: Stage Concept & Engine */}
               <div className="lg:col-span-7">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#F4F4F0] border border-black/[0.05] text-slate-800">
                     STAGE 0{current.id} // {current.stage}
                   </span>
                   <span
                     className={`text-xs font-mono-code font-bold uppercase px-2.5 py-0.5 rounded ${
                       current.status === 'FAIL'
-                        ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                        ? 'bg-red-50 text-red-800 border border-red-200'
                         : current.status === 'FLAGGED'
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                        : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                        ? 'bg-amber-50 text-amber-800 border border-amber-200'
+                        : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                     }`}
                   >
                     STATUS: {current.status}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-sans font-black text-white">
+                <h3 className="text-xl sm:text-2xl font-sans font-black text-[#090D15]">
                   {current.title}
                 </h3>
 
-                <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed font-normal">
                   {current.description}
                 </p>
 
-                <div className="mt-6 space-y-3 font-mono-code text-xs">
-                  <div className="p-3 rounded-xl bg-[#0B0F19] border border-white/[0.06]">
+                <div className="mt-5 space-y-2.5 font-mono-code text-xs">
+                  <div className="p-3 rounded-xl bg-[#FAFAF8] border border-black/[0.05]">
                     <div className="text-[10px] text-slate-500 uppercase font-bold">EXECUTING ENGINE:</div>
-                    <div className="text-cyan-300 font-bold mt-0.5">{current.engine}</div>
+                    <div className="text-slate-900 font-bold mt-0.5">{current.engine}</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#0B0F19] border border-white/[0.06]">
+                  <div className="p-3 rounded-xl bg-[#FAFAF8] border border-black/[0.05]">
                     <div className="text-[10px] text-slate-500 uppercase font-bold">TECHNICAL DISCIPLINE:</div>
-                    <div className="text-slate-300 mt-0.5 leading-relaxed">{current.technicalDetails}</div>
+                    <div className="text-slate-600 mt-0.5 leading-relaxed">{current.technicalDetails}</div>
                   </div>
                 </div>
               </div>
 
               {/* Right Column: Live Terminal Diagnostic Snippet */}
               <div className="lg:col-span-5">
-                <div className="rounded-xl bg-[#07090E] border border-cyan-500/30 shadow-inner overflow-hidden font-mono-code text-xs">
-                  <div className="p-3 bg-[#0B0F19] border-b border-white/[0.06] flex items-center justify-between text-[11px] text-slate-400">
-                    <span className="flex items-center gap-1.5 text-white font-bold">
-                      <FileCode className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="rounded-xl bg-[#FAFAF8] border border-black/[0.08] shadow-inner overflow-hidden font-mono-code text-xs">
+                  <div className="p-3 bg-white border-b border-black/[0.05] flex items-center justify-between text-[11px] text-slate-600">
+                    <span className="flex items-center gap-1.5 text-slate-900 font-bold">
+                      <FileCode className="w-3.5 h-3.5 text-[#090D15]" />
                       TERMINAL TRACE // S0{current.id}
                     </span>
-                    <span className="text-emerald-400">LIVE BUS</span>
+                    <span className="text-emerald-700 font-bold">LIVE BUS</span>
                   </div>
 
                   <div className="p-4 space-y-3">
                     <div>
                       <div className="text-[10px] text-slate-500 uppercase">SYSTEM DIAGNOSTIC LOG:</div>
-                      <div className="mt-1 p-3 rounded-lg bg-[#121826] border border-white/[0.06] text-white text-[11px] font-mono-code whitespace-pre-wrap break-all">
+                      <div className="mt-1 p-3 rounded-lg bg-white border border-black/[0.06] text-[#090D15] text-[11px] font-mono-code whitespace-pre-wrap break-all font-bold">
                         {current.outputSnippet}
                       </div>
                     </div>
 
-                    <div className="pt-2 flex items-center justify-between text-[10px] text-slate-400 border-t border-white/[0.05]">
+                    <div className="pt-2 flex items-center justify-between text-[10px] text-slate-500 border-t border-black/[0.05]">
                       <span>STAGE LATENCY BUDGET:</span>
-                      <span className="text-cyan-300 font-bold">&lt; 380 ms</span>
+                      <span className="text-slate-900 font-bold">&lt; 380 ms</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-slate-400">
+                    <div className="flex items-center justify-between text-[10px] text-slate-500">
                       <span>VERIFICATION HARNESS:</span>
-                      <span className="text-emerald-400 font-bold">DETERMINISTIC</span>
+                      <span className="text-emerald-700 font-bold">DETERMINISTIC</span>
                     </div>
                   </div>
                 </div>

@@ -22,53 +22,51 @@ export const DifferentiatorSection: React.FC = () => {
   ];
 
   return (
-    <section id="differentiators" className="scroll-mt-24 relative py-24 md:py-32 bg-[#0B0F19] border-b border-white/[0.08] overflow-hidden text-white">
-      <div className="absolute inset-0 industrial-grid opacity-50 pointer-events-none -z-10" />
+    <section id="differentiators" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FBFBFA] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121826] border border-cyan-500/30 text-xs font-mono-code text-cyan-300 mb-6 shadow-sm">
-            <Target className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+            <Target className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">COMPETITIVE ADVANTAGE</span>
-            <span className="text-white/20">/</span>
-            <span className="text-[#F0B31C] font-semibold">THE UNCHARTED TERRITORY</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-slate-600">THE UNCHARTED TERRITORY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-white uppercase leading-[1.08]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
             MOST SECURITY SYSTEMS <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-[#F0B31C] to-emerald-400">
-              STOP AT THE SCREEN.
-            </span>
+            <span className="text-slate-900">STOP AT THE SCREEN.</span>
           </h2>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             IT security stops at the perimeter firewall. OT security stops at protocol syntax. Sentinel-K is the first field copilot to connect human trust to physical consequences.
           </p>
         </div>
 
         {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {differentiators.map((d, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-[#121826]/90 border border-white/[0.08] hover:border-cyan-500/40 shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] transition-all duration-200 flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-mono-code text-cyan-400 font-bold">
+                <span className="text-[10px] font-mono-code text-slate-500 font-bold uppercase">
                   0{i + 1} // PARADIGM
                 </span>
-                <h3 className="text-sm font-sans font-black tracking-tight text-white uppercase mt-3">
+                <h3 className="text-xs sm:text-sm font-sans font-black tracking-tight text-[#090D15] uppercase mt-2.5">
                   {d.title}
                 </h3>
-                <p className="mt-3 text-xs text-slate-300 leading-relaxed font-normal">
+                <p className="mt-2.5 text-xs text-slate-600 leading-relaxed font-normal">
                   {d.desc}
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/[0.06] text-[10px] font-mono-code text-emerald-400 flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" />
+              <div className="mt-5 pt-3 border-t border-black/[0.05] text-[10px] font-mono-code text-emerald-800 flex items-center gap-1 font-bold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>UNIQUE TO SENTINEL-K</span>
               </div>
             </div>
