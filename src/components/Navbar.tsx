@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      const sections = ['hero', 'problem', 'pipeline', 'kinetic', 'two-layers'];
+      const sections = ['hero', 'problem', 'pipeline', 'digital-twin', 'agents'];
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
@@ -60,8 +60,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
   const navItems = [
     { id: 'problem', label: 'The Threat' },
     { id: 'pipeline', label: 'Pipeline' },
-    { id: 'kinetic', label: 'Kinetic Sim' },
-    { id: 'two-layers', label: 'Architecture' },
+    { id: 'digital-twin', label: 'Kinetic Twin' },
+    { id: 'agents', label: 'Architecture' },
   ];
 
   return (
