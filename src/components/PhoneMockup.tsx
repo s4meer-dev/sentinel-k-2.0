@@ -1,8 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { PhoneScreen } from './PhoneScreen';
 import type { ValidationPhase } from '../types/sentinel';
-import { AlertTriangle, Zap, Server, Gauge, CheckCircle2, Play, Pause } from 'lucide-react';
+import { 
+  Play, 
+  Pause, 
+  ChevronLeft, 
+  ChevronRight, 
+  RotateCcw,
+  Radio
+} from 'lucide-react';
 
 interface PhoneMockupProps {
   phase: ValidationPhase;
@@ -11,25 +18,59 @@ interface PhoneMockupProps {
   showControls?: boolean;
 }
 
+const PHASES: ValidationPhase[] = ['INCOMING', 'EXTRACTING', 'CYBER_CHECK', 'PHYSICAL_SIM', 'REPLAN'];
+
+const PHASE_LABELS: Record<ValidationPhase, string> = {
+  INCOMING: '01 SPOOF INTERCEPT',
+  EXTRACTING: '02 NPU INTENT PARSER',
+  CYBER_CHECK: '03 SCADA CYBER GATE',
+  PHYSICAL_SIM: '04 EPANET HYDRO TWIN',
+  REPLAN: '05 CRITIC SAFE REPLAN',
+  APPROVED: '05 BIOMETRIC SIGNED'
+};
+
 export const PhoneMockup: React.FC<PhoneMockupProps> = ({
   phase,
   onSelectPhase,
   className = '',
-  showControls = false,
+  showControls = true,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [progressPercent, setProgressPercent] = useState(0);
+  const [prevPhase, setPrevPhase] = useState(phase);
 
+  if (prevPhase !== phase) {
+    setPrevPhase(phase);
+    setProgressPercent(0);
+  }
+
+  const currentIdx = useMemo(() => {
+    return phase === 'APPROVED' ? 4 : PHASES.indexOf(phase);
+  }, [phase]);
+
+  // Framer Mobile Player Autoplay Timer Loop (4.5s per slide)
   useEffect(() => {
-    if (!isPlaying) return;
-    const phases: ValidationPhase[] = ['INCOMING', 'EXTRACTING', 'CYBER_CHECK', 'PHYSICAL_SIM', 'REPLAN'];
-    let idx = phases.indexOf(phase);
-    const interval = setInterval(() => {
-      idx = (idx + 1) % phases.length;
-      onSelectPhase(phases[idx]);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPlaying, phase, onSelectPhase]);
+    if (!isPlaying || isHovered) return;
+
+    const DURATION_MS = 4500;
+    const INTERVAL_MS = 50;
+    const stepIncrement = (INTERVAL_MS / DURATION_MS) * 100;
+
+    const timer = setInterval(() => {
+      setProgressPercent((prev) => {
+        if (prev >= 100) {
+          const nextIdx = (currentIdx + 1) % PHASES.length;
+          onSelectPhase(PHASES[nextIdx]);
+          return 0;
+        }
+        return prev + stepIncrement;
+      });
+    }, INTERVAL_MS);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, isHovered, currentIdx, onSelectPhase]);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -52,7 +93,39 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
   const handleMouseLeave = () => {
     mouseX.set(0);
     mouseY.set(0);
+    setIsHovered(false);
   };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handlePrev = () => {
+    const prevIdx = (currentIdx - 1 + PHASES.length) % PHASES.length;
+    onSelectPhase(PHASES[prevIdx]);
+  };
+
+  const handleNext = () => {
+    const nextIdx = (currentIdx + 1) % PHASES.length;
+    onSelectPhase(PHASES[nextIdx]);
+  };
+
+  // iQOO Monster Halo Ambient Backlight Color Mapping
+  const haloColor = useMemo(() => {
+    switch (phase) {
+      case 'INCOMING':
+        return 'rgba(245, 158, 11, 0.35)'; // Amber
+      case 'EXTRACTING':
+        return 'rgba(59, 130, 246, 0.35)'; // Blue
+      case 'CYBER_CHECK':
+        return 'rgba(16, 185, 129, 0.35)'; // Emerald
+      case 'PHYSICAL_SIM':
+        return 'rgba(239, 68, 68, 0.55)'; // Danger Red
+      case 'REPLAN':
+      case 'APPROVED':
+        return 'rgba(16, 185, 129, 0.40)'; // Safe Green
+    }
+  }, [phase]);
 
   return (
     <div className={`flex flex-col items-center select-none relative ${className}`}>
@@ -61,9 +134,23 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className="relative perspective-[1400px] py-1 cursor-grab active:cursor-grabbing"
       >
+        {/* iQOO 13 Monster Halo RGB Ambient Backlight */}
+        <motion.div 
+          animate={{
+            backgroundColor: haloColor,
+            scale: phase === 'PHYSICAL_SIM' ? [1, 1.08, 1] : 1,
+          }}
+          transition={{
+            duration: phase === 'PHYSICAL_SIM' ? 0.8 : 0.4,
+            repeat: phase === 'PHYSICAL_SIM' ? Infinity : 0
+          }}
+          className="absolute -top-6 inset-x-4 h-[380px] blur-[70px] rounded-full pointer-events-none -z-10 opacity-70 transition-colors duration-500"
+        />
+
         {/* Soft Ambient Ground Shadow */}
         <div className="absolute -bottom-6 inset-x-8 h-14 bg-slate-400/20 blur-2xl rounded-full pointer-events-none -z-10" />
 
@@ -111,7 +198,12 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
 
           {/* Inner Display Screen with Symmetrical 1.36mm Bezel */}
           <div className="relative w-full h-full rounded-[43px] bg-[#FAFAF8] overflow-hidden border border-black/[0.12] shadow-[inset_0_0_10px_rgba(0,0,0,0.06)]">
-            <PhoneScreen phase={phase} onSelectPhase={onSelectPhase} />
+            <PhoneScreen 
+              phase={phase} 
+              onSelectPhase={onSelectPhase} 
+              isPlaying={isPlaying && !isHovered}
+              progressPercent={progressPercent}
+            />
 
             {/* Dynamic Glass Parallax Glare */}
             <motion.div
@@ -124,64 +216,84 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         </motion.div>
       </div>
 
-      {/* Optional Phase Switcher Below Phone */}
+      {/* Framer-Inspired Mobile Player Playback Control Dock */}
       {showControls && (
-        <div className="mt-4 flex flex-col items-center gap-2 z-20 w-full max-w-md">
-          <div className="flex flex-wrap items-center justify-center gap-1 p-1 rounded-xl bg-white border border-black/[0.06] shadow-xs text-xs font-mono-code">
+        <div className="mt-4 flex flex-col items-center gap-2 z-20 w-full max-w-[340px]">
+          
+          <div className="w-full p-2 rounded-2xl bg-white border border-black/[0.08] shadow-xs flex items-center justify-between gap-2 text-xs font-mono-code">
+            
+            {/* Prev / Play / Next Controls */}
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handlePrev}
+                className="w-7 h-7 rounded-lg bg-[#F4F4F0] hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                title="Previous Slide"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+
+              <button
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="w-7 h-7 rounded-lg bg-[#090D15] hover:bg-slate-800 text-white flex items-center justify-center transition-colors cursor-pointer active:scale-95 shadow-2xs"
+                title={isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
+              >
+                {isPlaying ? (
+                  <Pause className="w-3.5 h-3.5" />
+                ) : (
+                  <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />
+                )}
+              </button>
+
+              <button
+                onClick={handleNext}
+                className="w-7 h-7 rounded-lg bg-[#F4F4F0] hover:bg-slate-200 text-slate-800 flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                title="Next Slide"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Current Slide Info */}
+            <div className="flex-1 min-w-0 px-2 text-left">
+              <div className="text-[10px] font-black text-[#090D15] truncate">
+                {PHASE_LABELS[phase]}
+              </div>
+              <div className="text-[8px] text-slate-500 flex items-center gap-1 font-bold">
+                <span>STAGE 0{currentIdx + 1} / 05</span>
+                {isPlaying && !isHovered && (
+                  <span className="flex items-center gap-0.5 text-emerald-600">
+                    <span className="w-1 h-1 rounded-full bg-emerald-500 animate-ping" />
+                    <span>AUTOPLAY</span>
+                  </span>
+                )}
+                {isHovered && isPlaying && (
+                  <span className="text-amber-700 font-semibold">[PAUSED]</span>
+                )}
+              </div>
+            </div>
+
+            {/* Reset Tour Button */}
             <button
-              onClick={() => onSelectPhase('INCOMING')}
-              className={`px-2.5 py-1 rounded-lg cursor-pointer ${
-                phase === 'INCOMING' ? 'bg-amber-100 text-amber-900 font-bold' : 'text-slate-600 hover:text-black'
-              }`}
+              onClick={() => {
+                onSelectPhase('INCOMING');
+                setProgressPercent(0);
+                setIsPlaying(true);
+              }}
+              className="p-1.5 rounded-lg text-slate-500 hover:text-black hover:bg-[#F4F4F0] transition-colors cursor-pointer"
+              title="Restart Tour from 01"
             >
-              <AlertTriangle className="w-3 h-3 inline mr-1 text-amber-600" />
-              01 DISPATCH
-            </button>
-            <button
-              onClick={() => onSelectPhase('EXTRACTING')}
-              className={`px-2.5 py-1 rounded-lg cursor-pointer ${
-                phase === 'EXTRACTING' ? 'bg-blue-100 text-blue-900 font-bold' : 'text-slate-600 hover:text-black'
-              }`}
-            >
-              <Zap className="w-3 h-3 inline mr-1 text-blue-600" />
-              02 EVIDENCE
-            </button>
-            <button
-              onClick={() => onSelectPhase('CYBER_CHECK')}
-              className={`px-2.5 py-1 rounded-lg cursor-pointer ${
-                phase === 'CYBER_CHECK' ? 'bg-emerald-100 text-emerald-900 font-bold' : 'text-slate-600 hover:text-black'
-              }`}
-            >
-              <Server className="w-3 h-3 inline mr-1 text-emerald-600" />
-              03 CYBER
-            </button>
-            <button
-              onClick={() => onSelectPhase('PHYSICAL_SIM')}
-              className={`px-2.5 py-1 rounded-lg cursor-pointer ${
-                phase === 'PHYSICAL_SIM' ? 'bg-red-100 text-red-900 font-bold' : 'text-slate-600 hover:text-black'
-              }`}
-            >
-              <Gauge className="w-3 h-3 inline mr-1 text-red-600" />
-              04 TWIN
-            </button>
-            <button
-              onClick={() => onSelectPhase('REPLAN')}
-              className={`px-2.5 py-1 rounded-lg cursor-pointer ${
-                phase === 'REPLAN' || phase === 'APPROVED' ? 'bg-emerald-100 text-emerald-900 font-bold' : 'text-slate-600 hover:text-black'
-              }`}
-            >
-              <CheckCircle2 className="w-3 h-3 inline mr-1 text-emerald-600" />
-              05 REPLAN
+              <RotateCcw className="w-3 h-3" />
             </button>
           </div>
 
-          <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono-code bg-white border border-black/[0.08] text-slate-700 hover:text-black cursor-pointer shadow-2xs"
-          >
-            {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3 fill-current text-[#F0B31C]" />}
-            <span>{isPlaying ? 'PAUSE TOUR' : 'AUTO CYCLE PHASES'}</span>
-          </button>
+          <div className="flex items-center justify-between w-full px-2 text-[9px] font-mono-code text-slate-400">
+            <span>TAP LEFT/RIGHT TO NAVIGATE</span>
+            <span className="flex items-center gap-1">
+              <Radio className="w-2.5 h-2.5 text-[#F0B31C]" />
+              <span>MONSTER HALO SYNCED</span>
+            </span>
+          </div>
+
         </div>
       )}
     </div>
