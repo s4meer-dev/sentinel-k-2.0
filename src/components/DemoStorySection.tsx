@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock } from 'lucide-react';
+import { Clock, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import type { DemoStoryStep } from '../types/sentinel';
 
 export const DemoStorySection: React.FC = () => {
@@ -98,6 +98,30 @@ export const DemoStorySection: React.FC = () => {
   ];
 
   const [activeStep, setActiveStep] = useState<number>(7);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const nextStep = () => {
+    setActiveStep((prev) => (prev % storySteps.length) + 1);
+  };
+
+  const prevStep = () => {
+    setActiveStep((prev) => (prev === 1 ? storySteps.length : prev - 1));
+  };
+
+  useEffect(() => {
+    if (!isPlaying) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
+    }
+    timerRef.current = setInterval(() => {
+      setActiveStep((prev) => (prev % storySteps.length) + 1);
+    }, 4500);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPlaying, storySteps.length]);
+
   const current = storySteps.find((s) => s.step === activeStep) || storySteps[6];
 
   return (
@@ -107,7 +131,7 @@ export const DemoStorySection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
             <Clock className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">INCIDENT WALKTHROUGH</span>
@@ -123,6 +147,41 @@ export const DemoStorySection: React.FC = () => {
           <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             Follow the 10-step sequence showing how an adversarial authority-spoofing attack was intercepted, simulated, rejected, and safely remediated in under 4 minutes.
           </p>
+
+          {/* Carousel Controls */}
+          <div className="mt-7 flex items-center justify-center gap-3">
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
+                isPlaying
+                  ? 'bg-[#090D15] text-[#F0B31C] border-[#090D15]'
+                  : 'bg-white text-slate-700 border-black/[0.08] hover:bg-slate-50'
+              } shadow-2xs`}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
+              <span>{isPlaying ? 'PAUSE STORY' : 'AUTO CYCLE'}</span>
+            </button>
+
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-white border border-black/[0.08] shadow-2xs">
+              <button
+                onClick={prevStep}
+                aria-label="Previous Step"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <span className="px-2 text-xs font-mono-code font-bold text-slate-600">
+                Step {activeStep} / {storySteps.length}
+              </span>
+              <button
+                onClick={nextStep}
+                aria-label="Next Step"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Step Nav Bar */}

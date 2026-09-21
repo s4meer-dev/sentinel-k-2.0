@@ -88,15 +88,18 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Floating Callout Chip 1: NPU Evidence Parser */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden 2xl:flex absolute -left-40 top-24 z-30 flex-col items-end pointer-events-none"
+          className="hidden 2xl:flex absolute -left-52 top-16 z-30 flex-col items-end pointer-events-none"
         >
           <div className="bg-white/95 border border-black/[0.08] rounded-xl p-3 shadow-md text-right backdrop-blur-md">
             <span className="text-[8px] font-mono-code text-slate-500 uppercase font-bold tracking-wider block flex items-center justify-end gap-1">
-              <Cpu className="w-2.5 h-2.5 text-blue-600" />
-              iQOO 13 // FIELD NPU ENGINE
+              <Cpu className="w-3 h-3 text-blue-600" />
+              SNAPDRAGON® 8 ELITE // NPU
             </span>
             <span className="text-xs font-mono-code font-black text-slate-900 mt-0.5 block">
               {getCalloutStatus()}
+            </span>
+            <span className="text-[8px] font-mono-code text-slate-400 mt-1 block">
+              45 TOPS ON-DEVICE SLM ENGINE
             </span>
           </div>
           <div className="flex items-center mt-1 mr-4">
@@ -105,10 +108,10 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
           </div>
         </motion.div>
 
-        {/* Floating Callout Chip 2: Office Kit Link */}
+        {/* Floating Callout Chip 2: Q2 Supercomputing Chip */}
         <motion.div
           style={{ x: chipParallaxX, y: chipParallaxY }}
-          className="hidden 2xl:flex absolute -right-40 bottom-36 z-30 flex-col items-start pointer-events-none"
+          className="hidden 2xl:flex absolute -right-52 bottom-28 z-30 flex-col items-start pointer-events-none"
         >
           <div className="flex items-center mb-1 ml-4">
             <div className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] shadow-xs" />
@@ -116,51 +119,66 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
           </div>
           <div className="bg-white/95 border border-black/[0.08] rounded-xl p-3 shadow-md text-left backdrop-blur-md">
             <span className="text-[8px] font-mono-code text-amber-700 uppercase font-bold tracking-wider block flex items-center gap-1">
-              <ShieldCheck className="w-2.5 h-2.5 text-emerald-600" />
-              OFFICE KIT // PEER BRIDGE
+              <ShieldCheck className="w-3 h-3 text-emerald-600" />
+              iQOO Q2 SUPERCOMPUTING
             </span>
             <span className="text-xs font-mono-code font-black text-slate-900 mt-0.5 block">
-              SECURE LAB HANDOFF
+              144Hz KINETIC SIM ENGINE
+            </span>
+            <span className="text-[8px] font-mono-code text-slate-400 mt-1 block">
+              ORIGINOS 5 HARDWARE ENCLAVE
             </span>
           </div>
         </motion.div>
 
-        {/* Smartphone Chassis with Ultra-Slim Titanium Bezel */}
+        {/* Smartphone Chassis with Authentic iQOO 13 Ultra-Slim Bezel */}
         <motion.div
           style={{
             rotateX,
             rotateY,
             transformStyle: 'preserve-3d',
           }}
-          className="relative w-[310px] sm:w-[340px] md:w-[360px] h-[640px] sm:h-[690px] rounded-[48px] p-[4px] bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.8)] transition-shadow duration-500"
+          className="relative w-[310px] sm:w-[340px] md:w-[365px] h-[645px] sm:h-[700px] rounded-[48px] p-[3.5px] bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.14),0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.85)] transition-shadow duration-500"
         >
-          <div className="absolute inset-0 rounded-[48px] border border-white/60 pointer-events-none" />
+          <div className="absolute inset-0 rounded-[48px] border border-white/70 pointer-events-none" />
           <div className="absolute inset-[1px] rounded-[47px] border border-black/15 pointer-events-none" />
 
-          {/* Side Buttons */}
-          <div className="absolute -left-[3px] top-[140px] w-[3px] h-[44px] bg-slate-400 rounded-l-sm border-l border-white/40 shadow-2xs" />
-          <div className="absolute -left-[3px] top-[194px] w-[3px] h-[44px] bg-slate-400 rounded-l-sm border-l border-white/40 shadow-2xs" />
-          <div className="absolute -right-[3px] top-[165px] w-[3px] h-[60px] bg-[#F0B31C] rounded-r-sm border-r border-[#E2A312] shadow-2xs" />
+          {/* Antenna Bands on Aluminum Rail */}
+          <div className="absolute top-[80px] -left-[3.5px] w-[3.5px] h-[3px] bg-slate-500/70 pointer-events-none" />
+          <div className="absolute bottom-[80px] -left-[3.5px] w-[3.5px] h-[3px] bg-slate-500/70 pointer-events-none" />
+          <div className="absolute top-[80px] -right-[3.5px] w-[3.5px] h-[3px] bg-slate-500/70 pointer-events-none" />
+          <div className="absolute bottom-[80px] -right-[3.5px] w-[3.5px] h-[3px] bg-slate-500/70 pointer-events-none" />
+
+          {/* Side Volume Rockers */}
+          <div className="absolute -left-[3.5px] top-[140px] w-[3.5px] h-[48px] bg-slate-400 rounded-l-sm border-l border-white/50 shadow-2xs" />
+          <div className="absolute -left-[3.5px] top-[200px] w-[3.5px] h-[48px] bg-slate-400 rounded-l-sm border-l border-white/50 shadow-2xs" />
+
+          {/* Signature iQOO Textured Kinetic Orange Power Button */}
+          <div className="absolute -right-[3.5px] top-[165px] w-[3.5px] h-[60px] bg-gradient-to-r from-[#D97706] to-[#F59E0B] rounded-r-sm border-r border-[#B45309] shadow-xs flex flex-col justify-between py-1.5">
+            <div className="w-full h-0.5 bg-black/25" />
+            <div className="w-full h-0.5 bg-black/25" />
+            <div className="w-full h-0.5 bg-black/25" />
+          </div>
+
+          {/* BMW M Motorsport Tricolor Accent Micro-Badge (Iconic iQOO Legend Edition) */}
+          <div className="absolute -bottom-2 right-8 flex items-center h-2 overflow-hidden rounded-sm shadow-xs border border-white/80 z-30 pointer-events-none">
+            <div className="w-2.5 h-full bg-[#0066B1]" />
+            <div className="w-2.5 h-full bg-[#002C6C]" />
+            <div className="w-2.5 h-full bg-[#E2231A]" />
+          </div>
 
           {/* Minimal Earpiece */}
-          <div className="absolute top-[7px] left-1/2 -translate-x-1/2 w-12 h-0.5 bg-slate-400 rounded-full z-30 flex items-center justify-center pointer-events-none">
+          <div className="absolute top-[6px] left-1/2 -translate-x-1/2 w-14 h-0.5 bg-slate-500 rounded-full z-30 flex items-center justify-center pointer-events-none">
             <div className="w-8 h-[0.5px] bg-slate-300" />
           </div>
 
-          {/* Inner Display Screen */}
-          <div className="relative w-full h-full rounded-[44px] bg-[#FAFAF8] overflow-hidden border border-black/[0.08] shadow-[inset_0_0_8px_rgba(0,0,0,0.04)]">
-            {/* Front Camera Punch-hole */}
-            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#030508] border border-slate-300 z-30 flex items-center justify-center pointer-events-none shadow-xs">
-              <div className="w-1 h-1 rounded-full bg-black flex items-center justify-center">
-                <div className="w-0.5 h-0.5 rounded-full bg-blue-400" />
-              </div>
-            </div>
-
+          {/* Inner Display Screen with 1.36mm Symmetrical Bezel */}
+          <div className="relative w-full h-full rounded-[44px] bg-[#FAFAF8] overflow-hidden border border-black/[0.12] shadow-[inset_0_0_10px_rgba(0,0,0,0.06)]">
             <PhoneScreen phase={phase} onSelectPhase={onSelectPhase} />
 
             <motion.div
               style={{
-                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 45%, transparent 75%)`,
+                background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.04) 45%, transparent 75%)`,
               }}
               className="absolute inset-0 pointer-events-none mix-blend-overlay z-20"
             />

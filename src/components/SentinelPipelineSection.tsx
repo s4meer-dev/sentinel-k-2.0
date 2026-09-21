@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   PhoneIncoming, 
@@ -11,7 +11,11 @@ import {
   UserCheck, 
   CheckCircle,
   FileCode,
-  Sliders
+  Sliders,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause
 } from 'lucide-react';
 import type { PipelineStep } from '../types/sentinel';
 
@@ -100,6 +104,29 @@ export const SentinelPipelineSection: React.FC = () => {
   ];
 
   const [activeStep, setActiveStep] = useState<number>(6); // Default to physical twin failure
+  const [isPlaying, setIsPlaying] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const nextStep = () => {
+    setActiveStep((prev) => (prev % steps.length) + 1);
+  };
+
+  const prevStep = () => {
+    setActiveStep((prev) => (prev === 1 ? steps.length : prev - 1));
+  };
+
+  useEffect(() => {
+    if (!isPlaying) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
+    }
+    timerRef.current = setInterval(() => {
+      setActiveStep((prev) => (prev % steps.length) + 1);
+    }, 4500);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [isPlaying, steps.length]);
 
   const current = steps.find((s) => s.id === activeStep) || steps[5];
 
@@ -149,6 +176,41 @@ export const SentinelPipelineSection: React.FC = () => {
           <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             From the moment an unverified instruction lands on an iQOO smartphone to the moment a physically verified safe action is dispatched to the PLC.
           </p>
+
+          {/* Carousel Controls */}
+          <div className="mt-7 flex items-center justify-center gap-3">
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
+                isPlaying
+                  ? 'bg-[#090D15] text-[#F0B31C] border-[#090D15]'
+                  : 'bg-white text-slate-700 border-black/[0.08] hover:bg-slate-50'
+              } shadow-2xs`}
+            >
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
+              <span>{isPlaying ? 'PAUSE PIPELINE' : 'AUTO CYCLE'}</span>
+            </button>
+
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-white border border-black/[0.08] shadow-2xs">
+              <button
+                onClick={prevStep}
+                aria-label="Previous Stage"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <span className="px-2 text-xs font-mono-code font-bold text-slate-600">
+                0{activeStep} / 0{steps.length}
+              </span>
+              <button
+                onClick={nextStep}
+                aria-label="Next Stage"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* 8-Step Interactive Timeline Bar */}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { SentinelExperienceCarousel } from './components/SentinelExperienceCarousel';
 import { ProblemSection } from './components/ProblemSection';
 import { BigIdeaSection } from './components/BigIdeaSection';
 import { SentinelPipelineSection } from './components/SentinelPipelineSection';
@@ -36,7 +37,7 @@ export function App() {
       {/* Streamlined Minimal Navbar */}
       <Navbar onVerifyClick={() => scrollTo('hero')} />
 
-      {/* Cinematic Hero Section: Phone Node + Evidence Stream + Digital Twin */}
+      {/* Flagship iQOO 13 Hero Section */}
       <main>
         <Hero
           currentPhase={currentPhase}
@@ -44,6 +45,9 @@ export function App() {
           onExploreClick={() => scrollTo('pipeline')}
           onKineticClick={() => scrollTo('kinetic')}
         />
+
+        {/* 5 Signature Operational Moments Interactive Carousel */}
+        <SentinelExperienceCarousel onSelectPhase={setCurrentPhase} />
 
         {/* Section 2: The Problem (Human Trust Compromise vs Cyber-Physical Reality) */}
         <ProblemSection />

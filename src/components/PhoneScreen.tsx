@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Wifi, 
-  BatteryMedium, 
+  BatteryCharging,
   CheckCircle2, 
   AlertTriangle, 
   ShieldCheck, 
@@ -10,6 +10,9 @@ import {
   ArrowRight, 
   Cpu, 
   ShieldAlert,
+  Fingerprint,
+  Radio,
+  Sparkles,
   Server,
   Gauge
 } from 'lucide-react';
@@ -24,41 +27,122 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
   phase,
   onSelectPhase 
 }) => {
+  const getOriginIslandContent = () => {
+    switch (phase) {
+      case 'INCOMING':
+        return {
+          icon: <AlertTriangle className="w-3 h-3 text-amber-500 animate-pulse" />,
+          title: 'UNVERIFIED DISPATCH',
+          badge: '8.9 URGENCY',
+          badgeColor: 'text-amber-400 bg-amber-950/40 border-amber-500/30',
+          textColor: 'text-amber-200',
+        };
+      case 'EXTRACTING':
+        return {
+          icon: <Cpu className="w-3 h-3 text-blue-400 animate-spin" />,
+          title: '45 TOPS NPU PARSER',
+          badge: 'SLM 3B QUANT',
+          badgeColor: 'text-blue-400 bg-blue-950/40 border-blue-500/30',
+          textColor: 'text-blue-200',
+        };
+      case 'CYBER_CHECK':
+        return {
+          icon: <ShieldCheck className="w-3 h-3 text-emerald-400" />,
+          title: 'CYBER PROTOCOL VALID',
+          badge: 'MODBUS 40012',
+          badgeColor: 'text-emerald-400 bg-emerald-950/40 border-emerald-500/30',
+          textColor: 'text-emerald-200',
+        };
+      case 'PHYSICAL_SIM':
+        return {
+          icon: <ShieldAlert className="w-3 h-3 text-red-500 animate-bounce" />,
+          title: '11.4 BAR OVERPRESSURE',
+          badge: 'HAZARD REJECT',
+          badgeColor: 'text-red-400 bg-red-950/50 border-red-500/40',
+          textColor: 'text-red-200',
+        };
+      case 'REPLAN':
+        return {
+          icon: <Sparkles className="w-3 h-3 text-[#F0B31C] animate-spin" />,
+          title: 'CRITIC REPLAN READY',
+          badge: '7.4 BAR SAFE',
+          badgeColor: 'text-amber-400 bg-amber-950/40 border-amber-500/30',
+          textColor: 'text-amber-200',
+        };
+      case 'APPROVED':
+        return {
+          icon: <CheckCircle2 className="w-3 h-3 text-emerald-400" />,
+          title: 'BIOMETRIC SIGNED',
+          badge: 'VALVE 02 ARMED',
+          badgeColor: 'text-emerald-400 bg-emerald-950/40 border-emerald-500/30',
+          textColor: 'text-emerald-200',
+        };
+    }
+  };
+
+  const island = getOriginIslandContent();
+
   return (
     <div className="relative w-full h-full bg-[#FAFAF8] text-[#090D15] flex flex-col justify-between select-none overflow-hidden font-sans border border-black/[0.06]">
       
-      {/* 1. OriginOS Status Bar (Field Terminal Mode) */}
-      <div className="relative z-20 px-4 pt-3 pb-1.5 flex justify-between items-center text-[10px] text-slate-500 font-mono-code tracking-wider border-b border-black/[0.05] bg-white/90 backdrop-blur-md">
-        <div className="flex items-center gap-1.5 font-bold text-[#090D15]">
-          <span>14:28:04</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#F0B31C]" />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[8px] px-1.5 py-0.2 rounded font-bold font-mono-code bg-[#F0FDF4] text-emerald-800 border border-emerald-300">
-            OFFICE KIT LINKED
-          </span>
-          <Wifi className="w-3 h-3 text-slate-600" />
-          <div className="flex items-center gap-0.5 text-slate-800 font-bold">
-            <span className="text-[9px]">92%</span>
-            <BatteryMedium className="w-3.5 h-3.5 text-slate-700" />
+      {/* 1. OriginOS 5 Status Bar with Integrated Dynamic Origin Island */}
+      <div className="relative z-30 pt-2 pb-1.5 px-3 bg-[#0A0D14] text-white">
+        
+        {/* Top Status Glyphs */}
+        <div className="flex justify-between items-center text-[10px] font-mono-code text-slate-400 px-1 mb-1">
+          <div className="flex items-center gap-1 font-bold text-white tracking-wider">
+            <span>14:28</span>
+            <span className="text-[9px] px-1 py-0 rounded bg-red-600/90 text-white font-black">5G</span>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 text-[8px] text-[#F0B31C] font-mono-code font-bold">
+              <Radio className="w-2.5 h-2.5 text-[#F0B31C]" />
+              <span>Q2 ENGINE</span>
+            </div>
+            <Wifi className="w-3 h-3 text-slate-300" />
+            <div className="flex items-center gap-0.5 text-white font-bold text-[9px]">
+              <span>96%</span>
+              <BatteryCharging className="w-3.5 h-3.5 text-emerald-400" />
+            </div>
           </div>
         </div>
+
+        {/* Dynamic Origin Island (Flagship Morphing Pill) */}
+        <motion.div 
+          layout
+          transition={{ type: 'spring', stiffness: 380, damping: 28 }}
+          className="mx-auto rounded-full bg-[#141A24] border border-white/10 shadow-lg px-2.5 py-1 flex items-center justify-between gap-2 max-w-[280px]"
+        >
+          <div className="flex items-center gap-1.5 min-w-0">
+            {island.icon}
+            <span className={`text-[10px] font-mono-code font-bold truncate ${island.textColor}`}>
+              {island.title}
+            </span>
+          </div>
+          <span className={`text-[8px] font-mono-code font-black px-1.5 py-0.2 rounded-full border shrink-0 ${island.badgeColor}`}>
+            {island.badge}
+          </span>
+        </motion.div>
       </div>
 
-      {/* 2. Top Moniker & Active Node */}
-      <div className="relative z-10 px-4 pt-2.5 pb-1 flex justify-between items-center border-b border-black/[0.04] bg-white/70">
+      {/* 2. OriginOS 5 Field Copilot Identity Banner */}
+      <div className="relative z-10 px-3.5 pt-2 pb-1.5 flex justify-between items-center border-b border-black/[0.05] bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-1.5">
-          <div className="w-4 h-4 rounded bg-[#090D15] text-[#F0B31C] text-[8px] font-black flex items-center justify-center font-mono-code">
+          <div className="w-5 h-5 rounded-md bg-[#090D15] text-[#F0B31C] text-[9px] font-black flex items-center justify-center font-mono-code border border-black/10">
             SK
           </div>
           <div>
-            <div className="text-[8px] font-mono-code text-slate-500 tracking-wider">FIELD COPILOT</div>
+            <div className="text-[8px] font-mono-code text-slate-500 uppercase tracking-wider flex items-center gap-1">
+              <span>ORIGINOS 5 ENCLAVE</span>
+              <span className="w-1 h-1 rounded-full bg-emerald-500" />
+            </div>
             <div className="text-[10px] font-bold text-[#090D15] font-sans">WATER SECTOR // NODE 04</div>
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <span className="text-[9px] font-mono-code px-1.5 py-0.5 rounded bg-[#F4F4F0] text-slate-700 border border-black/[0.06] font-bold">
-            01 INSTRUCTION
+          <span className="text-[8px] font-mono-code px-1.5 py-0.5 rounded-full bg-[#F2F2EC] text-slate-700 border border-black/[0.06] font-bold">
+            EPANET TWIN LINK
           </span>
         </div>
       </div>
@@ -295,8 +379,8 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
 
       </div>
 
-      {/* 4. Operator Action Trigger Button */}
-      <div className="relative z-10 px-3.5 pb-2.5 pt-1">
+      {/* 4. Operator Action Trigger / Ultrasonic In-Display Sensor */}
+      <div className="relative z-10 px-3 pb-2 pt-1">
         {phase === 'PHYSICAL_SIM' ? (
           <button
             onClick={() => onSelectPhase?.('REPLAN')}
@@ -306,16 +390,30 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         ) : phase === 'REPLAN' ? (
-          <button
-            onClick={() => onSelectPhase?.('APPROVED')}
-            className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-mono-code text-[11px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-98 cursor-pointer"
-          >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>CONFIRM SAFE PLAN (BIOMETRIC)</span>
-          </button>
+          <div className="flex flex-col items-center">
+            <button
+              onClick={() => onSelectPhase?.('APPROVED')}
+              className="group relative w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-mono-code text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all active:scale-98 cursor-pointer border border-emerald-400/40"
+            >
+              <div className="relative flex items-center justify-center">
+                <Fingerprint className="w-4 h-4 text-emerald-100 group-hover:scale-110 transition-transform" />
+                <span className="absolute -inset-1 rounded-full border border-white/40 animate-ping" />
+              </div>
+              <span>TOUCH ULTRASONIC SENSOR TO SIGN</span>
+            </button>
+            <span className="text-[8px] font-mono-code text-slate-400 mt-1">
+              iQOO 3D Ultrasonic In-Display Fingerprint Sensor
+            </span>
+          </div>
+        ) : phase === 'APPROVED' ? (
+          <div className="w-full py-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-center font-mono-code text-[10px] font-bold flex items-center justify-center gap-1.5 shadow-2xs">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span>OPERATOR SIGNED // DISPATCH COMMITTED</span>
+          </div>
         ) : (
-          <div className="w-full py-2 rounded-xl bg-[#F0F0EC] border border-black/[0.05] text-slate-700 text-center font-mono-code text-[10px] font-bold">
-            AUTONOMOUS VERIFICATION ACTIVE
+          <div className="w-full py-1.5 rounded-xl bg-[#F0F0EC] border border-black/[0.05] text-slate-600 text-center font-mono-code text-[9px] font-bold flex items-center justify-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F0B31C] animate-pulse" />
+            <span>AUTONOMOUS PIPELINE PROCESSING // Q2 144Hz</span>
           </div>
         )}
       </div>
