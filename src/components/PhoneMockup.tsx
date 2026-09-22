@@ -189,7 +189,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
           </div>
 
           {/* Inner Display Screen with Symmetrical 1.36mm Bezel */}
-          <div className="relative w-full h-full rounded-[43px] bg-[#FAFAF8] overflow-hidden border border-black/[0.12] shadow-[inset_0_0_10px_rgba(0,0,0,0.06)]">
+          <div className="relative w-full h-full rounded-[43px] bg-[#F4F2EC] overflow-hidden border border-black/[0.12] shadow-[inset_0_0_10px_rgba(0,0,0,0.06)]">
             <PhoneScreen 
               phase={phase} 
               onSelectPhase={onSelectPhase} 
@@ -212,7 +212,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
       {showControls && (
         <div className="mt-4 flex flex-col items-center gap-2 z-20 w-full max-w-[340px]">
           
-          <div className="w-full p-2 rounded-2xl bg-white border border-black/[0.08] shadow-xs flex items-center justify-between gap-2 text-xs font-mono-code">
+          <div className="w-full p-2 rounded-2xl glass-card glass-sheen shadow-xs flex items-center justify-between gap-2 text-xs font-mono-code">
             
             {/* Prev / Play / Next Controls */}
             <div className="flex items-center gap-1">

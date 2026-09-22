@@ -12,13 +12,8 @@ import {
   ShieldAlert, 
   Fingerprint, 
   Server, 
-  Gauge, 
   Activity, 
   AudioWaveform,
-  Volume2,
-  ChevronLeft,
-  ChevronRight,
-  TrendingUp,
   FileCode2,
   Lock
 } from 'lucide-react';
@@ -51,133 +46,61 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
 
   const currentIdx = phase === 'APPROVED' ? 4 : PHASES.indexOf(phase);
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const prevIdx = (currentIdx - 1 + PHASES.length) % PHASES.length;
-    onSelectPhase?.(PHASES[prevIdx]);
-  };
-
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const nextIdx = (currentIdx + 1) % PHASES.length;
-    onSelectPhase?.(PHASES[nextIdx]);
-  };
-
-  const getIslandData = () => {
-    switch (phase) {
-      case 'INCOMING':
-        return {
-          icon: <AlertTriangle className="w-3 h-3 text-amber-400 animate-pulse" />,
-          title: 'UNVERIFIED DISPATCH',
-          pill: '8.9 URGENCY',
-          pillClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-          titleColor: 'text-amber-200',
-        };
-      case 'EXTRACTING':
-        return {
-          icon: <Cpu className="w-3 h-3 text-blue-400 animate-spin" />,
-          title: '45 TOPS NPU PARSER',
-          pill: '18ms SLM',
-          pillClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
-          titleColor: 'text-blue-200',
-        };
-      case 'CYBER_CHECK':
-        return {
-          icon: <ShieldCheck className="w-3 h-3 text-emerald-400" />,
-          title: 'CYBER GATE: VALID',
-          pill: 'CRC 0x9B4E',
-          pillClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-          titleColor: 'text-emerald-200',
-        };
-      case 'PHYSICAL_SIM':
-        return {
-          icon: <ShieldAlert className="w-3 h-3 text-red-400 animate-bounce" />,
-          title: '11.4 BAR OVERPRESSURE',
-          pill: 'HARD REJECT',
-          pillClass: 'bg-red-500/30 text-red-300 border-red-500/50',
-          titleColor: 'text-red-200',
-        };
-      case 'REPLAN':
-        return {
-          icon: <Zap className="w-3 h-3 text-[#F0B31C] animate-pulse" />,
-          title: 'CRITIC REPLAN READY',
-          pill: '7.4 BAR SAFE',
-          pillClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-          titleColor: 'text-amber-200',
-        };
-      case 'APPROVED':
-        return {
-          icon: <CheckCircle2 className="w-3 h-3 text-emerald-400" />,
-          title: 'BIOMETRIC SIGNED',
-          pill: 'VALVE 02 ARMED',
-          pillClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-          titleColor: 'text-emerald-200',
-        };
-    }
-  };
-
-  const island = getIslandData();
-
   return (
     <div className="relative w-full h-full bg-[#F4F2EC] text-[#1A1712] flex flex-col justify-between select-none overflow-hidden font-sans">
       
-      {/* 1. Camera Punch-Hole — Dead-Centered at Top Edge */}
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-black ring-1 ring-slate-800 z-50 flex items-center justify-center shadow-inner pointer-events-none">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#020617] flex items-center justify-center">
-          <div className="w-0.5 h-0.5 rounded-full bg-blue-500/80 shadow-[0_0_2px_rgba(59,130,246,0.9)]" />
+      {/* 1. Camera Punch-Hole — Centered at Top Edge with Refined Bezel */}
+      <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-[#050505] ring-1 ring-black/30 z-50 flex items-center justify-center pointer-events-none shadow-sm">
+        <div className="w-1.5 h-1.5 rounded-full bg-[#0A0D14] flex items-center justify-center">
+          <div className="w-0.5 h-0.5 rounded-full bg-blue-500/70" />
         </div>
       </div>
 
-      {/* 2. System Status Bar with Centered Clearance for Camera */}
-      <div className="relative z-30 pt-1.5 pb-1 px-4 bg-[#ECE8DE]/80 backdrop-blur-md border-b border-[#1A1712]/[0.05]">
+      {/* 2. Top Navigation Area with Generous Padding */}
+      <div className="relative z-30 pt-4 pb-2 px-5 bg-[#F4F2EC]/90 backdrop-blur-md border-b border-black/[0.04]">
         
-        {/* System Bar Flanking the Center Camera */}
-        <div className="flex justify-between items-center text-[10px] font-mono-code px-1 mb-1 text-slate-800">
-          <div className="flex items-center gap-1.5 font-black tracking-tight text-[#090D15]">
-            <span>14:28</span>
-            <span className="text-[7.5px] px-1 py-0.2 rounded bg-slate-900 text-white font-bold">5G</span>
-          </div>
+        {/* Status Bar Flanking Camera */}
+        <div className="flex justify-between items-center text-[10px] tracking-tight font-medium text-[#1A1712]/80">
+          <span className="font-semibold text-[#1A1712]">14:28</span>
           
-          {/* Clearance for the centered punch hole */}
-          <div className="w-6 h-3" />
+          {/* Centered clearance gap for camera */}
+          <div className="w-8 h-2 pointer-events-none" />
 
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-0.5 text-[8px] text-emerald-700 font-bold">
-              <Lock className="w-2.5 h-2.5" />
+          <div className="flex items-center gap-1.5 text-[9px]">
+            <div className="flex items-center gap-0.5 text-emerald-700 font-semibold text-[8px] bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-200/60">
+              <Lock className="w-2 h-2" />
               <span>ENCLAVE</span>
             </div>
-            <Wifi className="w-3 h-3 text-slate-800" />
-            <div className="flex items-center gap-0.5 text-[#090D15] font-black text-[9px]">
+            <Wifi className="w-2.5 h-2.5 text-[#1A1712]/70" />
+            <div className="flex items-center gap-0.5 font-semibold text-[#1A1712]">
               <span>96%</span>
-              <BatteryCharging className="w-3.5 h-3.5 text-emerald-600" />
+              <BatteryCharging className="w-3 h-3 text-emerald-600" />
             </div>
           </div>
         </div>
 
-        {/* Origin Island Capsule: Center-Mounted Below Punch Hole */}
-        <motion.div 
-          layout
-          transition={{ type: 'spring', stiffness: 420, damping: 28 }}
-          className="mx-auto rounded-full bg-[#090D15] text-white px-3 py-1 flex items-center justify-between gap-2 max-w-[245px] shadow-md border border-white/10 cursor-pointer"
-          onClick={() => {
-            const nextIdx = (currentIdx + 1) % PHASES.length;
-            onSelectPhase?.(PHASES[nextIdx]);
-          }}
-        >
-          <div className="flex items-center gap-1.5 min-w-0">
-            {island.icon}
-            <span className={`text-[9px] font-mono-code font-bold truncate ${island.titleColor}`}>
-              {island.title}
-            </span>
+        {/* Minimal Subscrr-Style Top Header Bar */}
+        <div className="mt-2.5 flex items-center justify-between">
+          <div>
+            <div className="text-[9px] uppercase tracking-wider font-semibold text-[#7C766C]">
+              Field Copilot · Node 04
+            </div>
+            <div className="text-xs font-semibold text-[#1A1712] tracking-tight">
+              {phase === 'INCOMING' && '01 // Dispatch Intercept'}
+              {phase === 'EXTRACTING' && '02 // NPU Intent Structuring'}
+              {phase === 'CYBER_CHECK' && '03 // SCADA Cyber Gate'}
+              {phase === 'PHYSICAL_SIM' && '04 // EPANET Hydraulic Twin'}
+              {(phase === 'REPLAN' || phase === 'APPROVED') && '05 // Sovereign Biometric Sign'}
+            </div>
           </div>
 
-          <span className={`text-[7.5px] font-mono-code font-black px-1.5 py-0.2 rounded-full border shrink-0 ${island.pillClass}`}>
-            {island.pill}
+          <span className="text-[9px] font-mono-code font-bold px-2 py-0.5 rounded-full bg-white/80 border border-black/[0.06] text-[#1A1712] shadow-2xs">
+            0{currentIdx + 1} / 05
           </span>
-        </motion.div>
+        </div>
 
-        {/* Story Progress Segments */}
-        <div className="mt-1.5 px-0.5 flex items-center gap-1">
+        {/* Minimal Story Progress Indicator (5 Clean Segments) */}
+        <div className="mt-2 flex items-center gap-1">
           {PHASES.map((p, idx) => {
             const isCompleted = idx < currentIdx;
             const isCurrent = idx === currentIdx;
@@ -188,19 +111,15 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
                   e.stopPropagation();
                   onSelectPhase?.(p);
                 }}
-                className="flex-1 h-1 rounded-full bg-black/10 overflow-hidden cursor-pointer relative"
+                className="flex-1 h-1 rounded-full bg-black/[0.08] overflow-hidden cursor-pointer relative"
                 title={`Stage 0${idx + 1}`}
               >
                 <div 
                   className={`h-full rounded-full transition-all duration-150 ${
-                    isCompleted 
-                      ? 'w-full bg-[#090D15]' 
-                      : isCurrent 
-                      ? 'bg-[#090D15]' 
-                      : 'w-0'
+                    isCompleted || isCurrent ? 'bg-[#1A1712]' : 'w-0'
                   }`}
                   style={{
-                    width: isCompleted ? '100%' : isCurrent ? `${Math.max(8, progressPercent)}%` : '0%'
+                    width: isCompleted ? '100%' : isCurrent ? `${Math.max(10, progressPercent)}%` : '0%'
                   }}
                 />
               </button>
@@ -209,347 +128,320 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
         </div>
       </div>
 
-      {/* 3. Field Copilot Enclave Identity Header */}
-      <div className="px-4.5 py-1.5 flex justify-between items-center border-b border-black/[0.05] bg-white/90">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-[#090D15] text-white text-[8px] font-black flex items-center justify-center font-mono-code border border-black/10">
-            SK
-          </div>
-          <div>
-            <div className="text-[7.5px] font-mono-code text-slate-500 uppercase tracking-wider flex items-center gap-1">
-              <span>STAGE 0{currentIdx + 1} / 05</span>
-              <span className="w-1 h-1 rounded-full bg-emerald-500" />
-            </div>
-            <div className="text-[9.5px] font-black text-[#090D15]">WATER SECTOR // NODE 04</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-1 text-[8px] font-mono-code px-2 py-0.5 rounded-full bg-[#F2F2EC] text-slate-800 border border-black/[0.06] font-bold">
-          <Activity className="w-2.5 h-2.5 text-emerald-600" />
-          <span>SCADA LINKED</span>
-        </div>
-      </div>
-
-      {/* 4. Main Operational Diagnostic Body with Generous Padding */}
-      <div className="relative px-4.5 py-2.5 flex-1 flex flex-col justify-center space-y-2 text-xs overflow-hidden">
-        
-        {/* Invisible Story Tap Zones for Previous / Next */}
-        <button 
-          onClick={handlePrev} 
-          className="absolute left-0 top-0 bottom-0 w-8 z-20 flex items-center justify-start pl-1 opacity-0 hover:opacity-100 transition-opacity text-slate-400 hover:text-black cursor-pointer"
-          title="Previous Slide"
-        >
-          <ChevronLeft className="w-4 h-4 bg-white/90 rounded-full shadow-xs" />
-        </button>
-
-        <button 
-          onClick={handleNext} 
-          className="absolute right-0 top-0 bottom-0 w-8 z-20 flex items-center justify-end pr-1 opacity-0 hover:opacity-100 transition-opacity text-slate-400 hover:text-black cursor-pointer"
-          title="Next Slide"
-        >
-          <ChevronRight className="w-4 h-4 bg-white/90 rounded-full shadow-xs" />
-        </button>
-
+      {/* 3. Main Minimal Content Stage (Divided Clean Flow) */}
+      <div className="relative px-4 py-3 flex-1 flex flex-col justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           
           {/* Phase 01: Incoming Dispatch */}
           {phase === 'INCOMING' && (
             <motion.div
               key="p-incoming"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2.5"
             >
-              <div className="p-3 rounded-2xl bg-amber-50/90 border border-amber-300 shadow-2xs">
-                <div className="flex items-center justify-between text-[10px] font-mono-code text-amber-950 font-black mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-                    DISPATCH INTERCEPTED
+              {/* Primary Card */}
+              <div className="p-4 rounded-[24px] bg-white/95 border border-black/[0.06] shadow-[0_8px_20px_-6px_rgba(38,34,28,0.06)]">
+                <div className="flex items-center justify-between gap-1 pb-2 border-b border-black/[0.05]">
+                  <span className="inline-flex items-center gap-1.5 text-[9px] font-medium text-amber-900 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                    <AlertTriangle className="w-3 h-3 text-amber-600 shrink-0" />
+                    <span>UNVERIFIED DISPATCH</span>
                   </span>
-                  <span className="px-1.5 py-0.5 rounded bg-amber-200 text-amber-950 border border-amber-400 text-[7.5px] font-black">
-                    UNVERIFIED
+                  <span className="text-[8.5px] font-mono-code text-[#7C766C] font-semibold shrink-0">
+                    8.9 URGENCY
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-900 font-mono-code leading-relaxed font-semibold space-y-0.5">
-                  <div>CLAIMED: <strong className="text-black font-black">SUPERVISOR REYNOLDS</strong></div>
-                  <div>VOICE CLONE SUSPECT: <strong className="text-red-700 font-black">71% SIMILARITY</strong></div>
-                  <div>COERCIVE URGENCY: <strong className="text-amber-900 font-black">8.9 / 10</strong></div>
+
+                <div className="mt-3 text-xs sm:text-[13px] font-medium tracking-tight text-[#1A1712] leading-snug">
+                  &ldquo;Ramp Pump 4 to 850 RPM immediately. Water surge inbound.&rdquo;
+                </div>
+
+                {/* Divided Data Rows */}
+                <div className="mt-3.5 pt-2.5 border-t border-black/[0.05] space-y-1.5 text-[10px] tracking-tight">
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Caller Identity</span>
+                    <strong className="text-[#1A1712] font-semibold">Supervisor Reynolds</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Voice Analysis</span>
+                    <strong className="text-red-700 font-semibold">71% Clone Match (Anomaly)</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Shift Roster</span>
+                    <strong className="text-amber-900 font-semibold">Off-Duty (Annual Leave)</strong>
+                  </div>
                 </div>
               </div>
 
-              {/* Audio Waveform & Equalizer Animation */}
-              <div className="p-3 rounded-2xl bg-white border border-black/[0.08] shadow-2xs">
-                <div className="flex items-center justify-between text-[8px] font-mono-code text-slate-600 uppercase font-black mb-1.5">
-                  <span className="flex items-center gap-1">
-                    <AudioWaveform className="w-3 h-3 text-slate-800" />
-                    DISPATCH AUDIO STREAM
-                  </span>
-                  <button 
-                    onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                    className="flex items-center gap-0.5 text-[7.5px] text-slate-800 font-bold hover:underline cursor-pointer"
-                  >
-                    <Volume2 className="w-2.5 h-2.5" />
-                    <span>{isPlayingAudio ? '48kHz LIVE' : 'MUTED'}</span>
-                  </button>
+              {/* Minimal Waveform Bar */}
+              <div 
+                onClick={() => setIsPlayingAudio(!isPlayingAudio)}
+                className="p-2.5 rounded-[18px] bg-white/80 hover:bg-white border border-black/[0.05] flex items-center justify-between gap-3 shadow-2xs cursor-pointer transition-colors"
+                title="Tap to toggle audio stream"
+              >
+                <div className="flex items-center gap-2 text-[9px] font-medium text-[#7C766C]">
+                  <AudioWaveform className="w-3.5 h-3.5 text-[#1A1712]" />
+                  <span>Acoustic Stream</span>
                 </div>
-                
-                {/* Simulated Equalizer Bars */}
-                <div className="flex items-end justify-between h-6 px-2 py-1 bg-slate-900 rounded-md mb-2 gap-0.5">
-                  {[40, 75, 90, 60, 85, 95, 50, 70, 85, 65, 45, 90, 75, 55].map((h, i) => (
+
+                {/* Minimal Equalizer */}
+                <div className="flex items-end h-4 gap-0.5 px-2">
+                  {[40, 80, 95, 60, 90, 50, 85, 65, 45, 90].map((h, i) => (
                     <motion.div
                       key={i}
-                      animate={isPlayingAudio ? { height: [`${h * 0.4}%`, `${h}%`, `${h * 0.3}%`] } : { height: '30%' }}
-                      transition={{ repeat: Infinity, duration: 0.6 + (i * 0.07), ease: 'easeInOut' }}
-                      className="flex-1 bg-gradient-to-t from-slate-400 to-white rounded-2xs"
+                      animate={isPlayingAudio ? { height: [`${h * 0.35}%`, `${h}%`, `${h * 0.25}%`] } : { height: '30%' }}
+                      transition={{ repeat: Infinity, duration: 0.6 + (i * 0.08), ease: 'easeInOut' }}
+                      className="w-1 bg-[#1A1712] rounded-full"
                     />
                   ))}
                 </div>
 
-                <div className="text-[9.5px] font-black text-slate-950 font-mono-code italic bg-[#F4F4F0] p-2 rounded-xl border border-black/[0.06]">
-                  &ldquo;Ramp Pump 4 to 850 RPM immediately. Water surge inbound.&rdquo;
-                </div>
+                <span className="text-[8.5px] font-mono-code text-[#7C766C]">48kHz</span>
               </div>
             </motion.div>
           )}
 
-          {/* Phase 02: NPU Evidence Parsing */}
+          {/* Phase 02: NPU Evidence Structuring */}
           {phase === 'EXTRACTING' && (
             <motion.div
               key="p-extracting"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2.5"
             >
-              <div className="p-3 rounded-2xl bg-blue-50/90 border border-blue-300 shadow-2xs">
-                <div className="flex items-center justify-between text-[10px] font-mono-code text-blue-950 font-black mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <Cpu className="w-3.5 h-3.5 text-blue-600 animate-spin" />
-                    ON-DEVICE NPU (45 TOPS)
+              <div className="p-4 rounded-[24px] bg-white/95 border border-black/[0.06] shadow-[0_8px_20px_-6px_rgba(38,34,28,0.06)]">
+                <div className="flex items-center justify-between gap-1 pb-2 border-b border-black/[0.05]">
+                  <span className="inline-flex items-center gap-1.5 text-[9px] font-medium text-blue-900 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                    <Cpu className="w-3 h-3 text-blue-600 shrink-0" />
+                    <span>ON-DEVICE SLM</span>
                   </span>
-                  <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-blue-200 text-blue-950 border border-blue-400 font-black">
-                    18ms SLM
+                  <span className="text-[8.5px] font-mono-code text-blue-800 font-bold shrink-0">
+                    18ms LATENCY
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-900 font-mono-code space-y-1 font-semibold">
-                  <div className="flex justify-between">
-                    <span>Parsed Action:</span>
-                    <strong className="text-black font-black">SET PUMP_04 = 850 RPM</strong>
+
+                <div className="mt-3">
+                  <span className="text-[9px] uppercase tracking-wider text-[#7C766C] font-semibold block">
+                    Structured Kinetic Intent
+                  </span>
+                  <div className="text-sm font-semibold tracking-tight text-[#1A1712] mt-0.5">
+                    SET_SPEED (Pump 04) &rarr; 850 RPM
                   </div>
-                  <div className="flex justify-between">
-                    <span>Supervisor Roster:</span>
-                    <strong className="text-red-700 font-black">OFF DUTY (LEAVE)</strong>
+                </div>
+
+                <div className="mt-3.5 pt-2.5 border-t border-black/[0.05] space-y-1.5 text-[10px] tracking-tight">
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Target Hardware</span>
+                    <strong className="text-[#1A1712] font-semibold">PLC Station 04</strong>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Cloud Leakage:</span>
-                    <strong className="text-emerald-700 font-black">0.00 KB (AIR-GAPPED)</strong>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Compiled Modbus</span>
+                    <strong className="text-[#1A1712] font-mono-code font-semibold">Reg 40012 = 0x0352</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Cloud Egress</span>
+                    <strong className="text-emerald-700 font-semibold">0 KB (Air-Gapped)</strong>
                   </div>
                 </div>
               </div>
 
-              {/* Hex Modbus Inspector */}
-              <div className="p-3 rounded-2xl bg-white border border-black/[0.08] shadow-2xs">
-                <div className="flex items-center justify-between text-[8px] font-mono-code text-slate-600 uppercase font-black mb-1.5">
-                  <span className="flex items-center gap-1">
-                    <FileCode2 className="w-3 h-3 text-blue-600" />
-                    EXTRACTED MODBUS FRAME
-                  </span>
-                  <span className="text-blue-700 font-bold">PLC #04</span>
-                </div>
-                <div className="text-[9px] font-mono-code text-slate-950 bg-[#F4F4F0] p-2 rounded-xl border border-black/[0.06] space-y-0.5">
-                  <div className="text-slate-500 font-bold">HEX: [00 01] [00 00] [00 06] [01] [06] [9C 8C]</div>
-                  <div>WRITE_REG(ADDR: 40012, VAL: 0x0352)</div>
-                </div>
+              <div className="p-2.5 rounded-[18px] bg-white/80 border border-black/[0.05] flex items-center justify-between text-[9px] font-mono-code text-[#7C766C] shadow-2xs">
+                <span className="flex items-center gap-1.5 text-[#1A1712] font-medium">
+                  <FileCode2 className="w-3 h-3 text-blue-600" />
+                  <span>Modbus Frame</span>
+                </span>
+                <span className="text-[#1A1712]">[00 01 00 00 00 06 01 06 9C 4C]</span>
               </div>
             </motion.div>
           )}
 
-          {/* Phase 03: Cyber Validation Pass */}
+          {/* Phase 03: Cyber Validation */}
           {phase === 'CYBER_CHECK' && (
             <motion.div
               key="p-cyber"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2.5"
             >
-              <div className="p-3 rounded-2xl bg-emerald-50/90 border border-emerald-300 shadow-2xs">
-                <div className="flex items-center justify-between text-[10px] font-mono-code text-emerald-950 font-black mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    CYBER GATE: 100% VALID
+              <div className="p-4 rounded-[24px] bg-white/95 border border-black/[0.06] shadow-[0_8px_20px_-6px_rgba(38,34,28,0.06)]">
+                <div className="flex items-center justify-between pb-2.5 border-b border-black/[0.05]">
+                  <span className="inline-flex items-center gap-1.5 text-[9.5px] font-medium text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                    <span>CYBER LOGIC PASS</span>
                   </span>
-                  <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-emerald-200 text-emerald-950 border border-emerald-400 font-black">
-                    LOGIC PASS
+                  <span className="text-[9px] font-mono-code text-emerald-700 font-bold">
+                    CRC 0x9B4E
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-900 font-mono-code space-y-1 font-semibold">
-                  <div className="flex justify-between">
-                    <span>Modbus Syntax:</span>
-                    <strong className="text-emerald-900 font-black">VALID CRC (0x9B4E)</strong>
+
+                <div className="mt-3">
+                  <div className="text-sm font-semibold tracking-tight text-[#1A1712]">
+                    Packet Syntax &amp; Permissions Valid
                   </div>
-                  <div className="flex justify-between">
-                    <span>Register 40012:</span>
-                    <strong className="text-emerald-900 font-black">PERMITTED RANGE (0-1000)</strong>
+                  <p className="mt-1 text-[10.5px] text-[#7C766C] leading-relaxed">
+                    Standard OT firewalls approve this command. Register 40012 is within allowed range (0–1000).
+                  </p>
+                </div>
+
+                <div className="mt-3.5 pt-2.5 border-t border-black/[0.05] space-y-1.5 text-[10px] tracking-tight">
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Modbus Syntax</span>
+                    <strong className="text-emerald-700 font-semibold">100% Valid Frame</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Role Permissions</span>
+                    <strong className="text-emerald-700 font-semibold">Authorized Level 3</strong>
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 rounded-2xl bg-amber-50/90 border border-amber-300 shadow-2xs">
-                <div className="text-[9px] font-mono-code text-amber-950 font-black flex items-center gap-1.5">
+              {/* Subscrr Dilemma Pill */}
+              <div className="p-3 rounded-[20px] bg-amber-50/80 border border-amber-200/80 text-[10px] text-amber-900 leading-relaxed shadow-2xs">
+                <div className="flex items-center gap-1.5 font-semibold mb-0.5">
                   <Zap className="w-3 h-3 text-amber-600" />
-                  <span>THE KINETIC BLINDSPOT:</span>
+                  <span>The Kinetic Dilemma</span>
                 </div>
-                <div className="text-[10px] text-slate-900 font-mono-code mt-1 font-semibold leading-relaxed">
-                  Traditional SCADA firewalls approved this write. They cannot see forward water hammer consequences. Simulating in EPANET twin...
-                </div>
+                <span>Cyber defenses are blind to water hammer physics. Passing to EPANET twin for hydrodynamic verification...</span>
               </div>
             </motion.div>
           )}
 
-          {/* Phase 04: Physical Simulation Violation with SVG Pressure Curve */}
+          {/* Phase 04: Physical Twin Simulation Overpressure */}
           {phase === 'PHYSICAL_SIM' && (
             <motion.div
               key="p-physical"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2.5"
             >
-              <div className="p-3 rounded-2xl bg-red-50/90 border border-red-300 shadow-2xs">
-                <div className="flex items-center justify-between text-[10px] font-mono-code text-red-950 font-black mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <ShieldAlert className="w-3.5 h-3.5 text-red-600 animate-pulse" />
-                    HYDRAULIC TWIN: VIOLATION
+              <div className="p-4 rounded-[24px] bg-white/95 border border-red-200/80 shadow-[0_8px_20px_-6px_rgba(239,68,68,0.1)]">
+                <div className="flex items-center justify-between pb-2 border-b border-black/[0.05]">
+                  <span className="inline-flex items-center gap-1.5 text-[9.5px] font-medium text-red-900 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
+                    <ShieldAlert className="w-3 h-3 text-red-600 animate-pulse" />
+                    <span>OVERPRESSURE DETECTED</span>
                   </span>
-                  <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-red-200 text-red-950 border border-red-400 font-black">
+                  <span className="text-[9px] font-mono-code text-red-700 font-bold">
+                    T+42s RUPTURE
+                  </span>
+                </div>
+
+                {/* Subscrr Big Metric */}
+                <div className="mt-2.5 flex items-baseline justify-between">
+                  <div>
+                    <div className="text-3xl font-semibold tracking-tighter text-red-600">
+                      11.4 <span className="text-base font-medium">BAR</span>
+                    </div>
+                    <div className="text-[9.5px] text-[#7C766C] tracking-tight">
+                      Safety Threshold: 9.2 Bar (Exceeded by +2.2)
+                    </div>
+                  </div>
+
+                  <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-800 text-[9px] font-semibold border border-red-300">
                     HARD REJECT
                   </span>
                 </div>
-                
-                {/* SVG Pressure Surge Chart */}
-                <div className="h-16 w-full bg-white rounded-xl p-2 border border-red-200 relative mb-1.5">
-                  <div className="absolute top-1 left-2 text-[7.5px] font-mono-code font-bold text-red-700 flex items-center gap-1">
-                    <TrendingUp className="w-2.5 h-2.5" />
-                    <span>SURGE TRAJECTORY (T+42s)</span>
-                  </div>
-                  <div className="absolute top-1 right-2 text-[7.5px] font-mono-code font-bold text-red-600">
-                    11.4 BAR PEAK
-                  </div>
 
-                  <svg viewBox="0 0 160 40" className="w-full h-full overflow-visible pt-2.5">
-                    {/* Limit Line 9.2 Bar */}
-                    <line x1="0" y1="20" x2="160" y2="20" stroke="#EF4444" strokeWidth="1" strokeDasharray="3 2" />
-                    <text x="5" y="18" fill="#EF4444" fontSize="5" fontWeight="bold">9.2 BAR LIMIT</text>
+                {/* Minimal SVG Waveform */}
+                <div className="mt-2 h-14 w-full bg-[#F4F2EC]/60 rounded-xl p-1.5 relative border border-red-200/60 overflow-hidden">
+                  <svg viewBox="0 0 160 38" className="w-full h-full overflow-visible">
+                    {/* Limit Line */}
+                    <line x1="0" y1="18" x2="160" y2="18" stroke="#EF4444" strokeWidth="1" strokeDasharray="3 2" />
+                    <text x="4" y="15" fill="#EF4444" fontSize="4.5" fontWeight="600">9.2 BAR LIMIT</text>
                     
                     {/* Spike Curve */}
                     <path
-                      d="M 0 32 Q 40 30, 80 28 T 110 22 T 130 5 T 145 10 T 160 18"
+                      d="M 0 30 Q 40 28, 80 26 T 115 18 T 132 4 T 148 10 T 160 16"
                       fill="none"
                       stroke="#DC2626"
                       strokeWidth="2"
                     />
-                    {/* Danger Point */}
-                    <circle cx="130" cy="5" r="3" fill="#DC2626" className="animate-ping" />
-                    <circle cx="130" cy="5" r="2" fill="#FFFFFF" stroke="#DC2626" strokeWidth="1" />
+                    <circle cx="132" cy="4" r="2.5" fill="#DC2626" />
                   </svg>
                 </div>
 
-                <div className="text-[10px] text-slate-900 font-mono-code space-y-0.5 font-semibold">
-                  <div className="flex justify-between">
-                    <span>Relief Valve 02:</span>
-                    <strong className="text-red-700 font-black">0% (LOCKED CLOSED)</strong>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Peak Hydraulic Head:</span>
-                    <strong className="text-red-700 font-black">11.4 BAR (LIMIT: 9.2)</strong>
-                  </div>
+                <div className="mt-3 pt-2 border-t border-black/[0.05] flex justify-between text-[10px] tracking-tight text-[#7C766C]">
+                  <span>Root Cause</span>
+                  <strong className="text-red-700 font-semibold">Valve 02 is Locked Closed (0%)</strong>
                 </div>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-white border border-red-200 shadow-2xs text-[9px] font-mono-code text-red-900 font-semibold">
-                💥 Catastrophic rupture averted at Node 14. Autonomous replan ready.
               </div>
             </motion.div>
           )}
 
-          {/* Phase 05: Critic Replan & Approval */}
+          {/* Phase 05: Critic Replan & Biometric Sign */}
           {(phase === 'REPLAN' || phase === 'APPROVED') && (
             <motion.div
               key="p-replan"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-2"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2.5"
             >
-              <div className="p-3 rounded-2xl bg-emerald-50/90 border border-emerald-300 shadow-2xs">
-                <div className="flex items-center justify-between text-[10px] font-mono-code text-emerald-950 font-black mb-1.5">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    CRITIC SAFE REPLAN
+              <div className="p-4 rounded-[24px] bg-white/95 border border-emerald-200/80 shadow-[0_8px_20px_-6px_rgba(16,185,129,0.1)]">
+                <div className="flex items-center justify-between pb-2 border-b border-black/[0.05]">
+                  <span className="inline-flex items-center gap-1.5 text-[9.5px] font-medium text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>PHYSICALLY VERIFIED PLAN</span>
                   </span>
-                  <span className="text-[7.5px] px-1.5 py-0.5 rounded bg-emerald-200 text-emerald-950 border border-emerald-400 font-black">
-                    7.4 BAR SAFE
+                  <span className="text-[9px] font-mono-code text-emerald-700 font-bold">
+                    SAFETY VERIFIED
                   </span>
                 </div>
-                
-                {/* Safe Stabilized SVG Curve */}
-                <div className="h-14 w-full bg-white rounded-xl p-2 border border-emerald-200 relative mb-1.5">
-                  <div className="absolute top-1 left-2 text-[7.5px] font-mono-code font-bold text-emerald-700">
-                    SAFE HYDRAULIC GRADIENT
-                  </div>
-                  <div className="absolute top-1 right-2 text-[7.5px] font-mono-code font-bold text-emerald-700">
-                    7.4 BAR PEAK
+
+                {/* Subscrr Big Metric */}
+                <div className="mt-2.5 flex items-baseline justify-between">
+                  <div>
+                    <div className="text-3xl font-semibold tracking-tighter text-emerald-700">
+                      7.4 <span className="text-base font-medium">BAR</span>
+                    </div>
+                    <div className="text-[9.5px] text-[#7C766C] tracking-tight">
+                      Safe Gradient (Under 9.2 Bar Limit)
+                    </div>
                   </div>
 
-                  <svg viewBox="0 0 160 35" className="w-full h-full overflow-visible pt-1.5">
-                    <line x1="0" y1="12" x2="160" y2="12" stroke="#EF4444" strokeWidth="0.8" strokeDasharray="3 2" />
-                    <text x="5" y="10" fill="#EF4444" fontSize="4.5">9.2 BAR THRESHOLD</text>
-                    
-                    {/* Safe Curve */}
-                    <path
-                      d="M 0 28 Q 40 26, 80 24 T 120 18 T 160 20"
-                      fill="none"
-                      stroke="#059669"
-                      strokeWidth="2"
-                    />
-                    <circle cx="120" cy="18" r="2" fill="#059669" />
-                  </svg>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-semibold border border-emerald-300">
+                    SURVIVABLE
+                  </span>
                 </div>
 
-                <div className="text-[10px] text-slate-900 font-mono-code space-y-0.5 font-semibold">
-                  <div className="flex justify-between">
-                    <span>1. Pre-open Valve 02:</span>
-                    <strong className="text-emerald-900 font-black">40% MODULATION</strong>
+                {/* Divided Action Steps */}
+                <div className="mt-3 pt-2.5 border-t border-black/[0.05] space-y-1.5 text-[10px] tracking-tight">
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>1. Pre-open Valve 02</span>
+                    <strong className="text-emerald-800 font-semibold">40% Modulation</strong>
                   </div>
-                  <div className="flex justify-between">
-                    <span>2. Staged Ramp:</span>
-                    <strong className="text-emerald-900 font-black">3x STEPS TO 620 RPM</strong>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>2. Staged Ramp</span>
+                    <strong className="text-emerald-800 font-semibold">3 Intervals to 620 RPM</strong>
+                  </div>
+                  <div className="flex justify-between items-center text-[#7C766C]">
+                    <span>Dispatched PLC</span>
+                    <strong className="text-[#1A1712] font-semibold">Station 04 Protected</strong>
                   </div>
                 </div>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-white border border-black/[0.08] shadow-2xs text-[9px] font-mono-code text-slate-700 font-semibold">
-                ✓ EPANET verified: Peak 7.4 bar. Water hammer eliminated.
               </div>
             </motion.div>
           )}
+
         </AnimatePresence>
       </div>
 
-      {/* 5. Ultrasonic Fingerprint Touch Area / Action Trigger */}
-      <div className="px-4.5 pb-2.5 pt-0.5">
+      {/* 4. Action Area (Tactile Biometric Sensor or Clean State) */}
+      <div className="px-4 pb-3 pt-1">
         {phase === 'PHYSICAL_SIM' ? (
           <button
             onClick={() => onSelectPhase?.('REPLAN')}
-            className="w-full py-2.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-mono-code text-[10.5px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-98 cursor-pointer"
+            className="w-full py-2.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-medium text-xs tracking-tight flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-98 cursor-pointer"
           >
-            <span>TRIGGER CRITIC REPLAN</span>
+            <span>Trigger Safety Replan</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         ) : (phase === 'REPLAN' && !hasBiometricSigned) ? (
@@ -558,44 +450,35 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
               setHasBiometricSigned(true);
               onSelectPhase?.('APPROVED');
             }}
-            className="group relative w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-mono-code text-[10.5px] font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98 cursor-pointer border border-emerald-400/40"
+            className="group relative w-full py-2.5 px-4 rounded-2xl bg-[#1A1712] hover:bg-black text-white font-medium text-xs tracking-tight flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98 cursor-pointer border border-white/20"
           >
             <div className="relative flex items-center justify-center">
-              <Fingerprint className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
-              <span className="absolute -inset-1 rounded-full border border-white/50 animate-ping" />
+              <Fingerprint className="w-4 h-4 text-[#F0B31C] group-hover:scale-110 transition-transform" />
             </div>
-            <span>TOUCH ULTRASONIC SENSOR TO SIGN</span>
+            <span>Authorize Safe Execution</span>
           </button>
         ) : (phase === 'APPROVED' || hasBiometricSigned) ? (
-          <div className="w-full py-1.5 px-2.5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 font-mono-code text-[9px] shadow-2xs space-y-1">
-            <div className="flex items-center justify-between font-black text-[10px]">
-              <span className="flex items-center gap-1.5 text-emerald-700">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>CRYPTOGRAPHICALLY COMMITTED</span>
-              </span>
-              <span className="text-[7.5px] px-1 py-0.2 rounded bg-emerald-200 border border-emerald-400 font-bold">
-                ED25519 VERIFIED
-              </span>
-            </div>
-            <div className="text-[7.5px] text-emerald-800 truncate flex justify-between">
-              <span>OP #049 · SIG: 7F9A...4B21</span>
-              <span>PLC STATION 04 ARMED</span>
-            </div>
+          <div className="w-full py-2 px-3 rounded-2xl bg-emerald-50/90 border border-emerald-300/80 text-emerald-950 font-medium text-[10px] shadow-2xs flex items-center justify-between">
+            <span className="flex items-center gap-1.5 text-emerald-800 font-semibold">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Cryptographically Committed</span>
+            </span>
+            <span className="text-[8.5px] font-mono-code font-bold text-emerald-700">ED25519</span>
           </div>
         ) : (
-          <div className="w-full py-2 rounded-2xl bg-[#F0F0EC] border border-black/[0.05] text-slate-700 text-center font-mono-code text-[10px] font-bold flex items-center justify-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-900 animate-pulse" />
-            <span>AUTONOMOUS NPU VERIFICATION ACTIVE</span>
+          <div className="w-full py-2 rounded-2xl bg-white/70 border border-black/[0.05] text-[#7C766C] text-center text-[10px] font-medium flex items-center justify-center gap-1.5 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+            <span>Autonomous Invariant Monitor Active</span>
           </div>
         )}
       </div>
 
-      {/* 6. Minimal Terminal Navigation Dock */}
-      <div className="px-3 py-1.5 bg-white border-t border-black/[0.06] flex items-center justify-around text-[8px] font-mono-code text-slate-500">
+      {/* 5. Minimal Terminal Navigation Dock */}
+      <div className="px-4 py-2 bg-white/80 backdrop-blur-md border-t border-black/[0.04] flex items-center justify-between text-[9px] text-[#7C766C] font-medium">
         <button 
           onClick={() => onSelectPhase?.('INCOMING')}
-          className={`px-2 py-1 rounded-lg flex flex-col items-center gap-0.5 cursor-pointer ${
-            phase === 'INCOMING' ? 'text-amber-800 font-bold bg-amber-50' : 'hover:text-black'
+          className={`px-2 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors ${
+            phase === 'INCOMING' ? 'text-[#1A1712] font-semibold bg-black/[0.05]' : 'hover:text-[#1A1712]'
           }`}
         >
           <AlertTriangle className="w-3 h-3" />
@@ -604,18 +487,18 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
 
         <button 
           onClick={() => onSelectPhase?.('EXTRACTING')}
-          className={`px-2 py-1 rounded-lg flex flex-col items-center gap-0.5 cursor-pointer ${
-            phase === 'EXTRACTING' ? 'text-blue-800 font-bold bg-blue-50' : 'hover:text-black'
+          className={`px-2 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors ${
+            phase === 'EXTRACTING' ? 'text-[#1A1712] font-semibold bg-black/[0.05]' : 'hover:text-[#1A1712]'
           }`}
         >
           <Cpu className="w-3 h-3" />
-          <span>Evidence</span>
+          <span>NPU</span>
         </button>
 
         <button 
           onClick={() => onSelectPhase?.('CYBER_CHECK')}
-          className={`px-2 py-1 rounded-lg flex flex-col items-center gap-0.5 cursor-pointer ${
-            phase === 'CYBER_CHECK' ? 'text-emerald-800 font-bold bg-emerald-50' : 'hover:text-black'
+          className={`px-2 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors ${
+            phase === 'CYBER_CHECK' ? 'text-[#1A1712] font-semibold bg-black/[0.05]' : 'hover:text-[#1A1712]'
           }`}
         >
           <Server className="w-3 h-3" />
@@ -624,18 +507,18 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
 
         <button 
           onClick={() => onSelectPhase?.('PHYSICAL_SIM')}
-          className={`px-2 py-1 rounded-lg flex flex-col items-center gap-0.5 cursor-pointer ${
-            phase === 'PHYSICAL_SIM' ? 'text-red-800 font-bold bg-red-50' : 'hover:text-black'
+          className={`px-2 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors ${
+            phase === 'PHYSICAL_SIM' ? 'text-red-700 font-semibold bg-red-50' : 'hover:text-[#1A1712]'
           }`}
         >
-          <Gauge className="w-3 h-3" />
+          <Activity className="w-3 h-3" />
           <span>Twin</span>
         </button>
 
         <button 
           onClick={() => onSelectPhase?.('REPLAN')}
-          className={`px-2 py-1 rounded-lg flex flex-col items-center gap-0.5 cursor-pointer ${
-            phase === 'REPLAN' || phase === 'APPROVED' ? 'text-emerald-800 font-bold bg-emerald-50' : 'hover:text-black'
+          className={`px-2 py-1 rounded-xl flex items-center gap-1 cursor-pointer transition-colors ${
+            phase === 'REPLAN' || phase === 'APPROVED' ? 'text-emerald-800 font-semibold bg-emerald-50' : 'hover:text-[#1A1712]'
           }`}
         >
           <CheckCircle2 className="w-3 h-3" />
