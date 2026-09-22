@@ -218,25 +218,26 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
   };
 
   return (
-    <section className="relative py-20 bg-[#FBFBFA] border-b border-black/[0.06] overflow-hidden">
+    <section className="relative py-20 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
       {/* Background Millimeter Grid */}
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+      <div className="absolute inset-0 network-grid opacity-40 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-black/[0.06]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#1A1712]/[0.08]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-black/[0.06] shadow-2xs text-xs font-mono-code text-slate-800 mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-[#1A1712]/[0.08] shadow-2xs text-xs font-mono-code text-[#1A1712] mb-3">
               <Layers className="w-3.5 h-3.5 text-[#F0B31C]" />
               <span className="font-bold tracking-wider">SIGNATURE MOMENTS</span>
               <span className="text-slate-300">/</span>
-              <span className="text-amber-800 font-semibold">INTERACTIVE STORY CAROUSEL</span>
+              <span className="text-amber-900 font-semibold">INTERACTIVE STORY CAROUSEL</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#090D15] uppercase">
-              THE 5 OPERATIONAL MOMENTS.
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.08]">
+              THE 5 OPERATIONAL MOMENTS. <br />
+              <span className="font-serif italic font-normal normal-case text-slate-800">Verified at physics speed.</span>
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+            <p className="mt-2 text-sm sm:text-base text-[#7C766C] max-w-2xl">
               Experience step-by-step how Sentinel-K prevents cyber-physical catastrophe on the sovereign field node.
             </p>
           </div>
@@ -247,29 +248,29 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               onClick={() => setIsPlaying(!isPlaying)}
               className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
                 isPlaying
-                  ? 'bg-[#090D15] text-[#F0B31C] border-[#090D15]'
-                  : 'bg-white text-slate-700 border-black/[0.08] hover:bg-slate-50'
+                  ? 'bg-[#1A1712] text-[#F0B31C] border-[#1A1712]'
+                  : 'bg-white/80 text-[#1A1712] border-[#1A1712]/[0.08] hover:bg-white'
               } shadow-2xs`}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
               <span>{isPlaying ? 'PAUSE CAROUSEL' : 'AUTO PLAY'}</span>
             </button>
 
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white border border-black/[0.08] shadow-2xs">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md">
               <button
                 onClick={prevSlide}
                 aria-label="Previous Slide"
-                className="p-2 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-2 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 text-xs font-mono-code font-bold text-slate-500">
+              <span className="px-2 text-xs font-mono-code font-bold text-[#7C766C]">
                 0{currentIndex + 1} / 0{CAROUSEL_SLIDES.length}
               </span>
               <button
                 onClick={nextSlide}
                 aria-label="Next Slide"
-                className="p-2 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-2 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -285,8 +286,8 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               onClick={() => goToSlide(idx, idx > currentIndex ? 1 : -1)}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-mono-code text-xs font-bold shrink-0 transition-all cursor-pointer border ${
                 currentIndex === idx
-                  ? 'bg-[#090D15] text-white border-[#090D15] shadow-xs'
-                  : 'bg-white text-slate-600 border-black/[0.06] hover:bg-black/[0.02] hover:text-black'
+                  ? 'bg-[#1A1712] text-white border-[#1A1712] shadow-xs'
+                  : 'bg-white/80 text-[#7C766C] border-[#1A1712]/[0.08] hover:bg-white hover:text-[#1A1712]'
               }`}
             >
               <span className={`w-1.5 h-1.5 rounded-full ${
@@ -314,11 +315,11 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch"
             >
               {/* Left Column: Narrative & Hardware Context (7 cols) */}
-              <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-white border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+              <div className="lg:col-span-7 p-6 sm:p-8 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)] flex flex-col justify-between">
                 <div>
-                  <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-black/[0.05]">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#1A1712]/[0.06]">
                     <div className="flex items-center gap-2 font-mono-code text-xs">
-                      <span className="px-2.5 py-0.5 rounded-full bg-[#FAFAF8] border border-black/[0.06] text-[#090D15] font-black">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#ECE8DE]/60 border border-[#1A1712]/[0.08] text-[#1A1712] font-black">
                         {currentSlide.tag}
                       </span>
                     </div>
@@ -327,12 +328,12 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
                     </span>
                   </div>
 
-                  <div className="mt-4 text-xs font-mono-code text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <div className="mt-4 text-xs font-mono-code text-[#7C766C] uppercase tracking-wider flex items-center gap-1.5">
                     <Cpu className="w-3.5 h-3.5 text-[#F0B31C]" />
                     <span>HARDWARE ENCLAVE: {currentSlide.hardware}</span>
                   </div>
 
-                  <h3 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-tight">
+                  <h3 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-tight">
                     {currentSlide.headline}
                   </h3>
 
@@ -344,12 +345,12 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
                 {/* Bottom Status Box */}
                 <div className={`mt-6 p-4 rounded-2xl border ${
                   currentSlide.verdict.type === 'reject'
-                    ? 'bg-red-50/80 border-red-200 text-red-900'
+                    ? 'bg-red-50/90 border-red-200 text-red-900'
                     : currentSlide.verdict.type === 'warn'
-                    ? 'bg-amber-50/80 border-amber-200 text-amber-900'
+                    ? 'bg-amber-50/90 border-amber-200 text-amber-900'
                     : currentSlide.verdict.type === 'replan'
-                    ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900'
-                    : 'bg-blue-50/80 border-blue-200 text-blue-900'
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-900'
+                    : 'bg-blue-50/90 border-blue-200 text-blue-900'
                 }`}>
                   <div className="flex items-center gap-2 font-mono-code text-xs font-bold mb-1">
                     {currentSlide.verdict.type === 'reject' && <ShieldAlert className="w-4 h-4 text-red-600" />}
@@ -365,23 +366,23 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               </div>
 
               {/* Right Column: Live Telemetry Bus Vector (5 cols) */}
-              <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-[#FAFAF8] border border-black/[0.06] shadow-sm flex flex-col justify-between">
+              <div className="lg:col-span-5 p-6 sm:p-8 rounded-[32px] bg-[#ECE8DE]/50 border border-[#1A1712]/[0.08] shadow-sm flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-black/[0.06] text-xs font-mono-code">
-                    <div className="flex items-center gap-2 font-bold text-[#090D15]">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#1A1712]/[0.06] text-xs font-mono-code">
+                    <div className="flex items-center gap-2 font-bold text-[#1A1712]">
                       <Activity className="w-4 h-4 text-[#F0B31C]" />
                       <span>TELEMETRY BUS // REAL-TIME</span>
                     </div>
-                    <span className="text-[10px] text-slate-500 font-mono-code">NODE 04</span>
+                    <span className="text-[10px] text-[#7C766C] font-mono-code">NODE 04</span>
                   </div>
 
                   <div className="mt-4 space-y-2.5 font-mono-code text-xs">
                     {currentSlide.telemetry.map((t, i) => (
                       <div
                         key={i}
-                        className="p-3 rounded-xl bg-white border border-black/[0.05] shadow-2xs flex flex-col gap-1"
+                        className="p-3 rounded-xl bg-white border border-[#1A1712]/[0.06] shadow-2xs flex flex-col gap-1"
                       >
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">
+                        <span className="text-[10px] text-[#7C766C] uppercase tracking-wider font-bold">
                           {t.label}
                         </span>
                         <span className={`text-xs font-bold ${
@@ -401,14 +402,14 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
                 </div>
 
                 {/* Quick Phase Action Footnote */}
-                <div className="mt-6 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs font-mono-code text-slate-600">
+                <div className="mt-6 pt-4 border-t border-[#1A1712]/[0.06] flex items-center justify-between text-xs font-mono-code text-slate-600">
                   <div className="flex items-center gap-1.5">
                     <Radio className="w-3.5 h-3.5 text-[#F0B31C]" />
-                    <span>Synchronized with iQOO Terminal</span>
+                    <span>Synchronized with Sentinel Field Terminal</span>
                   </div>
                   <button
                     onClick={nextSlide}
-                    className="flex items-center gap-1 text-[#090D15] font-bold hover:underline cursor-pointer"
+                    className="flex items-center gap-1 text-[#1A1712] font-bold hover:underline cursor-pointer"
                   >
                     <span>Next Moment</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -428,8 +429,8 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               aria-label={`Go to slide ${idx + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                 currentIndex === idx
-                  ? 'w-10 bg-[#090D15]'
-                  : 'w-3 bg-slate-300 hover:bg-slate-400'
+                  ? 'w-10 bg-[#1A1712]'
+                  : 'w-3 bg-[#7C766C]/30 hover:bg-[#7C766C]/60'
               }`}
             />
           ))}

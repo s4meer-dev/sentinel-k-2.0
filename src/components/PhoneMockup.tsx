@@ -137,7 +137,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         onMouseLeave={handleMouseLeave}
         className="relative perspective-[1400px] py-1 cursor-grab active:cursor-grabbing"
       >
-        {/* iQOO 13 Monster Halo RGB Ambient Backlight */}
+        {/* Monster Halo RGB Ambient Backlight */}
         <motion.div 
           animate={{
             backgroundColor: haloColor,
@@ -153,7 +153,7 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
         {/* Soft Ambient Ground Shadow */}
         <div className="absolute -bottom-6 inset-x-8 h-14 bg-slate-400/20 blur-2xl rounded-full pointer-events-none -z-10" />
 
-        {/* Smartphone Chassis — Replicating iQOO 13 Flagship Aluminum Rail & 1.36mm Bezel */}
+        {/* Smartphone Chassis — Precision Aluminum Rail & Ultra-Slim Bezel */}
         <motion.div
           style={{
             rotateX,

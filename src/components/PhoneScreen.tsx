@@ -119,7 +119,7 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
   const island = getIslandData();
 
   return (
-    <div className="relative w-full h-full bg-[#FAFAF8] text-[#090D15] flex flex-col justify-between select-none overflow-hidden font-sans">
+    <div className="relative w-full h-full bg-[#F4F2EC] text-[#1A1712] flex flex-col justify-between select-none overflow-hidden font-sans">
       
       {/* 1. Camera Punch-Hole — Dead-Centered at Top Edge */}
       <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-black ring-1 ring-slate-800 z-50 flex items-center justify-center shadow-inner pointer-events-none">
@@ -129,7 +129,7 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
       </div>
 
       {/* 2. System Status Bar with Centered Clearance for Camera */}
-      <div className="relative z-30 pt-1.5 pb-1 px-4 bg-[#FBFBFA] border-b border-black/[0.04]">
+      <div className="relative z-30 pt-1.5 pb-1 px-4 bg-[#ECE8DE]/80 backdrop-blur-md border-b border-[#1A1712]/[0.05]">
         
         {/* System Bar Flanking the Center Camera */}
         <div className="flex justify-between items-center text-[10px] font-mono-code px-1 mb-1 text-slate-800">

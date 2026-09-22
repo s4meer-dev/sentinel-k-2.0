@@ -70,8 +70,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
         ref={menuRef}
         className={`pointer-events-auto mx-auto transition-all duration-300 ease-out ${
           scrolled
-            ? 'mt-2.5 w-fit max-w-[95vw] rounded-full bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.06)] px-3.5 py-1.5'
-            : 'mt-3 sm:mt-4 w-[92%] max-w-6xl rounded-2xl bg-white/80 backdrop-blur-xl border border-black/[0.05] shadow-[0_2px_16px_rgba(0,0,0,0.03)] px-4 sm:px-6 py-2 sm:py-2.5'
+            ? 'mt-2.5 w-fit max-w-[95vw] rounded-full bg-white/85 backdrop-blur-xl border border-[#1A1712]/[0.08] shadow-[0_12px_32px_-12px_rgba(38,34,28,0.12)] px-3.5 py-1.5'
+            : 'mt-3 sm:mt-4 w-[92%] max-w-6xl rounded-2xl bg-white/80 backdrop-blur-xl border border-[#1A1712]/[0.08] shadow-[0_8px_24px_-8px_rgba(38,34,28,0.06)] px-4 sm:px-6 py-2 sm:py-2.5'
         }`}
       >
         <div className="flex items-center justify-between gap-4 sm:gap-8">
@@ -81,19 +81,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2.5 cursor-pointer group shrink-0"
           >
-            <div className={`rounded-xl bg-[#F0B31C] text-[#090D15] flex items-center justify-center font-black transition-all duration-200 shadow-xs group-hover:scale-105 ${
+            <div className={`rounded-xl bg-[#F0B31C] text-[#1A1712] flex items-center justify-center font-black transition-all duration-200 shadow-xs group-hover:scale-105 ${
               scrolled ? 'w-6 h-6 text-[10px]' : 'w-7 h-7 text-xs'
             }`}>
               SK
             </div>
 
             <div className="flex items-center gap-2">
-              <span className={`font-sans font-black tracking-tight text-[#090D15] leading-tight transition-all duration-200 ${
+              <span className={`font-sans font-black tracking-tight text-[#1A1712] leading-tight transition-all duration-200 ${
                 scrolled ? 'text-xs' : 'text-sm'
               }`}>
                 SENTINEL-K
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-mono-code px-2 py-0.2 rounded-full bg-[#F5F5F2] text-slate-700 border border-black/[0.05] font-bold">
+              <span className="hidden sm:inline-flex items-center gap-1 text-[9px] font-mono-code px-2 py-0.2 rounded-full bg-[#ECE8DE]/80 text-[#1A1712] border border-[#1A1712]/[0.08] font-bold">
                 <Activity className="w-2.5 h-2.5 text-emerald-600" />
                 FIELD COPILOT
               </span>
@@ -108,10 +108,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-1 rounded-lg transition-all duration-200 cursor-pointer font-medium ${
+                  className={`px-3 py-1 rounded-xl transition-all duration-200 cursor-pointer font-medium ${
                     isActive
-                      ? 'bg-[#F5F5F2] text-[#090D15] font-bold shadow-2xs'
-                      : 'text-slate-600 hover:text-[#090D15] hover:bg-black/[0.03]'
+                      ? 'bg-[#1A1712] text-white font-bold shadow-xs'
+                      : 'text-[#7C766C] hover:text-[#1A1712] hover:bg-[#1A1712]/[0.04]'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onVerifyClick, onExperienceClick
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleAction}
-              className={`inline-flex items-center gap-1.5 font-mono-code font-black tracking-wider uppercase transition-all duration-200 active:scale-98 cursor-pointer rounded-xl bg-[#090D15] hover:bg-slate-800 text-white ${
+              className={`inline-flex items-center gap-1.5 font-mono-code font-black tracking-wider uppercase transition-all duration-200 active:scale-98 cursor-pointer rounded-xl bg-[#1A1712] hover:bg-[#2A241C] text-white ${
                 scrolled
                   ? 'px-3 py-1.5 text-[10px]'
                   : 'px-3.5 sm:px-4 py-1.5 text-xs shadow-xs'

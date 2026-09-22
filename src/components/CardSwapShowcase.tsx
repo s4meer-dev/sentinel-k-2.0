@@ -13,9 +13,9 @@ import {
 
 export const CardSwapShowcase: React.FC = () => {
   return (
-    <section className="relative py-20 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+    <section className="relative py-20 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
       {/* Millimeter Dot Grid */}
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+      <div className="absolute inset-0 network-grid opacity-40 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -23,50 +23,50 @@ export const CardSwapShowcase: React.FC = () => {
           
           {/* Left Column: Narrative & Technical Description (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-black/[0.07] shadow-2xs text-xs font-mono-code text-slate-800 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs text-xs font-mono-code text-[#1A1712] mb-4 backdrop-blur-md">
               <Layers className="w-3.5 h-3.5 text-[#F0B31C]" />
               <span className="font-bold tracking-wider">3D VERIFICATION STACK</span>
               <span className="text-slate-300">/</span>
-              <span className="text-amber-800 font-semibold">REACT BITS CARDSWAP</span>
+              <span className="text-amber-900 font-semibold">REACT BITS CARDSWAP</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
-              TANGIBLE 3D DEFENSE <br />
-              <span className="text-slate-900">VERIFICATION ENGINE.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.06]">
+              TANGIBLE 3D DEFENSE. <br />
+              <span className="font-serif italic font-normal normal-case text-slate-800">Verification stack in action.</span>
             </h2>
 
-            <p className="mt-4 text-base text-slate-600 font-normal leading-relaxed">
-              Witness how Sentinel-K executes multi-stage verification in real time. Each card represents an autonomous defense tier running on the iQOO 13 and plant workstations — from acoustic spoof detection to EPANET hydrodynamic simulation.
+            <p className="mt-4 text-base text-[#7C766C] font-normal leading-relaxed">
+              Witness how Sentinel-K executes multi-stage verification in real time. Each card represents an autonomous defense tier running on sovereign field nodes and plant workstations — from acoustic spoof detection to EPANET hydrodynamic simulation.
             </p>
 
             <div className="mt-6 space-y-3 font-mono-code text-xs">
-              <div className="p-3 rounded-2xl bg-white border border-black/[0.06] shadow-2xs flex items-center justify-between">
-                <span className="flex items-center gap-2 text-slate-700 font-bold">
+              <div className="p-3.5 rounded-2xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md flex items-center justify-between">
+                <span className="flex items-center gap-2 text-[#7C766C] font-bold">
                   <span className="w-2 h-2 rounded-full bg-blue-600" />
                   <span>On-Device Execution:</span>
                 </span>
-                <strong className="text-slate-900">Snapdragon® 8 Elite NPU (45 TOPS)</strong>
+                <strong className="text-[#1A1712]">Snapdragon® 8 Elite NPU (45 TOPS)</strong>
               </div>
 
-              <div className="p-3 rounded-2xl bg-white border border-black/[0.06] shadow-2xs flex items-center justify-between">
-                <span className="flex items-center gap-2 text-slate-700 font-bold">
+              <div className="p-3.5 rounded-2xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md flex items-center justify-between">
+                <span className="flex items-center gap-2 text-[#7C766C] font-bold">
                   <span className="w-2 h-2 rounded-full bg-[#F0B31C]" />
                   <span>Kinetic Co-Processor:</span>
                 </span>
-                <strong className="text-slate-900">Hardware-Accelerated Physics Engine</strong>
+                <strong className="text-[#1A1712]">Hardware-Accelerated Physics Engine</strong>
               </div>
 
-              <div className="p-3 rounded-2xl bg-white border border-black/[0.06] shadow-2xs flex items-center justify-between">
-                <span className="flex items-center gap-2 text-slate-700 font-bold">
+              <div className="p-3.5 rounded-2xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md flex items-center justify-between">
+                <span className="flex items-center gap-2 text-[#7C766C] font-bold">
                   <span className="w-2 h-2 rounded-full bg-emerald-600" />
                   <span>Air-Gapped Sovereign Gate:</span>
                 </span>
-                <strong className="text-slate-900">Ultrasonic Biometric Enclave</strong>
+                <strong className="text-[#1A1712]">Ultrasonic Biometric Enclave</strong>
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-2 text-xs font-mono-code text-slate-500">
-              <Clock className="w-3.5 h-3.5 text-slate-700" />
+            <div className="mt-6 flex items-center gap-2 text-xs font-mono-code text-[#7C766C]">
+              <Clock className="w-3.5 h-3.5 text-[#1A1712]" />
               <span>Cards swap automatically every 4.5 seconds with GSAP elastic physics.</span>
             </div>
           </div>

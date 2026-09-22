@@ -34,46 +34,48 @@ export const ProblemSection: React.FC = () => {
   ];
 
   return (
-    <section id="problem" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+    <section id="problem" className="scroll-mt-36 relative pt-36 md:pt-44 pb-20 md:pb-28 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
       {/* Subtle Dot Grid */}
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+      <div className="absolute inset-0 network-grid opacity-35 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-red-800 mb-5 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#1A1712]/[0.08] text-xs font-mono-code text-red-800 mb-5 shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md">
             <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
             <span className="font-bold tracking-wider">THE VULNERABILITY GAP</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600">CRITICAL INFRASTRUCTURE DEFENSE</span>
+            <span className="text-[#5C564C]">CRITICAL INFRASTRUCTURE DEFENSE</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]">
             THE ATTACK DOESN&apos;T HAVE TO <br />
-            <span className="text-red-700">COMPROMISE THE MACHINE.</span>
+            <span className="font-serif italic font-normal normal-case text-red-700 tracking-tight">
+              compromise the machine.
+            </span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#5C564C] max-w-2xl mx-auto font-normal leading-relaxed">
             It compromises the human who operates it. Adversaries weaponize urgent operational dispatches to trigger physically catastrophic commands through authorized human hands.
           </p>
         </div>
 
-        {/* 3 Core Problem Pillars */}
+        {/* 3 Core Problem Pillars — Subscrr Squircle Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {problems.map((p, i) => {
             const Icon = p.icon;
             return (
               <div
                 key={i}
-                className="p-6 sm:p-7 rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] transition-all duration-200 flex flex-col justify-between group"
+                className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05]">
-                      <Icon className="w-5 h-5 text-slate-800" />
+                    <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06]">
+                      <Icon className="w-5 h-5 text-[#1A1712]" />
                     </div>
-                    <span className="font-mono-code text-[10px] font-bold text-slate-500 uppercase px-2 py-0.5 rounded bg-slate-100">
+                    <span className="font-mono-code text-[10px] font-bold text-[#7C766C] uppercase px-2.5 py-0.5 rounded-full bg-[#ECE8DE]">
                       {p.badge}
                     </span>
                   </div>
@@ -100,37 +102,37 @@ export const ProblemSection: React.FC = () => {
           })}
         </div>
 
-        {/* Interactive Cyber-Physical Paradox Comparator */}
-        <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-white border border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
-          <div className="p-5 sm:p-6 bg-[#FAFAF8] border-b border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Interactive Cyber-Physical Paradox Comparator — Subscrr Bento Style */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] bg-white border border-[#1A1712]/[0.08] shadow-[0_8px_30px_-10px_rgba(38,34,28,0.08),0_24px_60px_-24px_rgba(38,34,28,0.1)] overflow-hidden">
+          <div className="p-6 sm:p-7 bg-[#ECE8DE]/60 border-b border-[#1A1712]/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-xs font-mono-code font-black text-slate-800 uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-xs font-mono-code font-black text-[#1A1712] uppercase tracking-wider">
                 <span className="w-2 h-2 rounded-full bg-[#F0B31C]" />
                 <span>INTERACTIVE COMPARATOR // DEFENSE PARADIGM</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1 font-mono-code">
+              <p className="text-xs text-[#7C766C] mt-1 font-mono-code">
                 Toggle below to compare what happens when a deceptive 850 RPM pump dispatch enters your plant.
               </p>
             </div>
 
             {/* Mode Switcher */}
-            <div className="flex items-center p-1 rounded-2xl bg-white border border-black/[0.08] shadow-2xs font-mono-code text-xs">
+            <div className="flex items-center p-1 rounded-2xl bg-white/90 border border-[#1A1712]/[0.08] shadow-2xs font-mono-code text-xs backdrop-blur-md">
               <button
                 onClick={() => setCompareMode('TRADITIONAL')}
-                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-xl font-bold transition-all cursor-pointer ${
                   compareMode === 'TRADITIONAL'
                     ? 'bg-red-600 text-white shadow-2xs'
-                    : 'text-slate-600 hover:text-black'
+                    : 'text-[#7C766C] hover:text-[#1A1712]'
                 }`}
               >
                 TRADITIONAL SCADA
               </button>
               <button
                 onClick={() => setCompareMode('SENTINEL')}
-                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-xl font-bold transition-all cursor-pointer ${
                   compareMode === 'SENTINEL'
-                    ? 'bg-[#090D15] text-[#F0B31C] shadow-2xs'
-                    : 'text-slate-600 hover:text-black'
+                    ? 'bg-[#1A1712] text-[#F0B31C] shadow-2xs'
+                    : 'text-[#7C766C] hover:text-[#1A1712]'
                 }`}
               >
                 SENTINEL-K TWIN

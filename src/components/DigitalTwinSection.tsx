@@ -16,89 +16,91 @@ export const DigitalTwinSection: React.FC = () => {
   }, [valveState, pumpSpeed]);
 
   return (
-    <section id="digital-twin" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FBFBFA] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+    <section id="digital-twin" className="scroll-mt-36 relative pt-36 md:pt-44 pb-20 md:pb-28 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
+      <div className="absolute inset-0 network-grid opacity-35 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md">
             <Waves className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">WNTR / EPANET HYDRODYNAMIC TWIN</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600">PHYSICS AS THE TESTBED</span>
+            <span className="text-[#5C564C]">PHYSICS AS THE TESTBED</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]">
             THE PHYSICAL WORLD IS THE <br />
-            <span className="text-slate-900">TEST ENVIRONMENT.</span>
+            <span className="font-serif italic font-normal normal-case text-slate-800 tracking-tight">
+              ultimate test environment.
+            </span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#5C564C] max-w-2xl mx-auto font-normal leading-relaxed">
             Before any high-impact command reaches the physical PLC, Sentinel-K simulates its exact consequences in an isolated digital twin running real-world differential fluid equations.
           </p>
         </div>
 
-        {/* Digital Twin Architecture Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+        {/* Digital Twin Architecture Grid — Subscrr Squircle Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           
-          <div className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
                 <Database className="w-5 h-5 text-blue-700" />
               </div>
-              <h3 className="text-sm sm:text-base font-sans font-black text-[#090D15] uppercase">
+              <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
                 Plant Topology Model
               </h3>
-              <p className="mt-2 text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="mt-2 text-xs text-[#5C564C] leading-relaxed font-normal">
                 Models 24 pipe junctions, 4 variable frequency pumps, 6 pressure relief valves, and 2 municipal distribution reservoirs with exact pipe roughness and elevation data.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-black/[0.05] font-mono-code text-[11px] text-blue-800 font-bold">
+            <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-blue-800 font-bold">
               Topology: EPANET 2.2 INP Schema
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
                 <Cpu className="w-5 h-5 text-amber-700" />
               </div>
-              <h3 className="text-sm sm:text-base font-sans font-black text-[#090D15] uppercase">
+              <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
                 Transient Kinematics Solver
               </h3>
-              <p className="mt-2 text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="mt-2 text-xs text-[#5C564C] leading-relaxed font-normal">
                 Computes Joukowsky water hammer shockwaves, velocity head gradients, and friction dissipation in 50-millisecond discrete time steps.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-black/[0.05] font-mono-code text-[11px] text-amber-800 font-bold">
+            <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-amber-800 font-bold">
               Engine: Python WNTR Engine
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
                 <ShieldCheck className="w-5 h-5 text-emerald-700" />
               </div>
-              <h3 className="text-sm sm:text-base font-sans font-black text-[#090D15] uppercase">
+              <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
                 Invariant Guardrails
               </h3>
-              <p className="mt-2 text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="mt-2 text-xs text-[#5C564C] leading-relaxed font-normal">
                 Hardcoded mathematical invariants: Max Manifold Pressure &lt;= 9.2 bar, Min Reservoir Head &gt;= 1.5m, Max Surge Velocity &lt;= 3.2 m/s.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-black/[0.05] font-mono-code text-[11px] text-emerald-800 font-bold">
+            <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-emerald-800 font-bold">
               Enforcement: Deterministic Reject Gate
             </div>
           </div>
 
         </div>
 
-        {/* Interactive EPANET 2.2 Hydrodynamics Sandbox */}
-        <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-white border border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
-          <div className="p-5 sm:p-6 bg-[#FAFAF8] border-b border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Interactive EPANET 2.2 Hydrodynamics Sandbox — Subscrr Bento Style */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] bg-white border border-[#1A1712]/[0.08] shadow-[0_8px_30px_-10px_rgba(38,34,28,0.08),0_24px_60px_-24px_rgba(38,34,28,0.1)] overflow-hidden">
+          <div className="p-6 sm:p-7 bg-[#ECE8DE]/60 border-b border-[#1A1712]/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono-code font-black text-slate-800 uppercase tracking-wider">
                 <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />

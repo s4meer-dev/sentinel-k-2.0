@@ -154,27 +154,28 @@ export const SentinelPipelineSection: React.FC = () => {
   };
 
   return (
-    <section id="pipeline" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
+    <section id="pipeline" className="scroll-mt-36 relative pt-36 md:pt-44 pb-20 md:pb-28 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
       {/* Subtle Dot Grid */}
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+      <div className="absolute inset-0 network-grid opacity-40 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
             <Sliders className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">END-TO-END VERIFICATION HARNESS</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600">8 DETERMINISTIC STAGES</span>
+            <span className="text-[#7C766C]">8 DETERMINISTIC STAGES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
-            THE 8-STAGE SENTINEL PIPELINE
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
+            THE 8-STAGE SENTINEL PIPELINE. <br />
+            <span className="font-serif italic font-normal normal-case text-slate-800">Deterministic verification in 125 milliseconds.</span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
-            From the moment an unverified instruction lands on an iQOO smartphone to the moment a physically verified safe action is dispatched to the PLC.
+          <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
+            From the moment an unverified instruction lands on an air-gapped field terminal to the moment a physically verified safe action is dispatched to the PLC.
           </p>
 
           {/* Carousel Controls */}
@@ -183,29 +184,29 @@ export const SentinelPipelineSection: React.FC = () => {
               onClick={() => setIsPlaying(!isPlaying)}
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
                 isPlaying
-                  ? 'bg-[#090D15] text-[#F0B31C] border-[#090D15]'
-                  : 'bg-white text-slate-700 border-black/[0.08] hover:bg-slate-50'
-              } shadow-2xs`}
+                  ? 'bg-[#1A1712] text-[#F0B31C] border-[#1A1712]'
+                  : 'bg-white/80 text-[#1A1712] border-[#1A1712]/[0.08] hover:bg-white'
+              } shadow-2xs backdrop-blur-md`}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
               <span>{isPlaying ? 'PAUSE PIPELINE' : 'AUTO CYCLE'}</span>
             </button>
 
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-white border border-black/[0.08] shadow-2xs">
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md">
               <button
                 onClick={prevStep}
                 aria-label="Previous Stage"
-                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 text-xs font-mono-code font-bold text-slate-600">
+              <span className="px-2 text-xs font-mono-code font-bold text-[#7C766C]">
                 0{activeStep} / 0{steps.length}
               </span>
               <button
                 onClick={nextStep}
                 aria-label="Next Stage"
-                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -214,7 +215,7 @@ export const SentinelPipelineSection: React.FC = () => {
         </div>
 
         {/* 8-Step Interactive Timeline Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-1.5 rounded-2xl bg-white border border-black/[0.06] shadow-2xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-2 rounded-[24px] bg-white/80 border border-[#1A1712]/[0.08] shadow-[0_8px_24px_-8px_rgba(38,34,28,0.06)] backdrop-blur-md">
           {steps.map((s) => {
             const Icon = getStepIcon(s.id);
             const isSelected = activeStep === s.id;
@@ -226,14 +227,14 @@ export const SentinelPipelineSection: React.FC = () => {
               <button
                 key={s.id}
                 onClick={() => setActiveStep(s.id)}
-                className={`p-3 rounded-xl text-left transition-all duration-200 cursor-pointer border ${
+                className={`p-3 rounded-2xl text-left transition-all duration-200 cursor-pointer border ${
                   isSelected
                     ? isFail
                       ? 'bg-red-50 border-red-300 text-red-900 shadow-xs'
                       : isReplan
                       ? 'bg-amber-50 border-amber-300 text-amber-900 shadow-xs'
-                      : 'bg-[#090D15] text-white border-[#090D15] shadow-xs'
-                    : 'bg-[#FAFAF8] border-transparent hover:border-black/10 text-slate-600'
+                      : 'bg-[#1A1712] text-white border-[#1A1712] shadow-xs'
+                    : 'bg-[#ECE8DE]/50 border-transparent hover:border-[#1A1712]/10 text-slate-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
@@ -253,7 +254,7 @@ export const SentinelPipelineSection: React.FC = () => {
                   }`} />
                 </div>
                 <div className={`text-[11px] font-sans font-bold line-clamp-1 ${
-                  isSelected && !isFail && !isReplan ? 'text-white' : 'text-[#090D15]'
+                  isSelected && !isFail && !isReplan ? 'text-white' : 'text-[#1A1712]'
                 }`}>
                   {s.stage}
                 </div>
@@ -285,18 +286,18 @@ export const SentinelPipelineSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="mt-5 p-6 sm:p-8 rounded-2xl bg-white border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
+            className="mt-6 p-6 sm:p-9 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               
               {/* Left Column: Stage Concept & Engine */}
               <div className="lg:col-span-7">
                 <div className="flex items-center gap-2 mb-2.5">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#F4F4F0] border border-black/[0.05] text-slate-800">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#ECE8DE]/70 border border-[#1A1712]/[0.08] text-[#1A1712]">
                     STAGE 0{current.id} // {current.stage}
                   </span>
                   <span
-                    className={`text-xs font-mono-code font-bold uppercase px-2.5 py-0.5 rounded ${
+                    className={`text-xs font-mono-code font-bold uppercase px-2.5 py-0.5 rounded-full ${
                       current.status === 'FAIL'
                         ? 'bg-red-50 text-red-800 border border-red-200'
                         : current.status === 'FLAGGED'
@@ -308,33 +309,33 @@ export const SentinelPipelineSection: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-sans font-black text-[#090D15]">
+                <h3 className="text-xl sm:text-2xl font-sans font-black text-[#1A1712]">
                   {current.title}
                 </h3>
 
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed font-normal">
+                <p className="mt-3 text-sm text-[#7C766C] leading-relaxed font-normal">
                   {current.description}
                 </p>
 
                 <div className="mt-5 space-y-2.5 font-mono-code text-xs">
-                  <div className="p-3 rounded-xl bg-[#FAFAF8] border border-black/[0.05]">
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">EXECUTING ENGINE:</div>
-                    <div className="text-slate-900 font-bold mt-0.5">{current.engine}</div>
+                  <div className="p-3.5 rounded-2xl bg-[#ECE8DE]/40 border border-[#1A1712]/[0.06]">
+                    <div className="text-[10px] text-[#7C766C] uppercase font-bold">EXECUTING ENGINE:</div>
+                    <div className="text-[#1A1712] font-bold mt-0.5">{current.engine}</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#FAFAF8] border border-black/[0.05]">
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">TECHNICAL DISCIPLINE:</div>
-                    <div className="text-slate-600 mt-0.5 leading-relaxed">{current.technicalDetails}</div>
+                  <div className="p-3.5 rounded-2xl bg-[#ECE8DE]/40 border border-[#1A1712]/[0.06]">
+                    <div className="text-[10px] text-[#7C766C] uppercase font-bold">TECHNICAL DISCIPLINE:</div>
+                    <div className="text-slate-700 mt-0.5 leading-relaxed">{current.technicalDetails}</div>
                   </div>
                 </div>
               </div>
 
               {/* Right Column: Live Terminal Diagnostic Snippet */}
               <div className="lg:col-span-5">
-                <div className="rounded-xl bg-[#FAFAF8] border border-black/[0.08] shadow-inner overflow-hidden font-mono-code text-xs">
-                  <div className="p-3 bg-white border-b border-black/[0.05] flex items-center justify-between text-[11px] text-slate-600">
-                    <span className="flex items-center gap-1.5 text-slate-900 font-bold">
-                      <FileCode className="w-3.5 h-3.5 text-[#090D15]" />
+                <div className="rounded-[24px] bg-[#ECE8DE]/50 border border-[#1A1712]/[0.08] shadow-inner overflow-hidden font-mono-code text-xs">
+                  <div className="p-3.5 bg-white border-b border-[#1A1712]/[0.06] flex items-center justify-between text-[11px] text-slate-600">
+                    <span className="flex items-center gap-1.5 text-[#1A1712] font-bold">
+                      <FileCode className="w-3.5 h-3.5 text-[#1A1712]" />
                       TERMINAL TRACE // S0{current.id}
                     </span>
                     <span className="text-emerald-700 font-bold">LIVE BUS</span>
@@ -342,18 +343,18 @@ export const SentinelPipelineSection: React.FC = () => {
 
                   <div className="p-4 space-y-3">
                     <div>
-                      <div className="text-[10px] text-slate-500 uppercase">SYSTEM DIAGNOSTIC LOG:</div>
-                      <div className="mt-1 p-3 rounded-lg bg-white border border-black/[0.06] text-[#090D15] text-[11px] font-mono-code whitespace-pre-wrap break-all font-bold">
+                      <div className="text-[10px] text-[#7C766C] uppercase">SYSTEM DIAGNOSTIC LOG:</div>
+                      <div className="mt-1 p-3 rounded-xl bg-white border border-[#1A1712]/[0.06] text-[#1A1712] text-[11px] font-mono-code whitespace-pre-wrap break-all font-bold">
                         {current.outputSnippet}
                       </div>
                     </div>
 
-                    <div className="pt-2 flex items-center justify-between text-[10px] text-slate-500 border-t border-black/[0.05]">
+                    <div className="pt-2 flex items-center justify-between text-[10px] text-[#7C766C] border-t border-[#1A1712]/[0.06]">
                       <span>STAGE LATENCY BUDGET:</span>
-                      <span className="text-slate-900 font-bold">&lt; 380 ms</span>
+                      <span className="text-[#1A1712] font-bold">&lt; 380 ms</span>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-slate-500">
+                    <div className="flex items-center justify-between text-[10px] text-[#7C766C]">
                       <span>VERIFICATION HARNESS:</span>
                       <span className="text-emerald-700 font-bold">DETERMINISTIC</span>
                     </div>

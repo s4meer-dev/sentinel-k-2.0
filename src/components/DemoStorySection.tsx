@@ -125,26 +125,26 @@ export const DemoStorySection: React.FC = () => {
   const current = storySteps.find((s) => s.step === activeStep) || storySteps[6];
 
   return (
-    <section id="demo-story" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+    <section id="demo-story" className="scroll-mt-36 relative pt-28 md:pt-36 pb-20 md:pb-28 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
+      <div className="absolute inset-0 network-grid opacity-40 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
             <Clock className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">INCIDENT WALKTHROUGH</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600">THE FRIDAY AFTERNOON SURGE ATTACK</span>
+            <span className="text-[#7C766C]">THE FRIDAY AFTERNOON SURGE ATTACK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
             CHRONICLE OF A THWARTED <br />
-            <span className="text-slate-900">PHYSICAL DISASTER.</span>
+            <span className="font-serif italic font-normal normal-case text-slate-800">physical disaster.</span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             Follow the 10-step sequence showing how an adversarial authority-spoofing attack was intercepted, simulated, rejected, and safely remediated in under 4 minutes.
           </p>
 
@@ -154,29 +154,29 @@ export const DemoStorySection: React.FC = () => {
               onClick={() => setIsPlaying(!isPlaying)}
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
                 isPlaying
-                  ? 'bg-[#090D15] text-[#F0B31C] border-[#090D15]'
-                  : 'bg-white text-slate-700 border-black/[0.08] hover:bg-slate-50'
-              } shadow-2xs`}
+                  ? 'bg-[#1A1712] text-[#F0B31C] border-[#1A1712]'
+                  : 'bg-white/80 text-[#1A1712] border-[#1A1712]/[0.08] hover:bg-white'
+              } shadow-2xs backdrop-blur-md`}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
               <span>{isPlaying ? 'PAUSE STORY' : 'AUTO CYCLE'}</span>
             </button>
 
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-white border border-black/[0.08] shadow-2xs">
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md">
               <button
                 onClick={prevStep}
                 aria-label="Previous Step"
-                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 text-xs font-mono-code font-bold text-slate-600">
+              <span className="px-2 text-xs font-mono-code font-bold text-[#7C766C]">
                 Step {activeStep} / {storySteps.length}
               </span>
               <button
                 onClick={nextStep}
                 aria-label="Next Step"
-                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-slate-700 hover:text-black transition-colors cursor-pointer active:scale-95"
+                className="p-1.5 rounded-lg hover:bg-black/[0.05] text-[#1A1712] transition-colors cursor-pointer active:scale-95"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -185,15 +185,15 @@ export const DemoStorySection: React.FC = () => {
         </div>
 
         {/* Step Nav Bar */}
-        <div className="max-w-4xl mx-auto flex items-center justify-between gap-1 p-1.5 rounded-2xl bg-white border border-black/[0.06] overflow-x-auto mb-6 shadow-2xs">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-1 p-1.5 rounded-2xl bg-white/80 border border-[#1A1712]/[0.08] backdrop-blur-md overflow-x-auto mb-6 shadow-2xs">
           {storySteps.map((st) => (
             <button
               key={st.step}
               onClick={() => setActiveStep(st.step)}
               className={`px-2.5 py-1.5 rounded-xl font-mono-code text-[11px] font-bold shrink-0 transition-all duration-200 cursor-pointer border ${
                 activeStep === st.step
-                  ? 'bg-[#090D15] text-white border-[#090D15] shadow-xs'
-                  : 'bg-transparent text-slate-600 border-transparent hover:text-black hover:bg-black/[0.02]'
+                  ? 'bg-[#1A1712] text-white border-[#1A1712] shadow-xs'
+                  : 'bg-transparent text-[#7C766C] border-transparent hover:text-[#1A1712] hover:bg-black/[0.02]'
               }`}
             >
               #{st.step}
@@ -210,15 +210,15 @@ export const DemoStorySection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
-              className="p-6 sm:p-8 rounded-2xl bg-white border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
+              className="p-6 sm:p-9 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-5 border-b border-black/[0.05]">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-5 border-b border-[#1A1712]/[0.06]">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#FAFAF8] border border-black/[0.05] text-slate-800">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono-code font-bold uppercase tracking-wider bg-[#ECE8DE]/70 border border-[#1A1712]/[0.08] text-[#1A1712]">
                     STEP {current.step} OF 10 // {current.time}
                   </span>
-                  <span className="text-xs font-mono-code text-slate-500">
-                    ACTOR: <strong className="text-slate-900">{current.actor}</strong>
+                  <span className="text-xs font-mono-code text-[#7C766C]">
+                    ACTOR: <strong className="text-[#1A1712]">{current.actor}</strong>
                   </span>
                 </div>
 
@@ -237,39 +237,39 @@ export const DemoStorySection: React.FC = () => {
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-sans font-black text-[#090D15]">
+              <h3 className="text-xl sm:text-2xl font-sans font-black text-[#1A1712]">
                 {current.title}
               </h3>
 
-              <p className="mt-2.5 text-sm text-slate-600 leading-relaxed font-normal">
+              <p className="mt-2.5 text-sm text-[#7C766C] leading-relaxed font-normal">
                 {current.summary}
               </p>
 
-              <div className="mt-5 p-3.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] font-mono-code text-xs">
-                <div className="text-[10px] text-slate-500 uppercase font-bold">OPERATIONAL TRACE:</div>
-                <div className="text-[#090D15] font-bold mt-1 text-xs">
+              <div className="mt-5 p-4 rounded-2xl bg-[#ECE8DE]/40 border border-[#1A1712]/[0.06] font-mono-code text-xs">
+                <div className="text-[10px] text-[#7C766C] uppercase font-bold">OPERATIONAL TRACE:</div>
+                <div className="text-[#1A1712] font-bold mt-1 text-xs">
                   {current.action}
                 </div>
               </div>
 
               {/* Navigation Arrows */}
-              <div className="mt-6 pt-3.5 border-t border-black/[0.05] flex items-center justify-between">
+              <div className="mt-6 pt-3.5 border-t border-[#1A1712]/[0.06] flex items-center justify-between">
                 <button
                   disabled={current.step === 1}
                   onClick={() => setActiveStep((prev) => Math.max(1, prev - 1))}
-                  className="text-xs font-mono-code text-slate-500 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                  className="text-xs font-mono-code text-[#7C766C] hover:text-[#1A1712] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 >
                   &larr; PREVIOUS
                 </button>
 
-                <span className="text-xs font-mono-code text-slate-400">
+                <span className="text-xs font-mono-code text-[#7C766C]">
                   {current.step} / 10
                 </span>
 
                 <button
                   disabled={current.step === 10}
                   onClick={() => setActiveStep((prev) => Math.min(10, prev + 1))}
-                  className="text-xs font-mono-code text-[#090D15] hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-bold"
+                  className="text-xs font-mono-code text-[#1A1712] hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer font-bold"
                 >
                   NEXT &rarr;
                 </button>

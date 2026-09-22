@@ -2,19 +2,19 @@
 
 @layer base {
   :root {
-    --color-bg-canvas: #FBFBFA;
+    --color-bg-canvas: #F4F2EC;
     --color-bg-surface: #FFFFFF;
-    --color-bg-surface-elevated: #F5F5F2;
-    --color-bg-surface-subtle: #EFEFEA;
+    --color-bg-surface-elevated: #ECE8DE;
+    --color-bg-surface-subtle: #E4DFC8;
     --color-iqoo-yellow: #F0B31C;
     --color-iqoo-yellow-warm: #E2A312;
-    --color-industrial-ink: #090D15;
+    --color-industrial-ink: #1A1712;
     --color-danger-crimson: #DC2626;
     --color-warning-amber: #D97706;
     --color-success-emerald: #16A34A;
-    --color-text-primary: #090D15;
-    --color-text-secondary: #475569;
-    --color-text-muted: #94A3B8;
+    --color-text-primary: #1A1712;
+    --color-text-secondary: #5C564C;
+    --color-text-muted: #8C8476;
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-heading: 'Syne', system-ui, sans-serif;
     --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -22,8 +22,8 @@
   }
 
   body {
-    background-color: #FBFBFA;
-    color: #090D15;
+    background-color: #F4F2EC;
+    color: #1A1712;
     font-family: var(--font-body);
     overflow-x: hidden;
     margin: 0;
@@ -38,6 +38,7 @@
     max-width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #F4F2EC;
   }
 }
 
@@ -93,14 +94,58 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #FBFBFA;
+  background: #F4F2EC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D8D2C4;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #B8B09E;
+}
+
+/* Subscrr Editorial Noise Grain Overlay */
+.subscrr-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Subscrr-Style Soft Luxury Cards */
+.subscrr-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(26, 23, 18, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 4px 20px -6px rgba(38, 34, 28, 0.05), 0 20px 50px -20px rgba(38, 34, 28, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subscrr-card:hover {
+  border-color: rgba(26, 23, 18, 0.15);
+  box-shadow: 0 8px 30px -8px rgba(38, 34, 28, 0.08), 0 30px 70px -25px rgba(38, 34, 28, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Subscrr-Style Dark Statement Feature Card */
+.subscrr-card-dark {
+  background: #111317;
+  color: #F4F2EC;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  box-shadow: 0 24px 64px -20px rgba(0, 0, 0, 0.35);
+}
+
+/* Subscrr Glass Navbar / Pill */
+.subscrr-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(26, 23, 18, 0.08);
+  box-shadow: 0 4px 24px -4px rgba(38, 34, 28, 0.08);
 }

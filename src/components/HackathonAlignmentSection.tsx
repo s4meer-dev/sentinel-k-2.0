@@ -26,25 +26,26 @@ export const HackathonAlignmentSection: React.FC = () => {
   ];
 
   return (
-    <section id="hackathon-alignment" className="scroll-mt-24 relative py-20 md:py-28 bg-[#FAFAF8] border-b border-black/[0.06] overflow-hidden text-[#090D15]">
-      <div className="absolute inset-0 network-grid opacity-50 pointer-events-none -z-10" />
+    <section id="hackathon-alignment" className="scroll-mt-36 relative pt-28 md:pt-36 pb-20 md:pb-28 bg-transparent border-b border-[#1A1712]/[0.08] overflow-hidden text-[#1A1712]">
+      <div className="absolute inset-0 network-grid opacity-40 pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.06] text-xs font-mono-code text-slate-800 mb-5 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
             <Award className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">iQOO HACKATHON 2026 ALIGNMENT</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-600">JUDGING CRITERIA</span>
+            <span className="text-[#7C766C]">JUDGING CRITERIA</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.06]">
-            BUILT FOR THE iQOO ECOSYSTEM.
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
+            BUILT FOR THE iQOO ECOSYSTEM. <br />
+            <span className="font-serif italic font-normal normal-case text-slate-800">Mission-critical infrastructure resilience.</span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             Sentinel-K demonstrates how flagship mobile performance elevates beyond consumer entertainment into mission-critical infrastructure resilience.
           </p>
         </div>
@@ -56,13 +57,13 @@ export const HackathonAlignmentSection: React.FC = () => {
             return (
               <div
                 key={i}
-                className="p-6 rounded-2xl bg-white border border-black/[0.06] hover:border-black/[0.12] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.05)] transition-all duration-200 flex flex-col justify-between"
+                className="p-6 rounded-[28px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_12px_32px_-12px_rgba(38,34,28,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(38,34,28,0.12)] transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="p-2.5 rounded-xl bg-[#FAFAF8] border border-black/[0.05] w-fit mb-4 text-[#090D15]">
+                  <div className="p-3 rounded-2xl bg-[#ECE8DE]/60 border border-[#1A1712]/[0.06] w-fit mb-4 text-[#1A1712]">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xs sm:text-sm font-sans font-black tracking-tight text-[#090D15] uppercase">
+                  <h3 className="text-xs sm:text-sm font-sans font-black tracking-tight text-[#1A1712] uppercase">
                     {p.title}
                   </h3>
                   <p className="mt-2.5 text-xs text-slate-600 leading-relaxed font-normal">
@@ -70,7 +71,7 @@ export const HackathonAlignmentSection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-black/[0.05] font-mono-code text-[10px] text-slate-500">
+                <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[10px] text-[#7C766C]">
                   CATEGORY: SYSTEM INTEGRATION
                 </div>
               </div>

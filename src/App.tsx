@@ -16,10 +16,10 @@ import { Footer } from './components/Footer';
 import type { ValidationPhase } from './types/sentinel';
 
 const sectionTransition = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 32, filter: 'blur(4px)' },
+  whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
   viewport: { once: true, amount: 0.08 },
-  transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const }
+  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
 };
 
 interface SectionBridgeProps {
@@ -29,14 +29,14 @@ interface SectionBridgeProps {
 
 const SectionBridge = ({ label, tag }: SectionBridgeProps) => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 select-none">
-    <div className="flex items-center justify-between text-[9px] font-mono-code text-slate-500 uppercase tracking-widest border-t border-black/[0.06] pt-3">
+    <div className="flex items-center justify-between text-[9px] font-mono-code text-[#7C766C] uppercase tracking-widest border-t border-[#1A1712]/[0.08] pt-3">
       <div className="flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-slate-900" />
-        <span className="font-bold text-slate-800">{label}</span>
+        <span className="w-1.5 h-1.5 rounded-full bg-[#1A1712]" />
+        <span className="font-bold text-[#1A1712]">{label}</span>
       </div>
       <div className="flex items-center gap-4">
         <span>{tag}</span>
-        <span className="hidden sm:inline text-slate-500">AIR-GAP PROTOCOL</span>
+        <span className="hidden sm:inline text-[#8C8476]">AIR-GAP PROTOCOL</span>
       </div>
     </div>
   </div>
@@ -53,7 +53,13 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FBFBFA] text-[#090D15] selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
+    <div className="relative min-h-screen bg-[#F4F2EC] text-[#1A1712] selection:bg-[#F0B31C] selection:text-black overflow-x-hidden font-sans">
+      {/* Subscrr Organic Noise Grain Texture */}
+      <div className="subscrr-grain" aria-hidden="true" />
+
+      {/* Subscrr Ambient Mesh Lighting */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-amber-100/30 via-stone-200/20 to-transparent blur-[140px] pointer-events-none -z-10" />
+
       {/* Streamlined Floating Navbar */}
       <Navbar onVerifyClick={() => scrollTo('hero')} />
 

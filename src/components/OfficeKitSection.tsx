@@ -30,13 +30,13 @@ export const OfficeKitSection: React.FC = () => {
         {/* 3-Tier Synergistic Diagram */}
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           
-          {/* Card 1: iQOO Field Terminal */}
+          {/* Card 1: Sovereign Field Terminal */}
           <div className="p-6 sm:p-7 rounded-2xl bg-white border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-black/[0.05] mb-4">
                 <span className="text-xs font-mono-code text-[#090D15] font-bold flex items-center gap-1.5">
                   <Smartphone className="w-4 h-4 text-blue-600" />
-                  iQOO 13 PRO NODE
+                  FIELD OPERATOR TERMINAL
                 </span>
                 <span className="text-[10px] font-mono-code px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
                   FIELD EDGE
