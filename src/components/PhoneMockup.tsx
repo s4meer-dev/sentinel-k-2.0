@@ -7,8 +7,7 @@ import {
   Pause, 
   ChevronLeft, 
   ChevronRight, 
-  RotateCcw,
-  Radio
+  RotateCcw
 } from 'lucide-react';
 
 interface PhoneMockupProps {
@@ -184,13 +183,6 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
             <div className="w-full h-0.5 bg-black/30" />
           </div>
 
-          {/* BMW M Motorsport Tricolor Stripe Badge (iQOO Legend Heritage) */}
-          <div className="absolute -bottom-2 right-8 flex items-center h-2 overflow-hidden rounded-xs shadow-xs border border-white/90 z-30 pointer-events-none">
-            <div className="w-2.5 h-full bg-[#0066B1]" />
-            <div className="w-2.5 h-full bg-[#002C6C]" />
-            <div className="w-2.5 h-full bg-[#E2231A]" />
-          </div>
-
           {/* Micro Stereo Earpiece Slit */}
           <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-14 h-0.5 bg-slate-500 rounded-full z-30 flex items-center justify-center pointer-events-none">
             <div className="w-8 h-[0.5px] bg-slate-300" />
@@ -288,9 +280,9 @@ export const PhoneMockup: React.FC<PhoneMockupProps> = ({
 
           <div className="flex items-center justify-between w-full px-2 text-[9px] font-mono-code text-slate-400">
             <span>TAP LEFT/RIGHT TO NAVIGATE</span>
-            <span className="flex items-center gap-1">
-              <Radio className="w-2.5 h-2.5 text-[#F0B31C]" />
-              <span>MONSTER HALO SYNCED</span>
+            <span className="flex items-center gap-1 text-slate-600 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>DEFENSE ENCLAVE ACTIVE</span>
             </span>
           </div>
 

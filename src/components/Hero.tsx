@@ -50,25 +50,28 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Left Column: Minimal Editorial Narrative & Jumper (6 cols) */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             
-            {/* Top iQOO Flagship Hardware Badge with BMW M Tricolor Accent */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-2xs text-xs font-mono-code text-slate-800 w-fit mb-6">
-              <div className="flex items-center h-2.5 overflow-hidden rounded-xs border border-black/10">
-                <div className="w-1.5 h-full bg-[#0066B1]" />
-                <div className="w-1.5 h-full bg-[#002C6C]" />
-                <div className="w-1.5 h-full bg-[#E2231A]" />
-              </div>
-              <span className="font-black tracking-wider text-[#090D15]">iQOO 13 FLAGSHIP</span>
+            {/* Top Hardware Badge without iQOO specific symbols */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] shadow-2xs text-xs font-mono-code text-slate-800 w-fit mb-4">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-black tracking-wider text-[#090D15]">SENTINEL-K</span>
               <span className="text-slate-300">/</span>
-              <span className="text-amber-800 font-bold text-[11px] flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                AIR-GAPPED FIELD ENCLAVE
+              <span className="text-slate-600 font-bold text-[11px]">
+                AIR-GAPPED FIELD SECURITY COPILOT
               </span>
             </div>
 
+            {/* Cinematic Telemetry Kicker */}
+            <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono-code text-slate-500 mb-3 uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              <span>DEFENSE SECTOR // MUNICIPAL SCADA NODE 04</span>
+              <span className="text-slate-300">·</span>
+              <span>EPANET 2.2 KINETIC TWIN</span>
+            </div>
+
             {/* Main Punchy Headline — Clean Ink Typography, No Yellow Line */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-sans font-black tracking-tight text-[#090D15] uppercase leading-[1.04]">
+            <h1 className="text-4xl sm:text-6xl lg:text-[62px] font-sans font-black tracking-[-0.03em] text-[#090D15] uppercase leading-[1.02]">
               THE COMMAND ISN&apos;T TRUSTED. <br />
-              <span>THE CONSEQUENCE IS VERIFIED.</span>
+              <span className="text-slate-900">THE CONSEQUENCE IS VERIFIED.</span>
             </h1>
 
             {/* Editorial Lead Paragraph — Concise & Punchy */}
