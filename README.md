@@ -98,8 +98,8 @@ iqoo/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/sashank321/iqoo.git
-cd iqoo
+git clone https://github.com/s4meer-dev/sentinel-k-2.0.git
+cd sentinel-k-2.0
 ```
 
 ### 2. Install dependencies
