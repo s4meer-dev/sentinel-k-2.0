@@ -44,7 +44,7 @@ const CAROUSEL_SLIDES: CarouselSlide[] = [
     id: 1,
     phase: 'INCOMING',
     tag: 'STAGE 01 // DISPATCH INTERCEPT',
-    hardware: 'iQOO 13 Field Enclave · Cellular Telemetry',
+    hardware: 'Air-Gapped Field Enclave · Cellular Telemetry',
     title: 'Adversary Authority Spoofing Intercepted',
     headline: 'CELLULAR VOICE CLONE DIRECTED AT FIELD TECHNICIAN',
     description: 'An incoming direct call impersonates Regional Supervisor Reynolds, ordering immediate manual override to ramp Pump 4 to 850 RPM. Sentinel-K intercepts the command at the field node before any SCADA contact.',
@@ -110,7 +110,7 @@ const CAROUSEL_SLIDES: CarouselSlide[] = [
     id: 4,
     phase: 'PHYSICAL_SIM',
     tag: 'STAGE 04 // KINETIC TWIN SIMULATION',
-    hardware: 'EPANET / WNTR Hydrodynamic Engine · Q2 Co-Processor',
+    hardware: 'EPANET / WNTR Hydrodynamic Engine · Hardware Physics Accelerator',
     title: 'Digital Twin Simulation: 11.4 Bar Catastrophe',
     headline: 'FORWARD KINETIC PROJECTION PREDICTS MANIFOLD OVERPRESSURE RUPTURE',
     description: 'The hydraulic twin forward-simulates the plant with real-time sensor telemetry. Because Relief Valve 02 is closed, running Pump 4 at 850 RPM induces severe hydraulic shock, exceeding the 9.2 bar yield threshold.',
@@ -237,7 +237,7 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               THE 5 OPERATIONAL MOMENTS.
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
-              Experience step-by-step how Sentinel-K prevents cyber-physical catastrophe on the iQOO 13 flagship node.
+              Experience step-by-step how Sentinel-K prevents cyber-physical catastrophe on the sovereign field node.
             </p>
           </div>
 

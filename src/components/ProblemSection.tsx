@@ -2,6 +2,7 @@ import React from 'react';
 import { AlertTriangle, ShieldX, UserX, Cpu, ArrowRight } from 'lucide-react';
 
 export const ProblemSection: React.FC = () => {
+  const [compareMode, setCompareMode] = React.useState<'TRADITIONAL' | 'SENTINEL'>('SENTINEL');
   const problems = [
     {
       icon: UserX,
@@ -97,6 +98,125 @@ export const ProblemSection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Interactive Cyber-Physical Paradox Comparator */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-white border border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+          <div className="p-5 sm:p-6 bg-[#FAFAF8] border-b border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono-code font-black text-slate-800 uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-[#F0B31C]" />
+                <span>INTERACTIVE COMPARATOR // DEFENSE PARADIGM</span>
+              </div>
+              <p className="text-xs text-slate-500 mt-1 font-mono-code">
+                Toggle below to compare what happens when a deceptive 850 RPM pump dispatch enters your plant.
+              </p>
+            </div>
+
+            {/* Mode Switcher */}
+            <div className="flex items-center p-1 rounded-2xl bg-white border border-black/[0.08] shadow-2xs font-mono-code text-xs">
+              <button
+                onClick={() => setCompareMode('TRADITIONAL')}
+                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                  compareMode === 'TRADITIONAL'
+                    ? 'bg-red-600 text-white shadow-2xs'
+                    : 'text-slate-600 hover:text-black'
+                }`}
+              >
+                TRADITIONAL SCADA
+              </button>
+              <button
+                onClick={() => setCompareMode('SENTINEL')}
+                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                  compareMode === 'SENTINEL'
+                    ? 'bg-[#090D15] text-[#F0B31C] shadow-2xs'
+                    : 'text-slate-600 hover:text-black'
+                }`}
+              >
+                SENTINEL-K TWIN
+              </button>
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8">
+            {compareMode === 'TRADITIONAL' ? (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono-code text-xs">
+                  <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200">
+                    <div className="text-emerald-800 font-bold mb-1">01 // PROTOCOL SYNTAX</div>
+                    <div className="text-emerald-950 font-black text-sm">CRC 0x9B4E VALID</div>
+                    <p className="text-[11px] text-emerald-800 mt-1">RFC 1151 Modbus function 0x06 accepted without error.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200">
+                    <div className="text-emerald-800 font-bold mb-1">02 // OT FIREWALL</div>
+                    <div className="text-emerald-950 font-black text-sm">PORT 502 WHITELISTED</div>
+                    <p className="text-[11px] text-emerald-800 mt-1">Direct TCP packet routes cleanly to PLC Station 04.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200">
+                    <div className="text-emerald-800 font-bold mb-1">03 // OPERATOR ACCESS</div>
+                    <div className="text-emerald-950 font-black text-sm">RBAC LEVEL 3 VALID</div>
+                    <p className="text-[11px] text-emerald-800 mt-1">Human technician authorized to write register 40012.</p>
+                  </div>
+                </div>
+
+                {/* Catastrophic Outcome Callout */}
+                <div className="p-5 rounded-2xl bg-red-50 border border-red-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-red-950 font-black font-mono-code text-xs uppercase tracking-wider">
+                      <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
+                      <span>THE CYBER DEFENSE BLINDSPOT: CATASTROPHIC FAILURE</span>
+                    </div>
+                    <p className="text-xs text-red-900 mt-1 leading-relaxed">
+                      Every cybersecurity gate passed. But because Relief Valve 02 remained closed (0%), Pump 4 caused an instant Joukowsky surge of <strong className="text-red-950 font-black">11.4 BAR (exceeding 9.2 bar limit)</strong>. Node 14 pipe flange fractured, resulting in severe water flooding.
+                    </p>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-red-600 text-white font-mono-code font-black text-xs shrink-0 shadow-2xs">
+                    RESULT: HARD PLANT DAMAGE
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono-code text-xs">
+                  <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200">
+                    <div className="text-amber-800 font-bold mb-1">01 // NPU ACOUSTIC PARSER</div>
+                    <div className="text-amber-950 font-black text-sm">71% CLONE ANOMALY</div>
+                    <p className="text-[11px] text-amber-900 mt-1">On-device SLM detects voice clone and flags 8.9 urgency score.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200">
+                    <div className="text-blue-800 font-bold mb-1">02 // EPANET TWIN</div>
+                    <div className="text-blue-950 font-black text-sm">11.4 BAR REJECTED</div>
+                    <p className="text-[11px] text-blue-950 mt-1">Forward fluid transient simulation detects rupture in 42ms.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                    <div className="text-emerald-800 font-bold mb-1">03 // AUTONOMOUS REPLAN</div>
+                    <div className="text-emerald-950 font-black text-sm">7.4 BAR SAFE GRADIENT</div>
+                    <p className="text-[11px] text-emerald-950 mt-1">Critic pre-opens Valve 02 to 40% and stages pump ramp.</p>
+                  </div>
+                </div>
+
+                {/* Safe Outcome Callout */}
+                <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-emerald-950 font-black font-mono-code text-xs uppercase tracking-wider">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                      <span>KINETIC TWIN GUARANTEE: COMPLETE MITIGATION</span>
+                    </div>
+                    <p className="text-xs text-emerald-900 mt-1 leading-relaxed">
+                      Catastrophe averted. The operator confirms the safe replan via the in-display ultrasonic biometric enclave. Modbus instruction is safely dispatched with zero hydraulic shock and 100% operational uptime.
+                    </p>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-emerald-600 text-white font-mono-code font-black text-xs shrink-0 shadow-2xs">
+                    RESULT: PLANT SURVIVES
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Bottom Axiom Banner */}

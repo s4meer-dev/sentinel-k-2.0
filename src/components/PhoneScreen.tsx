@@ -38,8 +38,16 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
   onSelectPhase,
   progressPercent = 0
 }) => {
+  const [prevPhase, setPrevPhase] = useState(phase);
   const [isPlayingAudio, setIsPlayingAudio] = useState(true);
   const [hasBiometricSigned, setHasBiometricSigned] = useState(false);
+
+  if (prevPhase !== phase) {
+    setPrevPhase(phase);
+    if (phase !== 'REPLAN' && phase !== 'APPROVED') {
+      setHasBiometricSigned(false);
+    }
+  }
 
   const currentIdx = phase === 'APPROVED' ? 4 : PHASES.indexOf(phase);
 
@@ -559,9 +567,20 @@ export const PhoneScreen: React.FC<PhoneScreenProps> = ({
             <span>TOUCH ULTRASONIC SENSOR TO SIGN</span>
           </button>
         ) : (phase === 'APPROVED' || hasBiometricSigned) ? (
-          <div className="w-full py-2 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-center font-mono-code text-[10px] font-black flex items-center justify-center gap-1.5 shadow-2xs">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            <span>DISPATCH COMMITTED // OPERATOR #049</span>
+          <div className="w-full py-1.5 px-2.5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 font-mono-code text-[9px] shadow-2xs space-y-1">
+            <div className="flex items-center justify-between font-black text-[10px]">
+              <span className="flex items-center gap-1.5 text-emerald-700">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>CRYPTOGRAPHICALLY COMMITTED</span>
+              </span>
+              <span className="text-[7.5px] px-1 py-0.2 rounded bg-emerald-200 border border-emerald-400 font-bold">
+                ED25519 VERIFIED
+              </span>
+            </div>
+            <div className="text-[7.5px] text-emerald-800 truncate flex justify-between">
+              <span>OP #049 · SIG: 7F9A...4B21</span>
+              <span>PLC STATION 04 ARMED</span>
+            </div>
           </div>
         ) : (
           <div className="w-full py-2 rounded-2xl bg-[#F0F0EC] border border-black/[0.05] text-slate-700 text-center font-mono-code text-[10px] font-bold flex items-center justify-center gap-1.5">

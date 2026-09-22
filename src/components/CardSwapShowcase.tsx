@@ -53,7 +53,7 @@ export const CardSwapShowcase: React.FC = () => {
                   <span className="w-2 h-2 rounded-full bg-[#F0B31C]" />
                   <span>Kinetic Co-Processor:</span>
                 </span>
-                <strong className="text-slate-900">iQOO Q2 Supercomputing Chip</strong>
+                <strong className="text-slate-900">Hardware-Accelerated Physics Engine</strong>
               </div>
 
               <div className="p-3 rounded-2xl bg-white border border-black/[0.06] shadow-2xs flex items-center justify-between">

@@ -122,6 +122,63 @@ export const AgentArchitectureSection: React.FC = () => {
               </div>
             </div>
           ))}
+
+          {/* 6th Cell: Air-Gapped IPC Message Bus & Latency Telemetry */}
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-[#090D15] to-[#1E293B] text-white border border-black/20 shadow-[0_4px_24px_rgba(0,0,0,0.1)] flex flex-col justify-between group">
+            <div>
+              <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-white/10">
+                <span className="text-[10px] font-mono-code font-bold uppercase px-2 py-0.5 rounded border border-emerald-500/40 text-emerald-300 bg-emerald-500/10">
+                  ORCHESTRATION BUS
+                </span>
+                <span className="text-[10px] font-mono-code text-slate-400">
+                  SOVEREIGN IPC
+                </span>
+              </div>
+
+              <h3 className="text-sm sm:text-base font-sans font-black text-white uppercase tracking-tight">
+                Air-Gapped IPC Pipeline
+              </h3>
+
+              <div className="text-xs font-mono-code text-[#F0B31C] font-bold mt-1">
+                Zero Cloud Egress · Total Latency: 125ms
+              </div>
+
+              <p className="mt-2.5 text-xs text-slate-300 leading-relaxed font-normal">
+                Agents communicate via memory-mapped circular ring buffers without network sockets. Zero telemetry leaks beyond the physical device.
+              </p>
+
+              <div className="mt-4 pt-3 border-t border-white/10 space-y-1.5 font-mono-code text-[10px]">
+                <div className="flex justify-between text-slate-300">
+                  <span>NPU Ingestion:</span>
+                  <span className="text-emerald-400 font-bold">18ms</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Forensics + Duty Roster:</span>
+                  <span className="text-emerald-400 font-bold">24ms</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Modbus AST Compilation:</span>
+                  <span className="text-emerald-400 font-bold">3ms</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>EPANET 2.2 Hydrodynamics:</span>
+                  <span className="text-emerald-400 font-bold">42ms</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Critic Replan Optimization:</span>
+                  <span className="text-emerald-400 font-bold">38ms</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] font-mono-code text-slate-400">
+              <span>SECURITY: AIR-GAPPED</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>ACTIVE ENCLAVE</span>
+              </span>
+            </div>
+          </div>
         </div>
 
       </div>

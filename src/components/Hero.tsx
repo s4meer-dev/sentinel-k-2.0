@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                <span>iQOO 13 TERMINAL</span>
+                <span>FLAGSHIP TERMINAL</span>
               </button>
 
               <button
