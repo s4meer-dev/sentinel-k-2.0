@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
+import { TextReveal } from './TextReveal';
 
 export const AgentArchitectureSection: React.FC = () => {
   const agents = [
@@ -53,17 +54,19 @@ export const AgentArchitectureSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs">
             <Cpu className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">MULTI-AGENT COORDINATION</span>
             <span className="text-slate-300">/</span>
             <span className="text-[#7C766C]">SPECIALIZED ROLES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
-            AGENTS REASON. TOOLS MEASURE. <br />
-            <span className="font-serif italic font-normal normal-case text-slate-800">Validators decide.</span>
-          </h2>
+          <TextReveal
+            text="AGENTS REASON. TOOLS MEASURE."
+            italicSubtitle="Validators decide."
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]"
+            subtitleClassName="font-serif italic font-normal normal-case text-slate-800"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             No single monolithic agent handles this workflow. Sentinel-K deploys five specialized agents with bounded responsibilities, deterministic tooling, and strict sandboxes.
@@ -75,7 +78,7 @@ export const AgentArchitectureSection: React.FC = () => {
           {agents.map((ag, i) => (
             <div
               key={i}
-              className="p-7 rounded-[28px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_12px_32px_-12px_rgba(38,34,28,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(38,34,28,0.12)] transition-all duration-200 flex flex-col justify-between group"
+              className="p-7 rounded-[28px] glass-card glass-sheen hover:border-[#1A1712]/[0.18] shadow-[0_12px_32px_-12px_rgba(38,34,28,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(38,34,28,0.14)] transition-all duration-200 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-[#1A1712]/[0.06]">
@@ -124,7 +127,7 @@ export const AgentArchitectureSection: React.FC = () => {
           ))}
 
           {/* 6th Cell: Air-Gapped IPC Message Bus & Latency Telemetry (Subscrr Obsidian Card) */}
-          <div className="p-7 rounded-[28px] bg-[#1A1712] text-white border border-white/15 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)] flex flex-col justify-between group relative overflow-hidden">
+          <div className="p-7 rounded-[28px] bg-[#1A1712] text-white border border-white/15 glass-sheen shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)] flex flex-col justify-between group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#F0B31C]/10 rounded-full blur-2xl pointer-events-none" />
             <div>
               <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-white/10">

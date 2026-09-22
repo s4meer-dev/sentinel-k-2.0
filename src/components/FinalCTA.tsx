@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Play } from 'lucide-react';
+import { TextReveal } from './TextReveal';
 
 interface FinalCTAProps {
   onExploreClick: () => void;
@@ -12,7 +13,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onExploreClick, onKineticCli
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Launchcard Container */}
-        <div className="max-w-4xl mx-auto rounded-[36px] bg-white border border-[#1A1712]/[0.08] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)] relative overflow-hidden text-center">
+        <div className="max-w-4xl mx-auto rounded-[36px] glass-card glass-sheen p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)] relative overflow-hidden text-center">
           
           {/* Subtle Ambient Fill */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-amber-200/[0.16] blur-[140px] pointer-events-none -z-10" />
@@ -24,10 +25,12 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onExploreClick, onKineticCli
           </div>
 
           {/* Bold Heading */}
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05] max-w-3xl mx-auto">
-            TRUST THE REASONING. <br />
-            <span className="font-serif italic font-normal normal-case text-slate-800">Verify the consequence.</span>
-          </h2>
+          <TextReveal
+            text="TRUST THE REASONING."
+            italicSubtitle="Verify the consequence."
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05] max-w-3xl mx-auto"
+            subtitleClassName="font-serif italic font-normal normal-case text-slate-800"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             Stop blind operational execution. Equip critical infrastructure field workers with on-device NPU evidence verification, deterministic cyber gates, and hydrodynamic physical twins.

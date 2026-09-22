@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle, ShieldX, UserX, Cpu, ArrowRight } from 'lucide-react';
+import { TextReveal } from './TextReveal';
 
 export const ProblemSection: React.FC = () => {
   const [compareMode, setCompareMode] = React.useState<'TRADITIONAL' | 'SENTINEL'>('SENTINEL');
@@ -42,37 +43,38 @@ export const ProblemSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#1A1712]/[0.08] text-xs font-mono-code text-red-800 mb-5 shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-xs font-mono-code text-red-800 mb-5 shadow-2xs">
             <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
             <span className="font-bold tracking-wider">THE VULNERABILITY GAP</span>
             <span className="text-slate-300">/</span>
             <span className="text-[#5C564C]">CRITICAL INFRASTRUCTURE DEFENSE</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]">
-            THE ATTACK DOESN&apos;T HAVE TO <br />
-            <span className="font-serif italic font-normal normal-case text-red-700 tracking-tight">
-              compromise the machine.
-            </span>
-          </h2>
+          <TextReveal
+            as="h2"
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]"
+            text="THE ATTACK DOESN'T HAVE TO"
+            italicSubtitle="compromise the machine."
+            italicClassName="font-serif italic font-normal normal-case text-red-700 tracking-tight"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#5C564C] max-w-2xl mx-auto font-normal leading-relaxed">
             It compromises the human who operates it. Adversaries weaponize urgent operational dispatches to trigger physically catastrophic commands through authorized human hands.
           </p>
         </div>
 
-        {/* 3 Core Problem Pillars — Subscrr Squircle Cards */}
+        {/* 3 Core Problem Pillars — Glassmorphism Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {problems.map((p, i) => {
             const Icon = p.icon;
             return (
               <div
                 key={i}
-                className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                className="p-7 sm:p-8 rounded-[32px] glass-card glass-sheen transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06]">
+                    <div className="p-3 rounded-2xl bg-[#ECE8DE]/70 border border-[#1A1712]/[0.06]">
                       <Icon className="w-5 h-5 text-[#1A1712]" />
                     </div>
                     <span className="font-mono-code text-[10px] font-bold text-[#7C766C] uppercase px-2.5 py-0.5 rounded-full bg-[#ECE8DE]">
@@ -80,11 +82,11 @@ export const ProblemSection: React.FC = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-sans font-black text-[#090D15] tracking-tight">
+                  <h3 className="text-base sm:text-lg font-sans font-black text-[#1A1712] tracking-tight">
                     {p.title}
                   </h3>
 
-                  <p className="mt-3 text-xs sm:text-sm font-mono-code font-semibold text-amber-900 italic bg-amber-50/80 p-2.5 rounded-lg border border-amber-200/70">
+                  <p className="mt-3 text-xs sm:text-sm font-mono-code font-semibold text-amber-900 italic bg-amber-50/80 p-2.5 rounded-xl border border-amber-200/70">
                     {p.lead}
                   </p>
 
@@ -93,7 +95,7 @@ export const ProblemSection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-black/[0.05] font-mono-code text-[11px] text-slate-500">
+                <div className="mt-6 pt-4 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-slate-500">
                   <span className="text-red-700 font-bold block mb-0.5">Impact Consequence:</span>
                   {p.consequence}
                 </div>
@@ -102,8 +104,8 @@ export const ProblemSection: React.FC = () => {
           })}
         </div>
 
-        {/* Interactive Cyber-Physical Paradox Comparator — Subscrr Bento Style */}
-        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] bg-white border border-[#1A1712]/[0.08] shadow-[0_8px_30px_-10px_rgba(38,34,28,0.08),0_24px_60px_-24px_rgba(38,34,28,0.1)] overflow-hidden">
+        {/* Interactive Cyber-Physical Paradox Comparator — Glass Bento Style */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] glass-card glass-sheen">
           <div className="p-6 sm:p-7 bg-[#ECE8DE]/60 border-b border-[#1A1712]/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono-code font-black text-[#1A1712] uppercase tracking-wider">

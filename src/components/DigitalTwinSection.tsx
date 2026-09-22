@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database, Waves, AlertTriangle, ShieldCheck, Cpu } from 'lucide-react';
+import { TextReveal } from './TextReveal';
 
 export const DigitalTwinSection: React.FC = () => {
   const [valveState, setValveState] = React.useState<number>(0);
@@ -23,31 +24,32 @@ export const DigitalTwinSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs">
             <Waves className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">WNTR / EPANET HYDRODYNAMIC TWIN</span>
             <span className="text-slate-300">/</span>
             <span className="text-[#5C564C]">PHYSICS AS THE TESTBED</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]">
-            THE PHYSICAL WORLD IS THE <br />
-            <span className="font-serif italic font-normal normal-case text-slate-800 tracking-tight">
-              ultimate test environment.
-            </span>
-          </h2>
+          <TextReveal
+            as="h2"
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.04]"
+            text="THE PHYSICAL WORLD IS THE"
+            italicSubtitle="ultimate test environment."
+            italicClassName="font-serif italic font-normal normal-case text-slate-800 tracking-tight"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#5C564C] max-w-2xl mx-auto font-normal leading-relaxed">
             Before any high-impact command reaches the physical PLC, Sentinel-K simulates its exact consequences in an isolated digital twin running real-world differential fluid equations.
           </p>
         </div>
 
-        {/* Digital Twin Architecture Grid — Subscrr Squircle Cards */}
+        {/* Digital Twin Architecture Grid — Glassmorphism Squircle Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           
-          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+          <div className="p-7 sm:p-8 rounded-[32px] glass-card glass-sheen transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#ECE8DE]/70 border border-[#1A1712]/[0.06] w-fit mb-4">
                 <Database className="w-5 h-5 text-blue-700" />
               </div>
               <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
@@ -62,9 +64,9 @@ export const DigitalTwinSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+          <div className="p-7 sm:p-8 rounded-[32px] glass-card glass-sheen transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#ECE8DE]/70 border border-[#1A1712]/[0.06] w-fit mb-4">
                 <Cpu className="w-5 h-5 text-amber-700" />
               </div>
               <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
@@ -74,14 +76,14 @@ export const DigitalTwinSection: React.FC = () => {
                 Computes Joukowsky water hammer shockwaves, velocity head gradients, and friction dissipation in 50-millisecond discrete time steps.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-amber-800 font-bold">
+            <div className="mt-5 pt-3 border-t border-[#1A1712]/[0.06] font-mono-code text-[11px] text-amber-900 font-bold">
               Engine: Python WNTR Engine
             </div>
           </div>
 
-          <div className="p-7 sm:p-8 rounded-[30px] bg-white border border-[#1A1712]/[0.08] hover:border-[#1A1712]/[0.16] shadow-[0_4px_20px_-6px_rgba(38,34,28,0.05),0_20px_50px_-20px_rgba(38,34,28,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(38,34,28,0.08),0_30px_70px_-25px_rgba(38,34,28,0.12)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+          <div className="p-7 sm:p-8 rounded-[32px] glass-card glass-sheen transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
             <div>
-              <div className="p-3 rounded-2xl bg-[#F4F2EC] border border-[#1A1712]/[0.06] w-fit mb-4">
+              <div className="p-3 rounded-2xl bg-[#ECE8DE]/70 border border-[#1A1712]/[0.06] w-fit mb-4">
                 <ShieldCheck className="w-5 h-5 text-emerald-700" />
               </div>
               <h3 className="text-sm sm:text-base font-sans font-black text-[#1A1712] uppercase">
@@ -98,8 +100,8 @@ export const DigitalTwinSection: React.FC = () => {
 
         </div>
 
-        {/* Interactive EPANET 2.2 Hydrodynamics Sandbox — Subscrr Bento Style */}
-        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] bg-white border border-[#1A1712]/[0.08] shadow-[0_8px_30px_-10px_rgba(38,34,28,0.08),0_24px_60px_-24px_rgba(38,34,28,0.1)] overflow-hidden">
+        {/* Interactive EPANET 2.2 Hydrodynamics Sandbox — Glass Bento Style */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-[36px] glass-card glass-sheen">
           <div className="p-6 sm:p-7 bg-[#ECE8DE]/60 border-b border-[#1A1712]/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono-code font-black text-slate-800 uppercase tracking-wider">

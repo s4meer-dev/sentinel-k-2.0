@@ -11,6 +11,7 @@ import {
 import { PhoneMockup } from './PhoneMockup';
 import { EvidenceStreamVisual } from './EvidenceStreamVisual';
 import { DigitalTwinHeroVisual } from './DigitalTwinHeroVisual';
+import { TextReveal } from './TextReveal';
 import type { ValidationPhase } from '../types/sentinel';
 
 interface HeroProps {
@@ -35,12 +36,7 @@ export const Hero: React.FC<HeroProps> = ({
       id="hero" 
       className="relative min-h-screen pt-24 pb-12 md:pt-28 md:pb-16 overflow-hidden bg-transparent border-b border-[#1A1712]/[0.08]"
     >
-      {/* Subscrr Warm Architectural Ambient Lighting */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-amber-100/35 blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-stone-200/40 blur-[160px] pointer-events-none -z-10" />
-      
-      {/* Millimeter Dot Grid */}
-      <div className="absolute inset-0 network-grid opacity-35 pointer-events-none -z-10" />
+      {/* Background Ambience & Soft Noise Grain is handled globally */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -51,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-6 flex flex-col justify-center">
             
             {/* Top Subscrr-Style Eyebrow Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#1A1712]/[0.08] shadow-[0_2px_8px_rgba(38,34,28,0.04)] text-xs font-mono-code text-slate-800 w-fit mb-4 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-pill text-xs font-mono-code text-slate-800 w-fit mb-4">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-black tracking-wider text-[#1A1712]">SENTINEL-K</span>
               <span className="text-slate-300">/</span>
@@ -68,13 +64,14 @@ export const Hero: React.FC<HeroProps> = ({
               <span>EPANET 2.2 KINETIC TWIN</span>
             </div>
 
-            {/* Main Punchy Headline — Subscrr-Style Poetic Editorial Typography */}
-            <h1 className="text-4xl sm:text-6xl lg:text-[62px] font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.02]">
-              THE COMMAND ISN&apos;T TRUSTED. <br />
-              <span className="font-serif italic font-normal normal-case text-slate-800 tracking-tight">
-                The consequence is verified.
-              </span>
-            </h1>
+            {/* Main Punchy Headline — Staggered Text Reveal Animation */}
+            <TextReveal
+              as="h1"
+              className="text-4xl sm:text-6xl lg:text-[62px] font-sans font-black tracking-[-0.035em] text-[#1A1712] uppercase leading-[1.02]"
+              text="THE COMMAND ISN'T TRUSTED."
+              italicSubtitle="The consequence is verified."
+              italicClassName="font-serif italic font-normal normal-case text-slate-800 tracking-tight"
+            />
 
             {/* Editorial Lead Paragraph — Concise & Punchy */}
             <p className="mt-5 text-base sm:text-lg text-[#5C564C] font-normal leading-relaxed max-w-xl">
@@ -91,7 +88,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className="text-[9px] text-slate-400 font-mono-code">TAP TO JUMP</span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-white/90 border border-[#1A1712]/[0.08] shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md max-w-lg">
+              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl glass-card glass-sheen max-w-lg">
                 {(['INCOMING', 'EXTRACTING', 'CYBER_CHECK', 'PHYSICAL_SIM', 'REPLAN'] as ValidationPhase[]).map((p, idx) => {
                   const labels = ['01 DISPATCH', '02 NPU PARSE', '03 CYBER GATE', '04 EPANET TWIN', '05 REPLAN'];
                   const isSelected = currentPhase === p || (p === 'REPLAN' && currentPhase === 'APPROVED');
@@ -124,7 +121,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               <button
                 onClick={onKineticClick}
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/90 hover:bg-white text-slate-800 border border-[#1A1712]/[0.08] font-mono-code text-xs font-bold uppercase tracking-wider transition-all shadow-[0_2px_8px_rgba(38,34,28,0.04)] backdrop-blur-md cursor-pointer active:scale-98"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl glass-pill hover:bg-white text-slate-800 font-mono-code text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-98"
               >
                 <Play className="w-3.5 h-3.5 text-amber-700 fill-current" />
                 <span>SEE 11.4 BAR REJECT DEMO</span>
@@ -132,7 +129,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Subscrr-style Sovereign Enclave Badge */}
-            <div className="hidden sm:flex items-center gap-3 mt-6 p-3 rounded-2xl bg-white/85 border border-[#1A1712]/[0.08] shadow-[0_4px_16px_rgba(38,34,28,0.04)] backdrop-blur-md max-w-md">
+            <div className="hidden sm:flex items-center gap-3 mt-6 p-3 rounded-2xl glass-card glass-sheen max-w-md">
               <div className="w-9 h-9 rounded-xl bg-[#1A1712] text-[#F0B31C] flex items-center justify-center font-mono-code text-[11px] font-black shrink-0 shadow-2xs">
                 PKI
               </div>
@@ -246,7 +243,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Bottom Technical Specifications Strip — Subscrr Glass Architecture */}
-        <div className="mt-8 p-4 rounded-3xl bg-white/85 border border-[#1A1712]/[0.08] shadow-[0_4px_20px_-4px_rgba(38,34,28,0.06)] backdrop-blur-md flex flex-wrap items-center justify-between gap-3 font-mono-code text-xs text-[#5C564C]">
+        <div className="mt-8 p-4 rounded-3xl glass-card glass-sheen flex flex-wrap items-center justify-between gap-3 font-mono-code text-xs text-[#5C564C]">
           <div className="flex items-center gap-2">
             <Terminal className="w-3.5 h-3.5 text-[#1A1712]" />
             <span className="text-[#1A1712] font-bold text-[11px]">

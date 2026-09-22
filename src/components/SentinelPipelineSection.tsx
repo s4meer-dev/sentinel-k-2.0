@@ -18,6 +18,7 @@ import {
   Pause
 } from 'lucide-react';
 import type { PipelineStep } from '../types/sentinel';
+import { TextReveal } from './TextReveal';
 
 export const SentinelPipelineSection: React.FC = () => {
   const steps: PipelineStep[] = [
@@ -98,13 +99,13 @@ export const SentinelPipelineSection: React.FC = () => {
       description: 'The operator reviews evidence, the rejected failure, and authorizes the safe replanned path.',
       engine: 'Air-Gapped Terminal Biometric Enclave',
       technicalDetails: 'Operator is presented with side-by-side cyber pass vs physical failure explanation. Requires explicit thumbprint signoff.',
-      outputSnippet: 'OPERATOR CONFIRMED: Plan B authorized with operator ID #OP-8821. Action dispatched safely.',
+      outputSnippet: 'SOVEREIGN DECISION: Authorized Safe Plan B via OriginOS Biometric Enclave.',
       status: 'VERIFIED',
     },
   ];
 
-  const [activeStep, setActiveStep] = useState<number>(6); // Default to physical twin failure
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeStep, setActiveStep] = useState<number>(6); // Default on simulation
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const nextStep = () => {
@@ -162,17 +163,19 @@ export const SentinelPipelineSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs">
             <Sliders className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">END-TO-END VERIFICATION HARNESS</span>
             <span className="text-slate-300">/</span>
             <span className="text-[#7C766C]">8 DETERMINISTIC STAGES</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
-            THE 8-STAGE SENTINEL PIPELINE. <br />
-            <span className="font-serif italic font-normal normal-case text-slate-800">Deterministic verification in 125 milliseconds.</span>
-          </h2>
+          <TextReveal
+            text="THE 8-STAGE SENTINEL PIPELINE."
+            italicSubtitle="Deterministic verification in 125 milliseconds."
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]"
+            subtitleClassName="font-serif italic font-normal normal-case text-slate-800"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             From the moment an unverified instruction lands on an air-gapped field terminal to the moment a physically verified safe action is dispatched to the PLC.
@@ -185,14 +188,14 @@ export const SentinelPipelineSection: React.FC = () => {
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
                 isPlaying
                   ? 'bg-[#1A1712] text-[#F0B31C] border-[#1A1712]'
-                  : 'bg-white/80 text-[#1A1712] border-[#1A1712]/[0.08] hover:bg-white'
-              } shadow-2xs backdrop-blur-md`}
+                  : 'glass-card text-[#1A1712] hover:bg-white'
+              } shadow-2xs`}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
               <span>{isPlaying ? 'PAUSE PIPELINE' : 'AUTO CYCLE'}</span>
             </button>
 
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md">
+            <div className="flex items-center gap-1 p-1 rounded-xl glass-card shadow-2xs">
               <button
                 onClick={prevStep}
                 aria-label="Previous Stage"
@@ -215,7 +218,7 @@ export const SentinelPipelineSection: React.FC = () => {
         </div>
 
         {/* 8-Step Interactive Timeline Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-2 rounded-[24px] bg-white/80 border border-[#1A1712]/[0.08] shadow-[0_8px_24px_-8px_rgba(38,34,28,0.06)] backdrop-blur-md">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 p-2 rounded-[24px] glass-card glass-sheen shadow-[0_8px_24px_-8px_rgba(38,34,28,0.06)]">
           {steps.map((s) => {
             const Icon = getStepIcon(s.id);
             const isSelected = activeStep === s.id;
@@ -286,7 +289,7 @@ export const SentinelPipelineSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
-            className="mt-6 p-6 sm:p-9 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
+            className="mt-6 p-6 sm:p-9 rounded-[32px] glass-card glass-sheen shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               

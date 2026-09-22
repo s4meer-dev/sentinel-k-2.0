@@ -119,33 +119,86 @@
 
 /* Subscrr-Style Soft Luxury Cards */
 .subscrr-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(26, 23, 18, 0.08);
-  border-radius: 28px;
-  box-shadow: 0 4px 20px -6px rgba(38, 34, 28, 0.05), 0 20px 50px -20px rgba(38, 34, 28, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  box-shadow: 
+    0 4px 20px -6px rgba(38, 34, 28, 0.05),
+    0 20px 50px -20px rgba(38, 34, 28, 0.08),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .subscrr-card:hover {
-  border-color: rgba(26, 23, 18, 0.15);
-  box-shadow: 0 8px 30px -8px rgba(38, 34, 28, 0.08), 0 30px 70px -25px rgba(38, 34, 28, 0.12);
-  transform: translateY(-2px);
+  border-color: rgba(26, 23, 18, 0.14);
+  box-shadow: 
+    0 8px 30px -8px rgba(38, 34, 28, 0.08),
+    0 30px 70px -25px rgba(38, 34, 28, 0.14),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-3px);
 }
 
-/* Subscrr-Style Dark Statement Feature Card */
-.subscrr-card-dark {
-  background: #111317;
-  color: #F4F2EC;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 36px;
-  box-shadow: 0 24px 64px -20px rgba(0, 0, 0, 0.35);
+/* Glassmorphism Card — Multi-layer Frosted Depth */
+.glass-card {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 20px 50px -20px rgba(38, 34, 28, 0.09),
+    0 1px 3px 0 rgba(26, 23, 18, 0.03),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Specular Light Reflection Sheen for Glass Cards */
+.glass-sheen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.9) 70%, transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Subscrr Glass Navbar / Pill */
 .subscrr-glass {
   background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(26, 23, 18, 0.08);
-  box-shadow: 0 4px 24px -4px rgba(38, 34, 28, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 8px 32px -8px rgba(38, 34, 28, 0.1),
+    0 1px 2px 0 rgba(26, 23, 18, 0.04),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Frosted Glass Pill */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(26, 23, 18, 0.07);
+  box-shadow: 
+    0 4px 16px -4px rgba(38, 34, 28, 0.06),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Subscrr-Style Dark Statement Feature Card */
+.subscrr-card-dark {
+  background: rgba(17, 19, 23, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  color: #F4F2EC;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  box-shadow: 
+    0 24px 64px -20px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }

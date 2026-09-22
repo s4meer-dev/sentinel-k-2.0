@@ -16,6 +16,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import type { ValidationPhase } from '../types/sentinel';
+import { TextReveal } from './TextReveal';
 
 interface CarouselSlide {
   id: number;
@@ -227,16 +228,18 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#1A1712]/[0.08]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-[#1A1712]/[0.08] shadow-2xs text-xs font-mono-code text-[#1A1712] mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card shadow-2xs text-xs font-mono-code text-[#1A1712] mb-3">
               <Layers className="w-3.5 h-3.5 text-[#F0B31C]" />
               <span className="font-bold tracking-wider">SIGNATURE MOMENTS</span>
               <span className="text-slate-300">/</span>
               <span className="text-amber-900 font-semibold">INTERACTIVE STORY CAROUSEL</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.08]">
-              THE 5 OPERATIONAL MOMENTS. <br />
-              <span className="font-serif italic font-normal normal-case text-slate-800">Verified at physics speed.</span>
-            </h2>
+            <TextReveal
+              text="THE 5 OPERATIONAL MOMENTS."
+              italicSubtitle="Verified at physics speed."
+              className="text-2xl sm:text-4xl lg:text-5xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.08]"
+              subtitleClassName="font-serif italic font-normal normal-case text-slate-800"
+            />
             <p className="mt-2 text-sm sm:text-base text-[#7C766C] max-w-2xl">
               Experience step-by-step how Sentinel-K prevents cyber-physical catastrophe on the sovereign field node.
             </p>
@@ -315,7 +318,7 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch"
             >
               {/* Left Column: Narrative & Hardware Context (7 cols) */}
-              <div className="lg:col-span-7 p-6 sm:p-8 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)] flex flex-col justify-between">
+              <div className="lg:col-span-7 p-6 sm:p-8 rounded-[32px] glass-card glass-sheen shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)] flex flex-col justify-between">
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#1A1712]/[0.06]">
                     <div className="flex items-center gap-2 font-mono-code text-xs">
@@ -366,7 +369,7 @@ export const SentinelExperienceCarousel: React.FC<SentinelExperienceCarouselProp
               </div>
 
               {/* Right Column: Live Telemetry Bus Vector (5 cols) */}
-              <div className="lg:col-span-5 p-6 sm:p-8 rounded-[32px] bg-[#ECE8DE]/50 border border-[#1A1712]/[0.08] shadow-sm flex flex-col justify-between">
+              <div className="lg:col-span-5 p-6 sm:p-8 rounded-[32px] glass-card glass-sheen shadow-sm flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between pb-3 border-b border-[#1A1712]/[0.06] text-xs font-mono-code">
                     <div className="flex items-center gap-2 font-bold text-[#1A1712]">

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import type { DemoStoryStep } from '../types/sentinel';
+import { TextReveal } from './TextReveal';
 
 export const DemoStorySection: React.FC = () => {
   const storySteps: DemoStoryStep[] = [
@@ -132,17 +133,19 @@ export const DemoStorySection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1A1712]/[0.08] text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-xs font-mono-code text-[#1A1712] mb-5 shadow-2xs">
             <Clock className="w-3.5 h-3.5 text-[#F0B31C]" />
             <span className="font-bold tracking-wider">INCIDENT WALKTHROUGH</span>
             <span className="text-slate-300">/</span>
             <span className="text-[#7C766C]">THE FRIDAY AFTERNOON SURGE ATTACK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]">
-            CHRONICLE OF A THWARTED <br />
-            <span className="font-serif italic font-normal normal-case text-slate-800">physical disaster.</span>
-          </h2>
+          <TextReveal
+            text="CHRONICLE OF A THWARTED"
+            italicSubtitle="physical disaster."
+            className="text-3xl sm:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1A1712] uppercase leading-[1.05]"
+            subtitleClassName="font-serif italic font-normal normal-case text-slate-800"
+          />
 
           <p className="mt-5 text-base sm:text-lg text-[#7C766C] max-w-2xl mx-auto font-normal leading-relaxed">
             Follow the 10-step sequence showing how an adversarial authority-spoofing attack was intercepted, simulated, rejected, and safely remediated in under 4 minutes.
@@ -155,14 +158,14 @@ export const DemoStorySection: React.FC = () => {
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-mono-code font-bold transition-all cursor-pointer border ${
                 isPlaying
                   ? 'bg-[#1A1712] text-[#F0B31C] border-[#1A1712]'
-                  : 'bg-white/80 text-[#1A1712] border-[#1A1712]/[0.08] hover:bg-white'
-              } shadow-2xs backdrop-blur-md`}
+                  : 'glass-card text-[#1A1712] hover:bg-white'
+              } shadow-2xs`}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current text-[#F0B31C]" />}
               <span>{isPlaying ? 'PAUSE STORY' : 'AUTO CYCLE'}</span>
             </button>
 
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-white/80 border border-[#1A1712]/[0.08] shadow-2xs backdrop-blur-md">
+            <div className="flex items-center gap-1 p-1 rounded-xl glass-card shadow-2xs">
               <button
                 onClick={prevStep}
                 aria-label="Previous Step"
@@ -185,7 +188,7 @@ export const DemoStorySection: React.FC = () => {
         </div>
 
         {/* Step Nav Bar */}
-        <div className="max-w-4xl mx-auto flex items-center justify-between gap-1 p-1.5 rounded-2xl bg-white/80 border border-[#1A1712]/[0.08] backdrop-blur-md overflow-x-auto mb-6 shadow-2xs">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-1 p-1.5 rounded-2xl glass-card overflow-x-auto mb-6 shadow-2xs">
           {storySteps.map((st) => (
             <button
               key={st.step}
@@ -210,7 +213,7 @@ export const DemoStorySection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
-              className="p-6 sm:p-9 rounded-[32px] bg-white border border-[#1A1712]/[0.08] shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
+              className="p-6 sm:p-9 rounded-[32px] glass-card glass-sheen shadow-[0_20px_50px_-20px_rgba(38,34,28,0.1)]"
             >
               <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-5 border-b border-[#1A1712]/[0.06]">
                 <div className="flex items-center gap-2">
